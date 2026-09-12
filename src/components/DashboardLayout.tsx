@@ -1,58 +1,73 @@
 import { useAuth } from "@/contexts/AuthContext";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
-import { useShop } from "@/contexts/ShopContext";
+import { useDepartments } from "@/contexts/DepartmentContext";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Store } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Building2 } from "lucide-react";
+import { roleLabel } from "@/lib/hr";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
+  title?: string;
+  description?: string;
+  actions?: React.ReactNode;
 }
 
-const DashboardLayout = ({ children }: DashboardLayoutProps) => {
-  const { user } = useAuth();
-  const { shops, selectedShop, setSelectedShop, loading } = useShop();
+const DashboardLayout = ({ children, title, description, actions }: DashboardLayoutProps) => {
+  const { user, role } = useAuth();
+  const { departments, selectedDepartment, setSelectedDepartment, loading } = useDepartments();
 
   return (
     <SidebarProvider>
-      <div className="min-h-screen flex w-full bg-background">
+      <div className="flex min-h-screen w-full bg-background">
         <AppSidebar />
-        <div className="flex-1 flex flex-col">
+        <div className="flex flex-1 flex-col">
           <header className="sticky top-0 z-10 flex h-14 items-center gap-4 border-b bg-card px-4 shadow-sm">
             <SidebarTrigger className="hover:bg-accent" />
-            <h1 className="text-lg font-heading font-semibold text-foreground">
-              TruckLogix Inventory System
-            </h1>
-            <div className="ml-auto flex items-center gap-4">
-              {!loading && shops.length > 0 && (
-                <div className="flex items-center gap-2">
-                  <Store className="h-4 w-4 text-muted-foreground" />
+            <h1 className="font-heading text-lg font-semibold text-foreground">PeopleHub HR</h1>
+            <div className="ml-auto flex items-center gap-3">
+              {!loading && departments.length > 0 && (
+                <div className="hidden items-center gap-2 sm:flex">
+                  <Building2 className="h-4 w-4 text-muted-foreground" />
                   <Select
-                    value={selectedShop?.id || ""}
+                    value={selectedDepartment?.id ?? "all"}
                     onValueChange={(value) => {
-                      const shop = shops.find((s) => s.id === value);
-                      if (shop) setSelectedShop(shop);
+                      if (value === "all") return setSelectedDepartment(null);
+                      const department = departments.find((d) => d.id === value);
+                      if (department) setSelectedDepartment(department);
                     }}
                   >
-                    <SelectTrigger className="w-[200px]">
-                      <SelectValue placeholder="Select shop" />
+                    <SelectTrigger className="w-[190px]">
+                      <SelectValue placeholder="All departments" />
                     </SelectTrigger>
                     <SelectContent>
-                      {shops.map((shop) => (
-                        <SelectItem key={shop.id} value={shop.id}>
-                          {shop.name}
+                      <SelectItem value="all">All departments</SelectItem>
+                      {departments.map((department) => (
+                        <SelectItem key={department.id} value={department.id}>
+                          {department.name}
                         </SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
                 </div>
               )}
-              <span className="text-sm text-muted-foreground">
-                {user?.email}
-              </span>
+              <Badge variant="secondary">{roleLabel(role)}</Badge>
+              <span className="hidden text-sm text-muted-foreground md:inline">{user?.email}</span>
             </div>
           </header>
-          <main className="flex-1 p-6 overflow-auto">
+          <main className="flex-1 overflow-auto p-6">
+            {(title || actions) && (
+              <div className="mb-6 flex flex-wrap items-start justify-between gap-3">
+                <div>
+                  {title && <h2 className="font-heading text-2xl font-semibold">{title}</h2>}
+                  {description && (
+                    <p className="mt-1 text-sm text-muted-foreground">{description}</p>
+                  )}
+                </div>
+                {actions}
+              </div>
+            )}
             {children}
           </main>
         </div>
