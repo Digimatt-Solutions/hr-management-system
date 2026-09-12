@@ -1453,6 +1453,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      admin_exists: { Args: never; Returns: boolean }
       can_manage_employee: {
         Args: { check_employee_id: string }
         Returns: boolean
