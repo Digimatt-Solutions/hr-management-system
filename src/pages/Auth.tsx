@@ -22,14 +22,11 @@ const Auth = () => {
   const [awaitingConfirmation, setAwaitingConfirmation] = useState(false);
 
   useEffect(() => {
-    supabase
-      .rpc("admin_exists")
-      .then(({ data, error }) => {
-        if (error) throw error;
-        setAdminExists(Boolean(data));
-      })
-      .catch(() => setAdminExists(true))
-      .finally(() => setCheckingAdmin(false));
+    (async () => {
+      const { data, error } = await supabase.rpc("admin_exists");
+      setAdminExists(error ? true : Boolean(data));
+      setCheckingAdmin(false);
+    })();
   }, []);
 
   const handleAuth = async (e: React.FormEvent) => {
