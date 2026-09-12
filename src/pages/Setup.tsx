@@ -21,14 +21,11 @@ const Setup = () => {
   const [awaitingConfirmation, setAwaitingConfirmation] = useState(false);
 
   useEffect(() => {
-    supabase
-      .rpc("admin_exists")
-      .then(({ data, error }) => {
-        if (error) throw error;
-        setAdminExists(Boolean(data));
-      })
-      .catch(() => setAdminExists(false))
-      .finally(() => setChecking(false));
+    (async () => {
+      const { data, error } = await supabase.rpc("admin_exists");
+      setAdminExists(error ? false : Boolean(data));
+      setChecking(false);
+    })();
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
