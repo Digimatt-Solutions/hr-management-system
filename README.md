@@ -1,73 +1,52 @@
-# Welcome to your Lovable project
+# HR Management System
 
-## Project info
+Build a full working application with a dashboard and make all pages work
+Assessment Instructions:
 
-**URL**: https://lovable.dev/projects/051a27bd-9b4d-4d26-9aa2-5c27e9a68e15
+● Build a Full-stack app using Django and React. Deliverables:
+○ Create a live hosted version (can use Vercel.app)
+○ Share the Github code
+○ We will test the hosted version for accuracy and the accuracy must be
+up to standards
+○ UI and UX must be good. Pay attention to good design and aesthetics,
+it can compensate for some inaccuracies in output
 
-## How can I edit this code?
+● Objective
+○ Build an app that takes trip details as inputs and outputs route
+instructions and draws ELD logs as outputs
+○ Build an app that takes in the following inputs:
+■ Current location
+■ Pickup location
+■ Dropoff location
+■ Current Cycle Used (Hrs)
+○ Outputs
+■ Map showing route and information regarding stops and rests --
+find and use a free map API
+■ Daily Log Sheets filled out -- need to draw on the log and fill out
+the sheet, multiple log sheets will be needed for longer trips
 
-There are several ways of editing your application.
+● Assumptions
+○ Property-carrying driver, 70hrs/8days, no adverse driving conditions
+○ Fueling at least once every 1,000 miles
+○ 1 hour for pickup and drop-off
 
-**Use Lovable**
+This project was built with [Lovable](https://lovable.dev).
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/051a27bd-9b4d-4d26-9aa2-5c27e9a68e15) and start prompting.
+## Build with Lovable
 
-Changes made via Lovable will be committed automatically to this repo.
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/f2c8e325-a35f-47d8-8a12-9d269c1dbaf6).
 
-**Use your preferred IDE**
+- **Ship faster**: describe what you want to build and Lovable handles the code.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Development
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
+git clone <this-repository-url>
+cd <repository-name>
 npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
 npm run dev
 ```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/051a27bd-9b4d-4d26-9aa2-5c27e9a68e15) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
