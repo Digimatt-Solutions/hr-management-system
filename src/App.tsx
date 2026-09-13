@@ -7,7 +7,6 @@ import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import { DepartmentProvider } from "./contexts/DepartmentContext";
 import RoleRoute from "./components/RoleRoute";
 import Auth from "./pages/Auth";
-import Setup from "./pages/Setup";
 import Dashboard from "./pages/Dashboard";
 import Employees from "./pages/Employees";
 import EmployeeDetail from "./pages/EmployeeDetail";
@@ -61,9 +60,9 @@ const App = () => (
         <AuthProvider>
           <DepartmentProvider>
             <Routes>
-              <Route path="/" element={<Navigate to="/dashboard" replace />} />
+              <Route path="/" element={<PublicRoute><Auth /></PublicRoute>} />
               <Route path="/auth" element={<PublicRoute><Auth /></PublicRoute>} />
-              <Route path="/setup" element={<PublicRoute><Setup /></PublicRoute>} />
+              <Route path="/setup" element={<Navigate to="/auth" replace />} />
               <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route path="/terms" element={<Terms />} />
 
