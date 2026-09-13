@@ -1,52 +1,219 @@
 # HR Management System
 
-Build a full working application with a dashboard and make all pages work
-Assessment Instructions:
+A modern web-based **Human Resource Management System** designed to streamline employee administration, HR operations, and organizational management through a centralized platform.
 
-● Build a Full-stack app using Django and React. Deliverables:
-○ Create a live hosted version (can use Vercel.app)
-○ Share the Github code
-○ We will test the hosted version for accuracy and the accuracy must be
-up to standards
-○ UI and UX must be good. Pay attention to good design and aesthetics,
-it can compensate for some inaccuracies in output
+The system provides a structured environment for managing employee information, HR activities, organizational records, and administrative workflows while maintaining appropriate access controls and data protection practices.
 
-● Objective
-○ Build an app that takes trip details as inputs and outputs route
-instructions and draws ELD logs as outputs
-○ Build an app that takes in the following inputs:
-■ Current location
-■ Pickup location
-■ Dropoff location
-■ Current Cycle Used (Hrs)
-○ Outputs
-■ Map showing route and information regarding stops and rests --
-find and use a free map API
-■ Daily Log Sheets filled out -- need to draw on the log and fill out
-the sheet, multiple log sheets will be needed for longer trips
+## Overview
 
-● Assumptions
-○ Property-carrying driver, 70hrs/8days, no adverse driving conditions
-○ Fueling at least once every 1,000 miles
-○ 1 hour for pickup and drop-off
+The HR Management System is built to simplify day-to-day human resource operations by bringing essential HR processes into a single, easy-to-use platform.
 
-This project was built with [Lovable](https://lovable.dev).
+It is designed with a focus on:
 
-## Build with Lovable
+* Efficient employee management
+* Centralized HR records
+* Role-based access to system functionality
+* Administrative management
+* Secure authentication and account management
+* Responsive and accessible user experience
+* Scalable application architecture
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/f2c8e325-a35f-47d8-8a12-9d269c1dbaf6).
+## Core Features
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+### Employee Management
 
-## Development
+* Employee registration and management
+* Employee profiles
+* Employment information
+* Department and role management
+* Employee status management
+* Centralized employee records
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+### HR Administration
 
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
+* HR dashboard
+* Organizational management
+* Department management
+* Employee oversight
+* Administrative workflows
+* System configuration
+
+### Authentication & Access Control
+
+* Secure user authentication
+* Account registration and login
+* Role-based access control
+* Protected application areas
+* Administrative access management
+* Session and account security controls
+
+Access to functionality is determined by the user's assigned role and permissions.
+
+### Dashboard
+
+The system provides dashboards tailored to the user's level of access, allowing authorized users to quickly access relevant HR information and system functionality.
+
+### Responsive UI/UX
+
+The application is designed to work across:
+
+* Desktop computers
+* Laptops
+* Tablets
+* Mobile devices
+
+The interface follows modern UI/UX principles with an emphasis on clarity, consistency, accessibility, and ease of navigation.
+
+## Security
+
+Security is treated as a core part of the system architecture.
+
+The application incorporates appropriate measures for:
+
+* Authentication and authorization
+* Role-based access control
+* Protected application routes
+* Secure handling of application data
+* Input validation
+* Database access controls
+* Controlled administrative functionality
+* Protection of sensitive system operations
+
+Security-sensitive implementation details are intentionally not documented publicly.
+
+## Technology Stack
+
+### Frontend
+
+* React
+* TypeScript
+* Modern CSS and responsive UI components
+
+### Backend & Data
+
+* Supabase
+* PostgreSQL
+* Database-level access controls
+
+### Development & Deployment
+
+* Git
+* GitHub
+* Vite
+* Node.js
+* Netlify / compatible hosting platforms
+
+## Project Structure
+
+The project follows a modular frontend architecture designed to keep application functionality organized and maintainable.
+
+Typical areas include:
+
+```text
+src/
+├── components/
+├── pages/
+├── hooks/
+├── lib/
+├── services/
+├── integrations/
+└── main.tsx
+```
+
+The exact implementation may evolve as the system develops.
+
+## Getting Started
+
+### Prerequisites
+
+Make sure you have the following installed:
+
+* Node.js
+* npm
+* Git
+
+### Installation
+
+Clone the repository:
+
+```bash
+git clone <repository-url>
+```
+
+Navigate into the project:
+
+```bash
+cd hr-management-system
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+### Environment Configuration
+
+Create the appropriate environment configuration for your local environment.
+
+Do **not** commit credentials, private keys, authentication secrets, or other sensitive configuration to the repository.
+
+### Run the Development Server
+
+```bash
 npm run dev
 ```
+
+The development server will provide a local URL where the application can be accessed.
+
+### Production Build
+
+To create a production build:
+
+```bash
+npm run build
+```
+
+To preview the production build locally:
+
+```bash
+npm run preview
+```
+
+## Deployment
+
+The application can be deployed using modern frontend hosting platforms that support Vite applications.
+
+Before deploying to production:
+
+1. Configure the required environment variables.
+2. Verify authentication and authorization behaviour.
+3. Confirm database access policies.
+4. Test protected application areas.
+5. Run a production build.
+6. Verify the deployed application across supported devices and browsers.
+
+## Development Principles
+
+The project follows these general principles:
+
+* Maintainable and modular code
+* Clear separation of application responsibilities
+* Responsive design
+* Consistent UI/UX
+* Secure data handling
+* Least-privilege access
+* Validation of user input
+* Production-ready deployment practices
+
+## Important Note
+
+This repository contains the application source code. Configuration values, credentials, private keys, and other sensitive operational information should be maintained outside the source repository using appropriate environment and deployment configuration.
+
+Security controls and internal administrative mechanisms are intentionally kept abstract in this documentation.
+
+## License
+
+This project is maintained by **Digimatt Solutions Limited**.
+
+All rights reserved unless otherwise specified.
