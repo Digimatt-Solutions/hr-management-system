@@ -10,7 +10,7 @@ export default function Terms() {
           <Link to="/auth?tab=create-account"><ArrowLeft />Back to sign up</Link>
         </Button>
         <header className="space-y-3 border-b pb-6">
-          <p className="text-sm font-semibold text-primary">PeopleHub HR</p>
+          <p className="text-sm font-semibold text-primary">Digimatt HR</p>
           <h1 className="text-3xl font-semibold">Terms &amp; Conditions</h1>
           <p className="text-muted-foreground">Rules for responsible use of this HR workspace.</p>
         </header>

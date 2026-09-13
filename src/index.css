@@ -8,7 +8,7 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* PeopleHub HR: crisp white, black and brand orange */
+    /* Digimatt HR: crisp white, black and brand orange */
     --background: 0 0% 98%;
     --foreground: 0 0% 5%;
 

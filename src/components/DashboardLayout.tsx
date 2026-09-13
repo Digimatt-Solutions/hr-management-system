@@ -38,7 +38,7 @@ const DashboardLayout = ({ children, title, description, actions }: DashboardLay
         <div className="flex flex-1 flex-col">
           <header className="sticky top-0 z-30 flex h-16 items-center gap-3 border-b bg-card/95 px-3 backdrop-blur sm:px-5">
             <SidebarTrigger className="h-9 w-9 hover:bg-muted" />
-            <h1 className="truncate font-heading text-base font-semibold text-foreground sm:text-lg">PeopleHub HR</h1>
+            <h1 className="truncate font-heading text-base font-semibold text-foreground sm:text-lg">Digimatt HR</h1>
             <div className="ml-auto flex min-w-0 items-center gap-2 sm:gap-3">
               {!loading && departments.length > 0 && (
                 <div className="hidden items-center gap-2 sm:flex">
