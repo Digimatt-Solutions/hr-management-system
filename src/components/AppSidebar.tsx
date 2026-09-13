@@ -17,7 +17,7 @@ import { useLocation } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { roleLabel } from "@/lib/hr";
 import { toast } from "sonner";
-import logoImage from "@/assets/digimatt-logo.png.asset.json";
+import logoImage from "@/assets/digimatt-logo.png";
 import {
   Sidebar,
   SidebarContent,
@@ -119,7 +119,7 @@ export function AppSidebar() {
         <div className={`border-b border-sidebar-border px-4 py-5 ${collapsed ? "px-2" : ""}`}>
           <div className={collapsed ? "mx-auto h-9 w-9 overflow-hidden rounded-md" : "flex justify-center"}>
             <img
-              src={logoImage.url}
+              src={logoImage}
               alt="Digimatt Solutions"
               className={collapsed ? "h-9 max-w-none object-cover object-left" : "h-auto w-full max-w-[190px] object-contain"}
             />
