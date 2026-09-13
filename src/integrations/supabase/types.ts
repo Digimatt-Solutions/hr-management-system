@@ -65,6 +65,21 @@ export type Database = {
           },
         ]
       }
+      app_setup_state: {
+        Row: {
+          admin_exists: boolean
+          singleton: boolean
+        }
+        Insert: {
+          admin_exists?: boolean
+          singleton?: boolean
+        }
+        Update: {
+          admin_exists?: boolean
+          singleton?: boolean
+        }
+        Relationships: []
+      }
       attendance_records: {
         Row: {
           clock_in: string | null
