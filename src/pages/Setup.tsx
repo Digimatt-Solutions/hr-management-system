@@ -12,7 +12,7 @@ import { Loader2, ShieldCheck } from "lucide-react";
 const Setup = () => {
   const navigate = useNavigate();
   const [checking, setChecking] = useState(true);
-  const [adminExists, setAdminExists] = useState(false);
+  const [adminExists, setAdminExists] = useState(true);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,7 +23,7 @@ const Setup = () => {
   useEffect(() => {
     (async () => {
       const { data, error } = await supabase.rpc("admin_exists");
-      setAdminExists(error ? false : Boolean(data));
+      setAdminExists(error ? true : Boolean(data));
       setChecking(false);
     })();
   }, []);
@@ -70,17 +70,17 @@ const Setup = () => {
   if (adminExists) return <Navigate to="/auth" replace />;
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-background via-secondary/40 to-background p-4">
-      <Card className="w-full max-w-md shadow-lg">
+    <div className="flex min-h-screen items-center justify-center bg-background p-4 sm:p-6">
+      <Card className="w-full max-w-md border-border shadow-lg">
         <CardHeader className="space-y-1 text-center">
           <div className="mb-3 flex justify-center">
-            <div className="rounded-full bg-primary/10 p-3">
+            <div className="rounded-md bg-primary/10 p-3">
               <ShieldCheck className="h-8 w-8 text-primary" />
             </div>
           </div>
-          <CardTitle className="font-heading text-2xl">First-time setup</CardTitle>
+          <CardTitle className="font-heading text-2xl">Create Super Admin</CardTitle>
           <CardDescription>
-            No administrator exists yet. Create the account that will manage the HR system.
+            This secure, one-time step creates the account that manages the entire HR workspace.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -148,11 +148,11 @@ const Setup = () => {
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Creating account...
                   </>
                 ) : (
-                  "Create administrator"
+                  "Create Super Admin"
                 )}
               </Button>
               <p className="text-center text-xs text-muted-foreground">
-                This account is stored permanently and can only be removed from the database.
+                 Setup closes automatically when the Super Admin account is created.
               </p>
             </form>
           )}
