@@ -9,8 +9,8 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { toast } from "sonner";
-import heroImage from "@/assets/peoplehub-auth.jpg.asset.json";
-import logoImage from "@/assets/digimatt-logo.png.asset.json";
+import heroImage from "@/assets/peoplehub-auth.jpg";
+import logoImage from "@/assets/digimatt-logo.png";
 import { cn } from "@/lib/utils";
 
 const TAB_SIGNIN = "login";
@@ -73,7 +73,7 @@ export default function Auth() {
   return (
     <main className="grid min-h-screen bg-card lg:grid-cols-[1.05fr_0.95fr]">
       <section className="relative hidden min-h-screen overflow-hidden lg:flex lg:flex-col lg:justify-end">
-        <img src={heroImage.url} alt="People working together at a workplace" className="absolute inset-0 h-full w-full object-cover" />
+        <img src={heroImage} alt="People working together at a workplace" className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-foreground/55" />
         <div className="relative z-10 max-w-xl space-y-4 p-10 text-primary-foreground">
           <h1 className="text-4xl font-semibold leading-tight">Your people, supported from day one.</h1>
@@ -84,7 +84,7 @@ export default function Auth() {
       <section className="flex min-h-screen items-center justify-center bg-background px-4 py-8 sm:px-8">
         <div className="w-full max-w-md rounded-lg border border-border bg-card px-5 py-7 shadow-lg sm:px-8 sm:py-8">
           <div className="mb-7 flex justify-center">
-            <img src={logoImage.url} alt="Digimatt Solutions" className="h-auto w-full max-w-[240px] object-contain" />
+            <img src={logoImage} alt="Digimatt Solutions" className="h-auto w-full max-w-[240px] object-contain" />
           </div>
           <div className="mb-7 space-y-2 text-center">
             <p className="text-sm font-semibold text-primary">HR workspace</p>
