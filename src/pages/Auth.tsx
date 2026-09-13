@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { Eye, EyeOff, Loader2, LockKeyhole, Mail, UserRound } from "lucide-react";
+import { Eye, EyeOff, Loader2, LockKeyhole, Mail, UserRound, UsersRound } from "lucide-react";
 import { z } from "zod";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
@@ -10,7 +10,6 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { toast } from "sonner";
 import heroImage from "@/assets/peoplehub-auth.jpg.asset.json";
-import logoImage from "@/assets/digimatt-logo.png.asset.json";
 import { cn } from "@/lib/utils";
 
 const TAB_SIGNIN = "login";
@@ -75,16 +74,21 @@ export default function Auth() {
       <section className="relative hidden min-h-screen overflow-hidden lg:flex lg:flex-col lg:justify-between">
         <img src={heroImage.url} alt="People working together at a workplace" className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-foreground/55" />
+        <div className="relative z-10 flex items-center gap-3 p-10 text-primary-foreground">
+          <span className="grid h-11 w-11 place-items-center rounded-md bg-primary"><UsersRound className="h-6 w-6" /></span>
+          <span className="font-heading text-xl font-semibold">PeopleHub HR</span>
+        </div>
         <div className="relative z-10 max-w-xl space-y-4 p-10 text-primary-foreground">
           <h1 className="text-4xl font-semibold leading-tight">Your people, supported from day one.</h1>
           <p className="max-w-lg text-base leading-7 text-primary-foreground/85">A secure workspace for employee records, leave, attendance, payroll, and performance.</p>
         </div>
       </section>
 
-      <section className="flex min-h-screen items-center justify-center bg-background px-4 py-8 sm:px-8">
-        <div className="w-full max-w-md rounded-lg border border-border bg-card px-5 py-7 shadow-lg sm:px-8 sm:py-8">
-          <div className="mb-7 flex justify-center">
-            <img src={logoImage.url} alt="Digimatt Solutions" className="h-auto w-full max-w-[240px] object-contain" />
+      <section className="flex min-h-screen items-center justify-center px-5 py-10 sm:px-10">
+        <div className="w-full max-w-md">
+          <div className="mb-8 flex items-center gap-3 lg:hidden">
+            <span className="grid h-10 w-10 place-items-center rounded-md bg-primary text-primary-foreground"><UsersRound className="h-5 w-5" /></span>
+            <span className="font-heading text-lg font-semibold">PeopleHub HR</span>
           </div>
           <div className="mb-7 space-y-2">
             <p className="text-sm font-semibold text-primary">HR workspace</p>
