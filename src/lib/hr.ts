@@ -1,5 +1,5 @@
 export const ROLE_LABELS: Record<string, string> = {
-  admin: "HR Admin",
+  admin: "Super Admin",
   manager: "Manager",
   staff: "Employee",
 };
