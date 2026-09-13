@@ -60,7 +60,7 @@ const companyItems: Item[] = [
 ];
 
 export function AppSidebar() {
-  const { state } = useSidebar();
+  const { state, isMobile, setOpenMobile } = useSidebar();
   const { signOut, role } = useAuth();
   const location = useLocation();
   const currentPath = location.pathname;
@@ -94,6 +94,7 @@ export function AppSidebar() {
                   <SidebarMenuButton asChild>
                     <NavLink
                       to={item.url}
+                      onClick={() => isMobile && setOpenMobile(false)}
                       className={`flex items-center gap-3 rounded-md px-3 py-2 transition-colors hover:bg-sidebar-accent ${
                         isActive ? "bg-sidebar-accent text-sidebar-primary font-medium" : ""
                       }`}

@@ -8,28 +8,26 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Base colors - Industrial/Professional theme */
-    --background: 220 15% 97%;
-    --foreground: 220 15% 12%;
+    /* PeopleHub HR: crisp white, black and brand orange */
+    --background: 0 0% 98%;
+    --foreground: 0 0% 5%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 15% 12%;
+    --card-foreground: 0 0% 5%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 15% 12%;
+    --popover-foreground: 0 0% 5%;
 
-    /* Primary - Amber/Orange (industrial, automotive) */
-    --primary: 25 95% 53%;
+    --primary: 24 90% 54%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary - Charcoal */
-    --secondary: 220 13% 91%;
-    --secondary-foreground: 220 15% 12%;
+    --secondary: 0 0% 94%;
+    --secondary-foreground: 0 0% 8%;
 
-    --muted: 220 13% 91%;
-    --muted-foreground: 220 9% 46%;
+    --muted: 0 0% 94%;
+    --muted-foreground: 0 0% 40%;
 
-    --accent: 25 95% 53%;
+    --accent: 24 90% 54%;
     --accent-foreground: 0 0% 100%;
 
     /* Success - Green for good stock */
@@ -44,24 +42,24 @@ All colors MUST be HSL.
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 13% 87%;
-    --input: 220 13% 87%;
-    --ring: 25 95% 53%;
+    --border: 0 0% 88%;
+    --input: 0 0% 84%;
+    --ring: 24 90% 54%;
 
     --radius: 0.5rem;
 
     /* Sidebar - Dark professional */
-    --sidebar-background: 220 18% 15%;
-    --sidebar-foreground: 220 10% 85%;
-    --sidebar-primary: 25 95% 53%;
+    --sidebar-background: 0 0% 5%;
+    --sidebar-foreground: 0 0% 90%;
+    --sidebar-primary: 24 90% 54%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 15% 20%;
-    --sidebar-accent-foreground: 220 10% 85%;
-    --sidebar-border: 220 15% 20%;
-    --sidebar-ring: 25 95% 53%;
+    --sidebar-accent: 0 0% 12%;
+    --sidebar-accent-foreground: 0 0% 96%;
+    --sidebar-border: 0 0% 16%;
+    --sidebar-ring: 24 90% 54%;
 
     /* Custom gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(25 95% 53%) 0%, hsl(35 90% 58%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(24 90% 54%) 0%, hsl(18 91% 48%) 100%);
     --gradient-success: linear-gradient(135deg, hsl(142 76% 36%) 0%, hsl(142 71% 45%) 100%);
     --gradient-warning: linear-gradient(135deg, hsl(38 92% 50%) 0%, hsl(45 93% 47%) 100%);
     --gradient-critical: linear-gradient(135deg, hsl(0 84% 60%) 0%, hsl(0 72% 51%) 100%);
