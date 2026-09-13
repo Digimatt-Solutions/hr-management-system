@@ -1,0 +1,12 @@
+DROP TABLE public.sale_items;
+DROP TABLE public.sales;
+DROP TABLE public.stock_alerts;
+DROP TABLE public.reorder_requests;
+DROP TABLE public.inventory;
+DROP TABLE public.products;
+DROP TABLE public.categories;
+DROP TABLE public.suppliers;
+DROP TABLE public.user_shop_access;
+DROP TABLE public.shops;
+DROP FUNCTION IF EXISTS public.get_user_shops(uuid);
+DROP FUNCTION IF EXISTS public.user_has_shop_access(uuid, uuid);
