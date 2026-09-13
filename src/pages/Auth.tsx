@@ -1,9 +1,8 @@
-import { FormEvent, useEffect, useState } from "react";
-import { Link, Navigate, useSearchParams } from "react-router-dom";
+import { FormEvent, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import { Eye, EyeOff, Loader2, LockKeyhole, Mail, UserRound, UsersRound } from "lucide-react";
 import { z } from "zod";
 import { useAuth } from "@/contexts/AuthContext";
-import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -37,17 +36,7 @@ export default function Auth() {
   const [agreed, setAgreed] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [checkingAdmin, setCheckingAdmin] = useState(true);
-  const [adminExists, setAdminExists] = useState(true);
   const [awaitingConfirmation, setAwaitingConfirmation] = useState(false);
-
-  useEffect(() => {
-    void (async () => {
-      const { data, error } = await supabase.rpc("admin_exists");
-      setAdminExists(error ? true : Boolean(data));
-      setCheckingAdmin(false);
-    })();
-  }, []);
 
   const switchMode = (next: Mode) => {
     setSearchParams({ tab: next === "signup" ? TAB_SIGNUP : TAB_SIGNIN }, { replace: true });
@@ -79,9 +68,6 @@ export default function Auth() {
       setLoading(false);
     }
   };
-
-  if (checkingAdmin) return <div className="flex min-h-screen items-center justify-center"><Loader2 className="h-6 w-6 animate-spin text-primary" /></div>;
-  if (!adminExists) return <Navigate to="/setup" replace />;
 
   return (
     <main className="grid min-h-screen bg-card lg:grid-cols-[1.05fr_0.95fr]">
