@@ -72,7 +72,7 @@ export default function Auth() {
 
   return (
     <main className="grid min-h-screen bg-card lg:grid-cols-[1.05fr_0.95fr]">
-      <section className="relative hidden min-h-screen overflow-hidden lg:flex lg:flex-col lg:justify-between">
+      <section className="relative hidden min-h-screen overflow-hidden lg:flex lg:flex-col lg:justify-end">
         <img src={heroImage.url} alt="People working together at a workplace" className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-foreground/55" />
         <div className="relative z-10 max-w-xl space-y-4 p-10 text-primary-foreground">
@@ -86,7 +86,7 @@ export default function Auth() {
           <div className="mb-7 flex justify-center">
             <img src={logoImage.url} alt="Digimatt Solutions" className="h-auto w-full max-w-[240px] object-contain" />
           </div>
-          <div className="mb-7 space-y-2">
+          <div className="mb-7 space-y-2 text-center">
             <p className="text-sm font-semibold text-primary">HR workspace</p>
             <h1 className="text-3xl font-semibold">{mode === "signin" ? "Welcome back" : "Create your account"}</h1>
             <p className="text-sm text-muted-foreground">{mode === "signin" ? "Sign in to continue to your team workspace." : "Join your organisation’s PeopleHub workspace."}</p>
