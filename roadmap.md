@@ -11,4 +11,4 @@
 - [x] Performance and payroll
 - [x] Settings (leave types, holidays, roles, department access)
 - [x] Split Login / Sign Up screen, policy agreement, user menu, and responsive mobile navigation
-- [ ] Remove retail tables and dead code
+- [x] Remove retail tables and dead code
