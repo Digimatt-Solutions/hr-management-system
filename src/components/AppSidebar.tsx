@@ -17,6 +17,7 @@ import { useLocation } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { roleLabel } from "@/lib/hr";
 import { toast } from "sonner";
+import logoImage from "@/assets/digimatt-logo.png.asset.json";
 import {
   Sidebar,
   SidebarContent,
@@ -115,12 +116,16 @@ export function AppSidebar() {
   return (
     <Sidebar collapsible="icon" className="border-r border-sidebar-border">
       <SidebarContent>
-        <div className={`px-4 py-4 ${collapsed ? "text-center px-2" : ""}`}>
-          <p className="font-heading text-base font-semibold text-sidebar-foreground">
-            {collapsed ? "HR" : "PeopleHub HR"}
-          </p>
+        <div className={`border-b border-sidebar-border px-4 py-5 ${collapsed ? "px-2" : ""}`}>
+          <div className={collapsed ? "mx-auto h-9 w-9 overflow-hidden rounded-md" : "flex justify-center"}>
+            <img
+              src={logoImage.url}
+              alt="Digimatt Solutions"
+              className={collapsed ? "h-9 max-w-none object-cover object-left" : "h-auto w-full max-w-[190px] object-contain"}
+            />
+          </div>
           {!collapsed && (
-            <p className="text-xs text-sidebar-foreground/60">{roleLabel(role)}</p>
+            <p className="mt-3 text-center text-xs text-sidebar-foreground/60">{roleLabel(role)}</p>
           )}
         </div>
         {renderGroup("Workspace", workspaceItems)}

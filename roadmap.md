@@ -12,3 +12,4 @@
 - [x] Settings (leave types, holidays, roles, department access)
 - [x] Split Login / Sign Up screen, policy agreement, user menu, and responsive mobile navigation
 - [x] Remove retail tables and dead code
+- [x] Apply Digimatt logo, bordered auth form, and light gray sidebar
