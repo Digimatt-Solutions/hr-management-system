@@ -17,7 +17,7 @@ import { useLocation } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { roleLabel } from "@/lib/hr";
 import { toast } from "sonner";
-import logoImage from "@/assets/digimatt-logo.png";
+import logoImage from "@/assets/kazini-logo.png.asset.json";
 import {
   Sidebar,
   SidebarContent,
@@ -42,6 +42,7 @@ interface Item {
 
 const workspaceItems: Item[] = [
   { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard, roles: ["admin", "manager", "staff"] },
+  { title: "Clients", url: "/clients", icon: Users, roles: ["admin"] },
   { title: "Employees", url: "/employees", icon: Users, roles: ["admin", "manager", "staff"] },
   { title: "Departments", url: "/departments", icon: Building2, roles: ["admin", "manager", "staff"] },
 ];
@@ -119,8 +120,8 @@ export function AppSidebar() {
         <div className={`border-b border-sidebar-border px-4 py-5 ${collapsed ? "px-2" : ""}`}>
           <div className={collapsed ? "mx-auto h-9 w-9 overflow-hidden rounded-md" : "flex justify-center"}>
             <img
-              src={logoImage}
-              alt="Digimatt Solutions"
+              src={logoImage.url}
+              alt="Kazini Shared"
               className={collapsed ? "h-9 max-w-none object-cover object-left" : "h-auto w-full max-w-[190px] object-contain"}
             />
           </div>

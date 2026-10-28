@@ -10,7 +10,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { toast } from "sonner";
 import heroImage from "@/assets/peoplehub-auth.jpg";
-import logoImage from "@/assets/digimatt-logo.png";
+import logoImage from "@/assets/kazini-logo.png.asset.json";
 import { cn } from "@/lib/utils";
 
 const TAB_SIGNIN = "login";
@@ -76,7 +76,7 @@ export default function Auth() {
         <img src={heroImage} alt="People working together at a workplace" className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-foreground/55" />
         <div className="relative z-10 max-w-xl space-y-4 p-10 text-primary-foreground">
-          <h1 className="text-4xl font-semibold leading-tight">Your people, supported from day one.</h1>
+          <h1 className="text-4xl font-semibold leading-tight">Your community, connected.</h1>
           <p className="max-w-lg text-base leading-7 text-primary-foreground/85">A secure workspace for employee records, leave, attendance, payroll, and performance.</p>
         </div>
       </section>
@@ -84,12 +84,12 @@ export default function Auth() {
       <section className="flex min-h-screen items-center justify-center bg-background px-4 py-8 sm:px-8">
         <div className="w-full max-w-md rounded-lg border border-border bg-card px-5 py-7 shadow-lg sm:px-8 sm:py-8">
           <div className="mb-7 flex justify-center">
-            <img src={logoImage} alt="Digimatt Solutions" className="h-auto w-full max-w-[240px] object-contain" />
+            <img src={logoImage.url} alt="Kazini Shared" className="h-auto w-full max-w-[240px] object-contain" />
           </div>
           <div className="mb-7 space-y-2 text-center">
-            <p className="text-sm font-semibold text-primary">HR workspace</p>
+            <p className="text-sm font-semibold text-primary">Kazini Admin</p>
             <h1 className="text-3xl font-semibold">{mode === "signin" ? "Welcome back" : "Create your account"}</h1>
-            <p className="text-sm text-muted-foreground">{mode === "signin" ? "Sign in to continue to your team workspace." : "Join your organisation’s PeopleHub workspace."}</p>
+            <p className="text-sm text-muted-foreground">{mode === "signin" ? "Sign in to your Kazini workspace." : "Create your Kazini team account."}</p>
           </div>
 
           <div role="tablist" aria-label="Account access" className="mb-7 grid grid-cols-2 rounded-md bg-muted p-1">
@@ -111,6 +111,7 @@ export default function Auth() {
               <Button type="submit" size="lg" className="w-full" disabled={loading || (mode === "signup" && !agreed)}>{loading && <Loader2 className="animate-spin" />}{mode === "signin" ? "Login" : "Create Account"}</Button>
             </form>
           )}
+          <Link to="/" className="mt-6 block text-center text-sm text-muted-foreground hover:text-primary">Back to Kazini Home</Link>
         </div>
       </section>
     </main>
