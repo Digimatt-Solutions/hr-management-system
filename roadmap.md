@@ -16,12 +16,17 @@
 
 # Kazini Admin redesign
 
-- [ ] Inspect attachments, existing modules, and Fundi Plug SMS workflow
-- [ ] Approve redesign plan and confirm SMS configuration
-- [ ] One-page Kazini public site and complete popup biodata form
-- [ ] Secure client submission storage and admin Client Management CRUD
-- [ ] Rebrand admin shell and database-driven dashboard charts
-- [ ] Editable account display name and profile photo upload
-- [ ] Complete existing employee and department management CRUD
-- [ ] Client SMS audiences, broadcasting, and result feedback (awaiting provider setup)
-- [ ] Verify validation, access controls, and desktop/mobile workflows
+- [x] Inspect attachments, existing modules, and Fundi Plug SMS workflow
+- [x] Approve redesign plan and securely save Airtouch production configuration
+- [x] One-page Kazini public site and complete popup biodata form; guest submission and mobile layout verified
+- [x] Implement secure client storage and admin Client Management CRUD
+- [x] Rebrand admin shell and database-driven dashboard charts
+- [x] Implement account display name and private profile photo upload
+- [x] Extend existing employee validation and department edit/delete; protect linked departments
+- [x] Implement and deploy client SMS audiences, broadcasting, history, and result feedback
+- [x] Run 10 biodata and SMS audience tests; remove temporary registration records
+- [ ] Verify signed-in client CRUD, dashboard, profile upload and employee/department flows — blocked: existing auth accounts have no profiles or roles; user skipped choosing the admin account
+- [ ] Verify authenticated submission ownership and spoofed-owner rejection — blocked: no authorized test session
+- [ ] Verify live Airtouch acceptance and delivery interpretation — blocked: designated test recipient and explicit send approval needed; no SMS sent
+
+Paused at the user's credit check-in request. Existing records remain intact. Seven database-linter warnings concern intentional authenticated access-check helpers; required helper execution remains enabled.
