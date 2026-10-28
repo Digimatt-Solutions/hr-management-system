@@ -27,7 +27,7 @@ export default function ClientForm({open, onOpenChange, record, admin = false, o
     if(!parsed.success){setErrors(Object.fromEntries(parsed.error.issues.map(i=>[i.path[0],i.message])));toast.error('Please check the highlighted fields');return;}
     setSaving(true);setErrors({});
     try{
-      if(admin){const result=record?await supabase.from('clients').update(parsed.data).eq('id',record.id).select('id').single():await supabase.from('clients').insert({...parsed.data,source:'admin'}).select('id').single();if(result.error)throw result.error;toast.success(record?'Client updated':'Client created');onSaved?.();onOpenChange(false);}
+      if(admin){const payload=parsed.data as ClientValues;const result=record?await supabase.from('clients').update(payload).eq('id',record.id).select('id').single():await supabase.from('clients').insert({...payload,source:'admin'}).select('id').single();if(result.error)throw result.error;toast.success(record?'Client updated':'Client created');onSaved?.();onOpenChange(false);}
       else{const {error}=await supabase.functions.invoke('submit-client',{body:parsed.data});if(error){if(error instanceof FunctionsHttpError){const body=await error.context.json();if(body.fields)setErrors(Object.fromEntries(Object.entries(body.fields).map(([key,val])=>[key,(val as string[])[0]])));throw new Error(body.error??'Could not save registration');}throw error;}setSuccess(true);onSaved?.();}
     }catch(error){toast.error(error instanceof Error?error.message:'Could not save client');}finally{setSaving(false);}
   };

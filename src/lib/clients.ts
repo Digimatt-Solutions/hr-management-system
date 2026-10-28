@@ -27,5 +27,5 @@ export const clientSchema = z.object({
   privacy_agreed: z.literal(true, { errorMap: () => ({message: 'Please acknowledge the privacy notice'}) }),
   signature_confirmed: z.literal(true, { errorMap: () => ({message: 'Please confirm your signature'}) }),
 });
-export type ClientValues = z.infer<typeof clientSchema>;
+export type ClientValues = Required<z.infer<typeof clientSchema>>;
 export const emptyClient = (): ClientValues => ({ full_name:'', phone:'', email:'', residential_address:'', company_name:'', industry:'', job_title:'', website:'', facebook:'', linkedin:'', social_other:'', membership_plans:[], working_hours:[], coworking_date: new Date().toISOString().slice(0,10), special_requirements:'', emergency_name:'', emergency_relationship:'', emergency_phone:'', comments:'', signature:'', signature_date: new Date().toISOString().slice(0,10), privacy_agreed: true, signature_confirmed: true });
