@@ -25,7 +25,7 @@ import {
 import { useAuth } from "@/contexts/AuthContext";
 import { useDepartments } from "@/contexts/DepartmentContext";
 import { formatDate, titleCase } from "@/lib/hr";
-import { Megaphone, Plus } from "lucide-react";
+import { Megaphone, Plus, Pencil, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import SmsBroadcast from '@/components/SmsBroadcast';
 
@@ -35,6 +35,7 @@ interface Row {
   body: string;
   priority: string;
   published_at: string;
+  department_id: string | null;
   departments: { name: string } | null;
 }
 
@@ -49,14 +50,17 @@ const Announcements = () => {
   const [priority, setPriority] = useState("normal");
   const [departmentId, setDepartmentId] = useState("all");
   const [saving, setSaving] = useState(false);
+  const [editing, setEditing] = useState<Row|null>(null);
+  const [removing, setRemoving] = useState<Row|null>(null);
 
   const load = useCallback(async () => {
     setLoading(true);
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from("announcements")
-      .select("id, title, body, priority, published_at, departments(name)")
+      .select("id, title, body, priority, published_at, department_id, departments(name)")
       .order("published_at", { ascending: false });
     setRows((data as unknown as Row[]) ?? []);
+    if(error)toast.error('Could not load announcements');
     setLoading(false);
   }, []);
 
@@ -66,17 +70,20 @@ const Announcements = () => {
 
   const save = async () => {
     if (!title.trim() || !body.trim()) return toast.error("Add a title and a message");
+    if(title.length>200||body.length>5000)return toast.error('Title or message is too long');
+    if(!user)return toast.error('Sign in required');
     setSaving(true);
-    const { error } = await supabase.from("announcements").insert({
+    const payload={
       title: title.trim(),
       body: body.trim(),
       priority,
       author_id: user?.id ?? null,
       department_id: departmentId === "all" ? null : departmentId,
-    });
+    };
+    const {error}=editing?await supabase.from('announcements').update(payload).eq('id',editing.id).select('id').single():await supabase.from('announcements').insert(payload);
     setSaving(false);
     if (error) return toast.error("Could not publish the announcement");
-    toast.success("Announcement published");
+    toast.success(editing?'Announcement updated':"Announcement published");
     setTitle("");
     setBody("");
     setOpen(false);
@@ -89,7 +96,7 @@ const Announcements = () => {
       description="Company and department news"
       actions={
         (isAdmin || isManager) && (
-          <Button onClick={() => setOpen(true)}>
+          <Button onClick={() => {setEditing(null);setTitle('');setBody('');setPriority('normal');setDepartmentId('all');setOpen(true);}}>
             <Plus className="mr-2 h-4 w-4" /> New announcement
           </Button>
         )
@@ -128,6 +135,7 @@ const Announcements = () => {
                   </div>
                   <p className="text-xs text-muted-foreground">{formatDate(row.published_at)}</p>
                 </div>
+                {isAdmin&&<div className="flex gap-1"><Button variant="ghost" size="icon" aria-label={`Edit ${row.title}`} title="Edit announcement" onClick={()=>{setEditing(row);setTitle(row.title);setBody(row.body);setPriority(row.priority);setDepartmentId(row.department_id??'all');setOpen(true);}}><Pencil className="h-4 w-4"/></Button><Button variant="ghost" size="icon" aria-label={`Delete ${row.title}`} title="Delete announcement" onClick={()=>setRemoving(row)}><Trash2 className="h-4 w-4 text-destructive"/></Button></div>}
               </CardHeader>
               <CardContent>
                 <p className="whitespace-pre-line text-sm text-muted-foreground">{row.body}</p>
@@ -140,7 +148,7 @@ const Announcements = () => {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>New announcement</DialogTitle>
+            <DialogTitle>{editing?'Edit announcement':'New announcement'}</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
             <div className="space-y-2">
@@ -192,11 +200,12 @@ const Announcements = () => {
           </div>
           <DialogFooter>
             <Button onClick={save} disabled={saving}>
-              Publish
+              {editing?'Save changes':'Publish'}
             </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
+      <Dialog open={!!removing} onOpenChange={v=>{if(!v)setRemoving(null);}}><DialogContent><DialogHeader><DialogTitle>Delete announcement?</DialogTitle></DialogHeader><p className="text-sm text-muted-foreground">This removes “{removing?.title}” from company news.</p><DialogFooter><Button variant="outline" onClick={()=>setRemoving(null)}>Cancel</Button><Button variant="destructive" disabled={saving} onClick={async()=>{if(!removing)return;setSaving(true);const {error}=await supabase.from('announcements').delete().eq('id',removing.id);setSaving(false);if(error)return toast.error(error.message);setRemoving(null);toast.success('Announcement deleted');load();}}>Delete</Button></DialogFooter></DialogContent></Dialog>
     </DashboardLayout>
   );
 };
