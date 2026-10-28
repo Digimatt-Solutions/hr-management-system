@@ -28,6 +28,8 @@ import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Terms from "./pages/Terms";
+import Home from "./pages/Home";
+import Clients from "./pages/Clients";
 
 const queryClient = new QueryClient();
 
@@ -60,7 +62,8 @@ const App = () => (
         <AuthProvider>
           <DepartmentProvider>
             <Routes>
-              <Route path="/" element={<PublicRoute><Auth /></PublicRoute>} />
+              <Route path="/" element={<Home />} />
+              <Route path="/clients" element={<ProtectedRoute><RoleRoute allow={["admin"]}><Clients /></RoleRoute></ProtectedRoute>} />
               <Route path="/auth" element={<PublicRoute><Auth /></PublicRoute>} />
               <Route path="/setup" element={<Navigate to="/auth" replace />} />
               <Route path="/privacy" element={<PrivacyPolicy />} />

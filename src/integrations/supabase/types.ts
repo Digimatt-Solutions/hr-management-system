@@ -127,6 +127,99 @@ export type Database = {
           },
         ]
       }
+      clients: {
+        Row: {
+          comments: string
+          company_name: string
+          coworking_date: string
+          created_at: string
+          email: string
+          emergency_name: string
+          emergency_phone: string
+          emergency_relationship: string
+          facebook: string
+          full_name: string
+          id: string
+          industry: string
+          job_title: string
+          linkedin: string
+          membership_plans: string[]
+          owner_id: string | null
+          phone: string
+          privacy_agreed: boolean
+          residential_address: string
+          signature: string
+          signature_confirmed: boolean
+          signature_date: string
+          social_other: string
+          source: string
+          special_requirements: string
+          updated_at: string
+          website: string
+          working_hours: string[]
+        }
+        Insert: {
+          comments?: string
+          company_name: string
+          coworking_date: string
+          created_at?: string
+          email: string
+          emergency_name: string
+          emergency_phone: string
+          emergency_relationship: string
+          facebook?: string
+          full_name: string
+          id?: string
+          industry: string
+          job_title?: string
+          linkedin?: string
+          membership_plans: string[]
+          owner_id?: string | null
+          phone: string
+          privacy_agreed: boolean
+          residential_address: string
+          signature: string
+          signature_confirmed: boolean
+          signature_date: string
+          social_other?: string
+          source?: string
+          special_requirements?: string
+          updated_at?: string
+          website?: string
+          working_hours: string[]
+        }
+        Update: {
+          comments?: string
+          company_name?: string
+          coworking_date?: string
+          created_at?: string
+          email?: string
+          emergency_name?: string
+          emergency_phone?: string
+          emergency_relationship?: string
+          facebook?: string
+          full_name?: string
+          id?: string
+          industry?: string
+          job_title?: string
+          linkedin?: string
+          membership_plans?: string[]
+          owner_id?: string | null
+          phone?: string
+          privacy_agreed?: boolean
+          residential_address?: string
+          signature?: string
+          signature_confirmed?: boolean
+          signature_date?: string
+          social_other?: string
+          source?: string
+          special_requirements?: string
+          updated_at?: string
+          website?: string
+          working_hours?: string[]
+        }
+        Relationships: []
+      }
       departments: {
         Row: {
           code: string
@@ -807,6 +900,7 @@ export type Database = {
       }
       profiles: {
         Row: {
+          avatar_path: string | null
           created_at: string | null
           email: string
           full_name: string
@@ -815,6 +909,7 @@ export type Database = {
           updated_at: string | null
         }
         Insert: {
+          avatar_path?: string | null
           created_at?: string | null
           email: string
           full_name: string
@@ -823,6 +918,7 @@ export type Database = {
           updated_at?: string | null
         }
         Update: {
+          avatar_path?: string | null
           created_at?: string | null
           email?: string
           full_name?: string
