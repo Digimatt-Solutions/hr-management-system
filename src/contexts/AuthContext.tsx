@@ -24,6 +24,8 @@ interface AuthContextType {
   loading: boolean;
   role: string | null;
   employee: EmployeeRecord | null;
+  profile: { full_name: string; phone: string | null; avatar_path: string | null } | null;
+  profileImage: string | undefined;
   isAdmin: boolean;
   isManager: boolean;
   profileLoading: boolean;
@@ -41,6 +43,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
   const [role, setRole] = useState<string | null>(null);
   const [employee, setEmployee] = useState<EmployeeRecord | null>(null);
+  const [profile, setProfile] = useState<AuthContextType['profile']>(null);
+  const [profileImage, setProfileImage] = useState<string>();
   const [profileLoading, setProfileLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -51,6 +55,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (!nextSession) {
         setRole(null);
         setEmployee(null);
+        setProfile(null);
+        setProfileImage(undefined);
         setProfileLoading(false);
       }
     });
@@ -67,16 +73,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const loadHrContext = useCallback(async (userId: string) => {
     setProfileLoading(true);
-    const [roleRes, employeeRes] = await Promise.all([
+    const [roleRes, employeeRes, profileRes] = await Promise.all([
       supabase.from('user_roles').select('role').eq('user_id', userId).maybeSingle(),
       supabase
         .from('employees')
         .select('id, employee_code, first_name, last_name, work_email, phone, department_id, position_id, manager_id, hire_date, status, avatar_url')
         .eq('profile_id', userId)
         .maybeSingle(),
+      supabase.from('profiles').select('full_name, phone, avatar_path').eq('id',userId).maybeSingle(),
     ]);
     setRole(roleRes.data?.role ?? 'staff');
     setEmployee((employeeRes.data as EmployeeRecord) ?? null);
+    setProfile(profileRes.data ?? null);
+    if (profileRes.data?.avatar_path) {
+      const {data} = await supabase.storage.from('profile-photos').createSignedUrl(profileRes.data.avatar_path, 3600);
+      setProfileImage(data?.signedUrl);
+    } else setProfileImage(undefined);
     setProfileLoading(false);
   }, []);
 
@@ -123,6 +135,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         loading,
         role,
         employee,
+        profile,
+        profileImage,
         isAdmin: role === 'admin',
         isManager: role === 'admin' || role === 'manager',
         profileLoading,

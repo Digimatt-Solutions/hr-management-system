@@ -94,7 +94,7 @@ const EmployeeDialog = ({ open, onOpenChange, employee, onSaved }: Props) => {
     if (open) {
       setValues({
         ...empty,
-        employee_code: `EMP-${Math.floor(1000 + Math.random() * 9000)}`,
+        employee_code: `EMP-${crypto.randomUUID().slice(0,8).toUpperCase()}`,
         ...(employee ?? {}),
       } as EmployeeFormValues);
     }
@@ -105,6 +105,8 @@ const EmployeeDialog = ({ open, onOpenChange, employee, onSaved }: Props) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if(!values.first_name.trim()||!values.last_name.trim()||!values.employee_code.trim()||values.first_name.length>150||values.last_name.length>150||values.employee_code.length>40)return toast.error('Enter valid employee names and staff number');
+    if(values.salary&&(!Number.isFinite(Number(values.salary))||Number(values.salary)<0))return toast.error('Salary must be a non-negative number');
     setSaving(true);
     try {
       const payload = {
@@ -140,14 +142,15 @@ const EmployeeDialog = ({ open, onOpenChange, employee, onSaved }: Props) => {
           "Team introduction and orientation",
           "Complete policy handbook acknowledgement",
         ];
-        await supabase.from("onboarding_tasks").insert(
+        const {error: checklistError}=await supabase.from("onboarding_tasks").insert(
           checklist.map((title, index) => ({
             employee_id: data.id,
             title,
             sort_order: index + 1,
           })),
         );
-        toast.success("Employee added with an onboarding checklist");
+        if(checklistError)toast.warning('Employee saved, but onboarding checklist could not be created');
+        else toast.success("Employee added with an onboarding checklist");
       }
       onSaved();
       onOpenChange(false);

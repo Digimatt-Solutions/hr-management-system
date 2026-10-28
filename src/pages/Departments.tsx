@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/dialog";
 import { useAuth } from "@/contexts/AuthContext";
 import { useDepartments } from "@/contexts/DepartmentContext";
-import { Building2, Plus, Users } from "lucide-react";
+import { Building2, Plus, Users, Pencil, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 
 interface Row {
@@ -37,6 +37,8 @@ const Departments = () => {
   const [code, setCode] = useState("");
   const [description, setDescription] = useState("");
   const [saving, setSaving] = useState(false);
+  const [editing, setEditing] = useState<Row | null>(null);
+  const [removing, setRemoving] = useState<Row | null>(null);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -46,6 +48,7 @@ const Departments = () => {
       supabase.from("positions").select("id, department_id"),
     ]);
     const departments = dep.data ?? [];
+    if(dep.error||emp.error||pos.error)toast.error('Could not load department records');
     setRows(
       departments.map((d) => ({
         ...d,
@@ -63,12 +66,12 @@ const Departments = () => {
   const save = async () => {
     if (!name.trim() || !code.trim()) return toast.error("Name and code are required");
     setSaving(true);
-    const { error } = await supabase
-      .from("departments")
-      .insert({ name: name.trim(), code: code.trim().toUpperCase(), description: description || null });
+    if(name.trim().length>150||code.trim().length>30||description.length>2000){setSaving(false);return toast.error('Department details are too long');}
+    const payload={ name: name.trim(), code: code.trim().toUpperCase(), description: description || null };
+    const { error } = editing ? await supabase.from('departments').update(payload).eq('id',editing.id).select('id').single() : await supabase.from('departments').insert(payload);
     setSaving(false);
-    if (error) return toast.error("Could not create the department");
-    toast.success("Department created");
+    if (error) return toast.error(error.message);
+    toast.success(editing ? "Department updated" : "Department created");
     setName("");
     setCode("");
     setDescription("");
@@ -83,7 +86,7 @@ const Departments = () => {
       description="Teams across the organisation"
       actions={
         isAdmin && (
-          <Button onClick={() => setOpen(true)}>
+          <Button onClick={() => {setEditing(null);setName('');setCode('');setDescription('');setOpen(true);}}>
             <Plus className="mr-2 h-4 w-4" /> New department
           </Button>
         )
@@ -116,6 +119,7 @@ const Departments = () => {
                   </span>
                   <span className="text-muted-foreground">{row.positions} roles</span>
                 </div>
+                {isAdmin&&<div className="flex justify-end gap-1"><Button variant="ghost" size="icon" aria-label={`Edit ${row.name}`} title="Edit department" onClick={()=>{setEditing(row);setName(row.name);setCode(row.code);setDescription(row.description??'');setOpen(true);}}><Pencil className="h-4 w-4"/></Button><Button variant="ghost" size="icon" aria-label={`Delete ${row.name}`} title="Delete department" onClick={()=>setRemoving(row)}><Trash2 className="h-4 w-4 text-destructive"/></Button></div>}
               </CardContent>
             </Card>
           ))}
@@ -128,7 +132,7 @@ const Departments = () => {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>New department</DialogTitle>
+            <DialogTitle>{editing?'Edit department':'New department'}</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
             <div className="space-y-2">
@@ -150,11 +154,12 @@ const Departments = () => {
           </div>
           <DialogFooter>
             <Button onClick={save} disabled={saving}>
-              Create
+              {editing?'Save changes':'Create'}
             </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
+      <Dialog open={!!removing} onOpenChange={v=>{if(!v)setRemoving(null);}}><DialogContent><DialogHeader><DialogTitle>Delete {removing?.name}?</DialogTitle></DialogHeader><p className="text-sm text-muted-foreground">Departments with employees, positions or other linked records cannot be deleted.</p><DialogFooter><Button variant="outline" onClick={()=>setRemoving(null)}>Cancel</Button><Button variant="destructive" disabled={saving} onClick={async()=>{if(!removing)return;if(removing.headcount||removing.positions)return toast.error('Reassign employees and positions first');setSaving(true);const {error}=await supabase.from('departments').delete().eq('id',removing.id);setSaving(false);if(error)return toast.error('Department has linked records and cannot be deleted');toast.success('Department deleted');setRemoving(null);load();reload();}}>Delete</Button></DialogFooter></DialogContent></Dialog>
     </DashboardLayout>
   );
 };
