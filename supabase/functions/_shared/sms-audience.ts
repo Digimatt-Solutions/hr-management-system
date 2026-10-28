@@ -1,3 +1,3 @@
 import { z } from 'npm:zod@3.25.76';
-export const smsSchema = z.object({audience:z.enum(['all','recent','selected']),message:z.string().trim().min(1).max(480),client_ids:z.array(z.string().uuid()).max(10000).default([]),since:z.string().datetime().optional(),until:z.string().datetime().optional(),preview:z.boolean().default(true),request_id:z.string().uuid()}).refine(v=>v.audience!=='selected'||v.client_ids.length>0,'Select at least one client').refine(v=>v.audience!=='recent'||(!!v.since&&!!v.until&&v.since<=v.until),'Choose a valid registration date range');
-export function smsPhone(raw:string){let p=raw.replace(/\D/g,'');if(/^0[17]\d{8}$/.test(p))p='254'+p.slice(1);return /^254[17]\d{8}$/.test(p)?p:null;}
+import { validAudience } from './sms-selection.ts';
+export const smsSchema = z.object({audience:z.enum(['all','recent','selected']),message:z.string().trim().min(1).max(480),client_ids:z.array(z.string().uuid()).max(10000).default([]),since:z.string().datetime().optional(),until:z.string().datetime().optional(),preview:z.boolean().default(true),request_id:z.string().uuid()}).refine(validAudience,'Select clients or choose a valid registration date range');

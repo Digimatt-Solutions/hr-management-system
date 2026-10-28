@@ -1,6 +1,7 @@
 import { createClient } from 'npm:@supabase/supabase-js@2';
 import { corsHeaders } from 'npm:@supabase/supabase-js@2/cors';
-import { smsSchema, smsPhone } from '../_shared/sms-audience.ts';
+import { smsSchema } from '../_shared/sms-audience.ts';
+import { uniqueSmsPhones } from '../_shared/sms-selection.ts';
 
 Deno.serve(async(req)=>{
  const reply=(body:unknown,status=200)=>new Response(JSON.stringify(body),{status,headers:{...corsHeaders,'Content-Type':'application/json'}});
@@ -14,7 +15,7 @@ Deno.serve(async(req)=>{
   const parsed=smsSchema.safeParse(await req.json());if(!parsed.success)return reply({error:parsed.error.issues[0]?.message??'Invalid message'},400);
   const input=parsed.data;let rows:{phone:string}[]=[];let offset=0;
   while(true){let query=db.from('clients').select('phone').order('id').range(offset,offset+999);if(input.audience==='selected')query=query.in('id',input.client_ids);if(input.audience==='recent')query=query.gte('created_at',input.since).lte('created_at',input.until);const {data,error}=await query;if(error)return reply({error:'Could not resolve client audience'},500);rows.push(...(data??[]));if((data?.length??0)<1000)break;offset+=1000;}
-  const phones=Array.from(new Set(rows.map(r=>smsPhone(r.phone)).filter((p):p is string=>p!==null)));const skipped=rows.length-phones.length;
+  const phones=uniqueSmsPhones(rows);const skipped=rows.length-phones.length;
   if(input.preview)return reply({total:phones.length,skipped,clients:rows.length});
   if(!phones.length)return reply({error:'No supported Kenyan mobile numbers in this audience'},400);
   const endpoint=Deno.env.get('SMS_API_ENDPOINT');const username=Deno.env.get('SMS_USERNAME');const password=Deno.env.get('SMS_PASSWORD');const issn=Deno.env.get('SMS_ISSN');
