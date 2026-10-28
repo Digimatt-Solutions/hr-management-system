@@ -28,17 +28,17 @@ interface DashboardLayoutProps {
 }
 
 const DashboardLayout = ({ children, title, description, actions }: DashboardLayoutProps) => {
-  const { user, role, employee, isAdmin, signOut } = useAuth();
+   const { user, role, employee, profile, profileImage, signOut } = useAuth();
   const { departments, selectedDepartment, setSelectedDepartment, loading } = useDepartments();
 
   return (
     <SidebarProvider defaultOpen>
       <div className="flex min-h-screen w-full bg-background">
         <AppSidebar />
-        <div className="flex flex-1 flex-col">
+        <div className="flex min-w-0 flex-1 flex-col">
           <header className="sticky top-0 z-30 flex h-16 items-center gap-3 border-b bg-card/95 px-3 backdrop-blur sm:px-5">
             <SidebarTrigger className="h-9 w-9 hover:bg-muted" />
-            <h1 className="truncate font-heading text-base font-semibold text-foreground sm:text-lg">Digimatt HR</h1>
+            <h1 className="truncate font-heading text-base font-semibold text-foreground sm:text-lg">Kazini Admin</h1>
             <div className="ml-auto flex min-w-0 items-center gap-2 sm:gap-3">
               {!loading && departments.length > 0 && (
                 <div className="hidden items-center gap-2 sm:flex">
@@ -70,25 +70,26 @@ const DashboardLayout = ({ children, title, description, actions }: DashboardLay
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" className="h-10 max-w-[220px] gap-2 px-2" aria-label="Open account menu">
                     <Avatar className="h-8 w-8">
-                      <AvatarImage src={employee?.avatar_url ?? undefined} alt="" />
+                      <AvatarImage src={profileImage} alt="" />
                       <AvatarFallback className="bg-primary text-xs font-semibold text-primary-foreground">
-                        {initials(fullName(employee)) || "PH"}
+                        {initials(profile?.full_name || fullName(employee)) || "KA"}
                       </AvatarFallback>
                     </Avatar>
                     <span className="hidden min-w-0 text-left lg:block">
-                      <span className="block truncate text-sm font-medium">{fullName(employee)}</span>
+                      <span className="block truncate text-sm font-medium">{profile?.full_name || fullName(employee)}</span>
                       <span className="block truncate text-xs text-muted-foreground">{roleLabel(role)}</span>
                     </span>
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-60">
                   <DropdownMenuLabel className="font-normal">
-                    <span className="block truncate font-medium">{fullName(employee)}</span>
+                    <span className="block truncate font-medium">{profile?.full_name || fullName(employee)}</span>
                     <span className="block truncate text-xs text-muted-foreground">{user?.email}</span>
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem asChild><Link to="/profile"><UserRound className="mr-2 h-4 w-4" />Profile</Link></DropdownMenuItem>
-                  {isAdmin && <DropdownMenuItem asChild><Link to="/settings"><Settings className="mr-2 h-4 w-4" />Profile Settings</Link></DropdownMenuItem>}
+                  <DropdownMenuItem asChild><Link to="/profile"><Settings className="mr-2 h-4 w-4" />Profile Settings</Link></DropdownMenuItem>
+                  <DropdownMenuItem asChild><Link to="/"><Building2 className="mr-2 h-4 w-4" />Home</Link></DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onSelect={() => void signOut()} className="text-destructive focus:text-destructive">
                     <LogOut className="mr-2 h-4 w-4" />Logout

@@ -33,6 +33,7 @@ export function DepartmentProvider({ children }: { children: ReactNode }) {
         .order('name');
       if (error) throw error;
       setDepartments(data || []);
+      setSelectedDepartment(current=>current ? data?.find(d=>d.id===current.id)??null : null);
     } catch (error: any) {
       console.error('Error loading departments:', error);
       toast.error('Could not load departments');

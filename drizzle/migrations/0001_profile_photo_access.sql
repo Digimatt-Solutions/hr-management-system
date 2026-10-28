@@ -1,0 +1,3 @@
+CREATE POLICY "Owners read profile photos" ON storage.objects FOR SELECT TO authenticated USING (bucket_id='profile-photos' AND (storage.foldername(name))[1]=auth.uid()::text);
+CREATE POLICY "Owners upload profile photos" ON storage.objects FOR INSERT TO authenticated WITH CHECK (bucket_id='profile-photos' AND (storage.foldername(name))[1]=auth.uid()::text AND lower(storage.extension(name)) IN ('png','jpg','jpeg','webp'));
+CREATE POLICY "Owners delete profile photos" ON storage.objects FOR DELETE TO authenticated USING (bucket_id='profile-photos' AND (storage.foldername(name))[1]=auth.uid()::text);
