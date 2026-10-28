@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'bun:test';
-import { clientSchema, emptyClient, membershipPlans, workingHours, normalizePhone } from './clients';
+import { clientSchema, emptyClient, membershipPlans, workingHours, normalizePhone } from '../src/lib/clients';
 const valid = {...emptyClient(),full_name:'Test Client',phone:'0700000001',email:'test@example.com',residential_address:'Test address',company_name:'Test company',industry:'Services',membership_plans:['Daily'],working_hours:['Morning'],emergency_name:'Test Contact',emergency_relationship:'Colleague',emergency_phone:'0700000002',signature:'Test Client'};
 describe('Kazini biodata rules',()=>{
  it('accepts the five document membership options',()=>{expect(membershipPlans).toEqual(['Daily','Weekly','Monthly','Dedicated Desk','Meeting room']);for(const plan of membershipPlans)expect(clientSchema.safeParse({...valid,membership_plans:[plan]}).success).toBe(true);expect(clientSchema.safeParse({...valid,membership_plans:['Annual']}).success).toBe(false);});
