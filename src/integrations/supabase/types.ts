@@ -1005,6 +1005,45 @@ export type Database = {
           },
         ]
       }
+      sms_broadcasts: {
+        Row: {
+          accepted: number
+          audience: string
+          created_at: string
+          created_by: string
+          failed: number
+          id: string
+          message: string
+          skipped: number
+          status: string
+          total: number
+        }
+        Insert: {
+          accepted?: number
+          audience: string
+          created_at?: string
+          created_by: string
+          failed?: number
+          id?: string
+          message: string
+          skipped?: number
+          status?: string
+          total?: number
+        }
+        Update: {
+          accepted?: number
+          audience?: string
+          created_at?: string
+          created_by?: string
+          failed?: number
+          id?: string
+          message?: string
+          skipped?: number
+          status?: string
+          total?: number
+        }
+        Relationships: []
+      }
       user_department_access: {
         Row: {
           created_at: string

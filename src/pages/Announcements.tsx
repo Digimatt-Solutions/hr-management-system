@@ -27,6 +27,7 @@ import { useDepartments } from "@/contexts/DepartmentContext";
 import { formatDate, titleCase } from "@/lib/hr";
 import { Megaphone, Plus } from "lucide-react";
 import { toast } from "sonner";
+import SmsBroadcast from '@/components/SmsBroadcast';
 
 interface Row {
   id: string;
@@ -94,6 +95,7 @@ const Announcements = () => {
         )
       }
     >
+      {isAdmin&&<SmsBroadcast/>}
       {loading ? (
         <div className="space-y-4">
           {[...Array(3)].map((_, i) => (

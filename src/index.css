@@ -151,8 +151,12 @@ All colors MUST be HSL.
     background: var(--gradient-critical);
   }
 
-  .animate-in {
+  .animate-enter {
     animation: slideIn 0.3s ease-out;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   }
 
   @keyframes slideIn {
