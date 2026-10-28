@@ -8,6 +8,13 @@
       "when": 1793171089078,
       "tag": "0000_kazini_clients_profiles",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1793171233995,
+      "tag": "0001_profile_photo_access",
+      "breakpoints": true
     }
   ]
 }
