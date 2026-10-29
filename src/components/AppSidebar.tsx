@@ -168,13 +168,13 @@ export function AppSidebar() {
     <Sidebar collapsible="icon" className="border-r border-sidebar-border">
       <SidebarContent>
         <div
-          className={`border-b border-sidebar-border px-4 py-5 ${collapsed ? "px-2" : ""}`}
+          className={`border-b border-sidebar-border px-4 py-2 ${collapsed ? "px-2" : ""}`}
         >
           <div
             className={
               collapsed
                 ? "mx-auto h-9 w-9 overflow-hidden rounded-md"
-                : "flex justify-center"
+                : "flex justify-left"
             }
           >
             <img
@@ -182,16 +182,12 @@ export function AppSidebar() {
               alt="Kazini Shared"
               className={
                 collapsed
-                  ? "h-9 max-w-none object-cover object-left"
-                  : "h-auto w-full max-w-[190px] object-contain"
+                  ? "h-5 max-w-none object-cover object-left"
+                  : "h-auto w-full max-w-[110px] object-contain"
               }
             />
           </div>
-          {!collapsed && (
-            <p className="mt-3 text-center text-xs text-sidebar-foreground/60">
-              {roleLabel(role)}
-            </p>
-          )}
+
         </div>
         {renderGroup("Workspace", workspaceItems)}
         {renderGroup("People", peopleItems)}

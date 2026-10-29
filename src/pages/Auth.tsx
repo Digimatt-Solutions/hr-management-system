@@ -109,12 +109,12 @@ export default function Auth() {
       </section>
 
       <section className="flex min-h-screen items-center justify-center bg-background px-4 py-8 sm:px-8">
-        <div className="w-full max-w-md rounded-lg border border-border bg-card px-5 py-7 shadow-lg sm:px-8 sm:py-8">
+        <div className="w-full max-w-md rounded-2xl border border-border bg-card px-5 py-7 shadow-lg sm:px-8 sm:py-8">
           <div className="mb-7 flex justify-center">
             <img
               src={logoImage}
               alt="Kazini Shared"
-              className="h-auto w-full max-w-[240px] object-contain"
+              className="h-auto w-full max-w-[160px] object-contain"
             />
           </div>
           <div className="mb-7 space-y-2 text-center">
