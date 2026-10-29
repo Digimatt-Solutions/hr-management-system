@@ -85,7 +85,7 @@ const EmployeeDetail = () => {
     const { data } = await supabase
       .from("employees")
       .select(
-        "*, departments(id, name), positions(id, title, level), manager:manager_id(id, first_name, last_name)",
+        "*, departments!employees_department_id_fkey(id, name), positions(id, title, level), manager:manager_id(id, first_name, last_name)",
       )
       .eq("id", id)
       .maybeSingle();

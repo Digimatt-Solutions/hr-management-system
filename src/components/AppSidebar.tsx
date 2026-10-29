@@ -18,6 +18,8 @@ import { useAuth } from "@/contexts/AuthContext";
 import { roleLabel } from "@/lib/hr";
 import { toast } from "sonner";
 import logoImage from "@/assets/kazini-logo.png";
+import { useModules } from "@/contexts/ModuleContext";
+import { moduleForPath } from "@/lib/modules";
 import {
   Sidebar,
   SidebarContent,
@@ -109,6 +111,7 @@ const companyItems: Item[] = [
 export function AppSidebar() {
   const { state, isMobile, setOpenMobile } = useSidebar();
   const { signOut, role } = useAuth();
+  const { enabled } = useModules();
   const location = useLocation();
   const currentPath = location.pathname;
   const collapsed = state === "collapsed";
@@ -123,7 +126,7 @@ export function AppSidebar() {
   };
 
   const visible = (items: Item[]) =>
-    items.filter((item) => !role || item.roles.includes(role as Role));
+    items.filter((item) => role && item.roles.includes(role as Role) && enabled(moduleForPath(item.url)));
 
   const renderGroup = (label: string, items: Item[]) => {
     const list = visible(items);

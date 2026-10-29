@@ -1,6 +1,8 @@
 import { CalendarDays, LayoutDashboard, UserRound, Users } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import { useModules } from "@/contexts/ModuleContext";
+import { moduleForPath } from "@/lib/modules";
 
 const items = [
   { label: "Home", to: "/dashboard", icon: LayoutDashboard },
@@ -10,14 +12,15 @@ const items = [
 ];
 
 export function BottomNav() {
+  const { enabled } = useModules();
   return (
     <nav
       aria-label="Mobile navigation"
       className="fixed inset-x-0 bottom-0 z-40 border-t bg-card/95 px-2 backdrop-blur lg:hidden"
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >
-      <div className="mx-auto grid h-16 max-w-md grid-cols-4">
-        {items.map((item) => (
+      <div className="mx-auto flex h-16 max-w-md justify-around">
+        {items.filter(item => enabled(moduleForPath(item.to))).map((item) => (
           <NavLink
             key={item.to}
             to={item.to}

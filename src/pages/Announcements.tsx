@@ -28,6 +28,7 @@ import { formatDate, titleCase } from "@/lib/hr";
 import { Megaphone, Plus, Pencil, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import SmsBroadcast from "@/components/SmsBroadcast";
+import { useModules } from "@/contexts/ModuleContext";
 
 interface Row {
   id: string;
@@ -41,6 +42,7 @@ interface Row {
 
 const Announcements = () => {
   const { isAdmin, isManager, user } = useAuth();
+  const { enabled } = useModules();
   const { departments } = useDepartments();
   const [rows, setRows] = useState<Row[]>([]);
   const [loading, setLoading] = useState(true);
@@ -122,7 +124,7 @@ const Announcements = () => {
         )
       }
     >
-      {isAdmin && <SmsBroadcast />}
+      {isAdmin && enabled("sms") && <SmsBroadcast />}
       {loading ? (
         <div className="space-y-4">
           {[...Array(3)].map((_, i) => (

@@ -25,6 +25,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Link } from "react-router-dom";
 import { BottomNav } from "@/components/BottomNav";
+import { useModules } from "@/contexts/ModuleContext";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -40,6 +41,7 @@ const DashboardLayout = ({
   actions,
 }: DashboardLayoutProps) => {
   const { user, role, employee, profile, profileImage, signOut } = useAuth();
+  const { enabled } = useModules();
   const { departments, selectedDepartment, setSelectedDepartment, loading } =
     useDepartments();
 
@@ -54,7 +56,7 @@ const DashboardLayout = ({
               Kazini Admin
             </h1>
             <div className="ml-auto flex min-w-0 items-center gap-2 sm:gap-3">
-              {!loading && departments.length > 0 && (
+              {enabled("departments") && !loading && departments.length > 0 && (
                 <div className="hidden items-center gap-2 sm:flex">
                   <Building2 className="h-4 w-4 text-muted-foreground" />
                   <Select
@@ -118,18 +120,18 @@ const DashboardLayout = ({
                     </span>
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem asChild>
+                  {enabled("profile") && <DropdownMenuItem asChild>
                     <Link to="/profile">
                       <UserRound className="mr-2 h-4 w-4" />
                       Profile
                     </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
+                  </DropdownMenuItem>}
+                  {enabled("profile") && <DropdownMenuItem asChild>
                     <Link to="/profile">
                       <Settings className="mr-2 h-4 w-4" />
                       Profile Settings
                     </Link>
-                  </DropdownMenuItem>
+                  </DropdownMenuItem>}
                   <DropdownMenuItem asChild>
                     <Link to="/">
                       <Building2 className="mr-2 h-4 w-4" />
