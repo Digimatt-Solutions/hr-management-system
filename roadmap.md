@@ -25,16 +25,16 @@
 - [x] Extend existing employee validation and department edit/delete; protect linked departments
 - [x] Implement and deploy client SMS audiences, broadcasting, history, and result feedback
 - [x] Run 10 biodata and SMS audience tests; remove temporary registration records
-- [ ] Verify signed-in client CRUD, dashboard, profile upload and employee/department flows — blocked: existing auth accounts have no profiles or roles; user skipped choosing the admin account
-- [ ] Verify authenticated submission ownership and spoofed-owner rejection — blocked: no authorized test session
+- [ ] Complete extended signed-in client CRUD, profile upload and employee/department checks; administrator session is now available and dashboard/directory reads are verified
+- [ ] Verify authenticated submission ownership and spoofed-owner rejection
 - [ ] Verify live Airtouch acceptance and delivery interpretation — blocked: designated test recipient and explicit send approval needed; no SMS sent
 
 Paused at the user's credit check-in request. Existing records remain intact. Seven database-linter warnings concern intentional authenticated access-check helpers; required helper execution remains enabled.
 
 # Platform precision updates
 
-- [ ] Apply Quicksand and subtle glossy styling; compact dashboard cards/charts and popup forms
-- [ ] Reproduce and resolve dashboard fetch failures
-- [ ] Add persisted administrator module visibility controls across navigation and direct pages
-- [ ] Remove identified fabricated placeholder data without deleting real user records
-- [ ] Verify authenticated visibility controls, dashboard loading, and small-screen layout
+- [x] Apply Quicksand and subtle glossy styling; compact dashboard cards/charts and popup forms
+- [x] Reproduce and resolve dashboard fetch failures (ambiguous department relationship and failed count-only requests)
+- [x] Add persisted administrator module visibility controls across navigation and direct pages
+- [x] Remove original demonstration employees and unused seeded HR settings; preserve real employee/client records
+- [x] Verify authenticated visibility controls after reload and direct page access, dashboard loading, two-card rows and 8px popup clearance; 15 tests pass
