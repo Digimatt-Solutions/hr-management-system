@@ -30,6 +30,12 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Terms from "./pages/Terms";
 import Home from "./pages/Home";
 import Clients from "./pages/Clients";
+import { ModuleProvider } from "./contexts/ModuleContext";
+import { useModules } from "./contexts/ModuleContext";
+import { moduleForPath } from "./lib/modules";
+import { useLocation } from "react-router-dom";
+import DashboardLayout from "./components/DashboardLayout";
+import { Button } from "./components/ui/button";
 
 const queryClient = new QueryClient();
 
@@ -43,8 +49,14 @@ function FullScreenLoader() {
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
+  const { enabled, loading: modulesLoading, error, reload } = useModules();
+  const location = useLocation();
   if (loading) return <FullScreenLoader />;
-  return user ? <>{children}</> : <Navigate to="/auth" replace />;
+  if (!user) return <Navigate to="/auth" replace />;
+  if (modulesLoading) return <FullScreenLoader />;
+  if (location.pathname !== "/settings" && error) return <DashboardLayout title="Unable to load workspace"><p className="mb-4 text-sm text-destructive">{error}</p><Button onClick={reload}>Retry</Button></DashboardLayout>;
+  if (!enabled(moduleForPath(location.pathname))) return <DashboardLayout title="Module unavailable"><p className="text-sm text-muted-foreground">This module is currently hidden by your administrator.</p></DashboardLayout>;
+  return <>{children}</>;
 }
 
 function PublicRoute({ children }: { children: React.ReactNode }) {
@@ -60,6 +72,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <AuthProvider>
+          <ModuleProvider>
           <DepartmentProvider>
             <Routes>
               <Route path="/" element={<Home />} />
@@ -198,6 +211,7 @@ const App = () => (
               <Route path="*" element={<NotFound />} />
             </Routes>
           </DepartmentProvider>
+          </ModuleProvider>
         </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>

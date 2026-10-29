@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/table";
 import { formatDate, roleLabel } from "@/lib/hr";
 import { toast } from "sonner";
+import ModuleVisibility from "@/components/ModuleVisibility";
 
 interface UserRow {
   id: string;
@@ -118,11 +119,13 @@ const Settings = () => {
       description="People access and HR configuration"
     >
       <Tabs defaultValue="access">
-        <TabsList>
+        <TabsList className="h-auto flex-wrap justify-start">
+          <TabsTrigger value="modules">Modules</TabsTrigger>
           <TabsTrigger value="access">Access</TabsTrigger>
           <TabsTrigger value="leave">Leave types</TabsTrigger>
           <TabsTrigger value="holidays">Holidays</TabsTrigger>
         </TabsList>
+        <TabsContent value="modules"><ModuleVisibility /></TabsContent>
 
         <TabsContent value="access">
           <Card>
