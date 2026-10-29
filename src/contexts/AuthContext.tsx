@@ -1,7 +1,14 @@
-import { createContext, useContext, useEffect, useState, ReactNode, useCallback } from 'react';
-import { User, Session } from '@supabase/supabase-js';
-import { supabase } from '@/integrations/supabase/client';
-import { useNavigate } from 'react-router-dom';
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode,
+  useCallback,
+} from "react";
+import { User, Session } from "@supabase/supabase-js";
+import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
 
 export interface EmployeeRecord {
   id: string;
@@ -24,14 +31,22 @@ interface AuthContextType {
   loading: boolean;
   role: string | null;
   employee: EmployeeRecord | null;
-  profile: { full_name: string; phone: string | null; avatar_path: string | null } | null;
+  profile: {
+    full_name: string;
+    phone: string | null;
+    avatar_path: string | null;
+  } | null;
   profileImage: string | undefined;
   isAdmin: boolean;
   isManager: boolean;
   profileLoading: boolean;
   refreshEmployee: () => Promise<void>;
   signIn: (email: string, password: string) => Promise<{ error: any }>;
-  signUp: (email: string, password: string, fullName: string) => Promise<{ error: any }>;
+  signUp: (
+    email: string,
+    password: string,
+    fullName: string,
+  ) => Promise<{ error: any }>;
   signOut: () => Promise<void>;
 }
 
@@ -43,13 +58,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
   const [role, setRole] = useState<string | null>(null);
   const [employee, setEmployee] = useState<EmployeeRecord | null>(null);
-  const [profile, setProfile] = useState<AuthContextType['profile']>(null);
+  const [profile, setProfile] = useState<AuthContextType["profile"]>(null);
   const [profileImage, setProfileImage] = useState<string>();
   const [profileLoading, setProfileLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, nextSession) => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, nextSession) => {
       setSession(nextSession);
       setUser(nextSession?.user ?? null);
       if (!nextSession) {
@@ -74,19 +91,31 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const loadHrContext = useCallback(async (userId: string) => {
     setProfileLoading(true);
     const [roleRes, employeeRes, profileRes] = await Promise.all([
-      supabase.from('user_roles').select('role').eq('user_id', userId).maybeSingle(),
       supabase
-        .from('employees')
-        .select('id, employee_code, first_name, last_name, work_email, phone, department_id, position_id, manager_id, hire_date, status, avatar_url')
-        .eq('profile_id', userId)
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", userId)
         .maybeSingle(),
-      supabase.from('profiles').select('full_name, phone, avatar_path').eq('id',userId).maybeSingle(),
+      supabase
+        .from("employees")
+        .select(
+          "id, employee_code, first_name, last_name, work_email, phone, department_id, position_id, manager_id, hire_date, status, avatar_url",
+        )
+        .eq("profile_id", userId)
+        .maybeSingle(),
+      supabase
+        .from("profiles")
+        .select("full_name, phone, avatar_path")
+        .eq("id", userId)
+        .maybeSingle(),
     ]);
-    setRole(roleRes.data?.role ?? 'staff');
+    setRole(roleRes.data?.role ?? "staff");
     setEmployee((employeeRes.data as EmployeeRecord) ?? null);
     setProfile(profileRes.data ?? null);
     if (profileRes.data?.avatar_path) {
-      const {data} = await supabase.storage.from('profile-photos').createSignedUrl(profileRes.data.avatar_path, 3600);
+      const { data } = await supabase.storage
+        .from("profile-photos")
+        .createSignedUrl(profileRes.data.avatar_path, 3600);
       setProfileImage(data?.signedUrl);
     } else setProfileImage(undefined);
     setProfileLoading(false);
@@ -103,8 +132,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [user, loadHrContext]);
 
   const signIn = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    if (!error) navigate('/dashboard');
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+    if (!error) navigate("/dashboard");
     return { error };
   };
 
@@ -124,7 +156,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     await supabase.auth.signOut();
     setRole(null);
     setEmployee(null);
-    navigate('/auth');
+    navigate("/auth");
   };
 
   return (
@@ -137,8 +169,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         employee,
         profile,
         profileImage,
-        isAdmin: role === 'admin',
-        isManager: role === 'admin' || role === 'manager',
+        isAdmin: role === "admin",
+        isManager: role === "admin" || role === "manager",
         profileLoading,
         refreshEmployee,
         signIn,
@@ -154,7 +186,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 export function useAuth() {
   const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 }

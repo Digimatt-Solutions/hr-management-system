@@ -14,7 +14,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { formatDate, formatMoney, fullName, statusVariant, titleCase } from "@/lib/hr";
+import {
+  formatDate,
+  formatMoney,
+  fullName,
+  statusVariant,
+  titleCase,
+} from "@/lib/hr";
 import { Lock } from "lucide-react";
 import { toast } from "sonner";
 
@@ -109,7 +115,8 @@ const Payroll = () => {
                     </Badge>
                   </div>
                   <p className="text-xs text-muted-foreground">
-                    {formatDate(period.start_date)} – {formatDate(period.end_date)}
+                    {formatDate(period.start_date)} –{" "}
+                    {formatDate(period.end_date)}
                   </p>
                 </CardHeader>
                 <CardContent className="flex items-center justify-between">
@@ -132,7 +139,9 @@ const Payroll = () => {
               </Card>
             ))}
             {periods.length === 0 && (
-              <p className="text-sm text-muted-foreground">No pay periods yet.</p>
+              <p className="text-sm text-muted-foreground">
+                No pay periods yet.
+              </p>
             )}
           </div>
 
@@ -142,7 +151,8 @@ const Payroll = () => {
                 Payslips {current ? `· ${current.name}` : ""}
               </CardTitle>
               <p className="text-sm text-muted-foreground">
-                {payslips.length} payslips · {formatMoney(totalNet)} total net pay
+                {payslips.length} payslips · {formatMoney(totalNet)} total net
+                pay
               </p>
             </CardHeader>
             <CardContent>
@@ -172,12 +182,17 @@ const Payroll = () => {
                       <TableCell>{formatMoney(slip.allowances)}</TableCell>
                       <TableCell>{formatMoney(slip.tax)}</TableCell>
                       <TableCell>{formatMoney(slip.deductions)}</TableCell>
-                      <TableCell className="font-medium">{formatMoney(slip.net_pay)}</TableCell>
+                      <TableCell className="font-medium">
+                        {formatMoney(slip.net_pay)}
+                      </TableCell>
                     </TableRow>
                   ))}
                   {payslips.length === 0 && (
                     <TableRow>
-                      <TableCell colSpan={6} className="py-8 text-center text-muted-foreground">
+                      <TableCell
+                        colSpan={6}
+                        className="py-8 text-center text-muted-foreground"
+                      >
                         No payslips for this period.
                       </TableCell>
                     </TableRow>

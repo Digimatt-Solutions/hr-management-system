@@ -32,7 +32,14 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useAuth } from "@/contexts/AuthContext";
-import { currentYear, daysBetween, formatDate, fullName, statusVariant, titleCase } from "@/lib/hr";
+import {
+  currentYear,
+  daysBetween,
+  formatDate,
+  fullName,
+  statusVariant,
+  titleCase,
+} from "@/lib/hr";
 import { Plus } from "lucide-react";
 import { toast } from "sonner";
 
@@ -76,7 +83,10 @@ const Leave = () => {
 
   const load = useCallback(async () => {
     const [t, b, m, all] = await Promise.all([
-      supabase.from("leave_types").select("id, name, days_per_year").order("name"),
+      supabase
+        .from("leave_types")
+        .select("id, name, days_per_year")
+        .order("name"),
       employee
         ? supabase
             .from("leave_balances")
@@ -104,7 +114,9 @@ const Leave = () => {
     setBalances((b.data as unknown as Balance[]) ?? []);
     setMine((m.data as unknown as Request[]) ?? []);
     setTeam(
-      ((all.data as unknown as Request[]) ?? []).filter((r) => r.employee_id !== employee?.id),
+      ((all.data as unknown as Request[]) ?? []).filter(
+        (r) => r.employee_id !== employee?.id,
+      ),
     );
   }, [employee]);
 
@@ -113,9 +125,12 @@ const Leave = () => {
   }, [load]);
 
   const submit = async () => {
-    if (!employee) return toast.error("No employee record linked to your account");
-    if (!typeId || !start || !end) return toast.error("Fill in the type and the dates");
-    if (new Date(end) < new Date(start)) return toast.error("The end date is before the start date");
+    if (!employee)
+      return toast.error("No employee record linked to your account");
+    if (!typeId || !start || !end)
+      return toast.error("Fill in the type and the dates");
+    if (new Date(end) < new Date(start))
+      return toast.error("The end date is before the start date");
     setSaving(true);
     const { error } = await supabase.from("leave_requests").insert({
       employee_id: employee.id,
@@ -149,7 +164,11 @@ const Leave = () => {
     load();
   };
 
-  const renderTable = (rows: Request[], withNames: boolean, withActions = false) => (
+  const renderTable = (
+    rows: Request[],
+    withNames: boolean,
+    withActions = false,
+  ) => (
     <Table>
       <TableHeader>
         <TableRow>
@@ -171,14 +190,20 @@ const Leave = () => {
             <TableCell>{formatDate(row.end_date)}</TableCell>
             <TableCell>{row.days}</TableCell>
             <TableCell>
-              <Badge variant={statusVariant(row.status)}>{titleCase(row.status)}</Badge>
+              <Badge variant={statusVariant(row.status)}>
+                {titleCase(row.status)}
+              </Badge>
             </TableCell>
             {withActions && (
               <TableCell className="space-x-2 text-right">
                 <Button size="sm" onClick={() => review(row.id, "approved")}>
                   Approve
                 </Button>
-                <Button size="sm" variant="outline" onClick={() => review(row.id, "rejected")}>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => review(row.id, "rejected")}
+                >
                   Reject
                 </Button>
               </TableCell>
@@ -214,21 +239,29 @@ const Leave = () => {
       <div className="space-y-6">
         <Card>
           <CardHeader>
-            <CardTitle className="text-base">My balances ({currentYear()})</CardTitle>
+            <CardTitle className="text-base">
+              My balances ({currentYear()})
+            </CardTitle>
           </CardHeader>
           <CardContent className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {balances.length === 0 && (
-              <p className="text-sm text-muted-foreground">No balances allocated yet.</p>
+              <p className="text-sm text-muted-foreground">
+                No balances allocated yet.
+              </p>
             )}
             {balances.map((balance) => {
-              const remaining = Number(balance.entitled_days) - Number(balance.used_days);
+              const remaining =
+                Number(balance.entitled_days) - Number(balance.used_days);
               const percent = balance.entitled_days
-                ? (Number(balance.used_days) / Number(balance.entitled_days)) * 100
+                ? (Number(balance.used_days) / Number(balance.entitled_days)) *
+                  100
                 : 0;
               return (
                 <div key={balance.id} className="rounded-md border p-4">
                   <p className="font-medium">{balance.leave_types?.name}</p>
-                  <p className="text-sm text-muted-foreground">{remaining} days left</p>
+                  <p className="text-sm text-muted-foreground">
+                    {remaining} days left
+                  </p>
                   <Progress value={percent} className="mt-2" />
                 </div>
               );
@@ -239,25 +272,35 @@ const Leave = () => {
         <Tabs defaultValue="mine">
           <TabsList>
             <TabsTrigger value="mine">My requests</TabsTrigger>
-            {isManager && <TabsTrigger value="pending">Awaiting approval ({pending.length})</TabsTrigger>}
+            {isManager && (
+              <TabsTrigger value="pending">
+                Awaiting approval ({pending.length})
+              </TabsTrigger>
+            )}
             {isManager && <TabsTrigger value="team">Team history</TabsTrigger>}
           </TabsList>
           <TabsContent value="mine">
             <Card>
-              <CardContent className="p-4">{renderTable(mine, false)}</CardContent>
+              <CardContent className="p-4">
+                {renderTable(mine, false)}
+              </CardContent>
             </Card>
           </TabsContent>
           {isManager && (
             <TabsContent value="pending">
               <Card>
-                <CardContent className="p-4">{renderTable(pending, true, true)}</CardContent>
+                <CardContent className="p-4">
+                  {renderTable(pending, true, true)}
+                </CardContent>
               </Card>
             </TabsContent>
           )}
           {isManager && (
             <TabsContent value="team">
               <Card>
-                <CardContent className="p-4">{renderTable(team, true)}</CardContent>
+                <CardContent className="p-4">
+                  {renderTable(team, true)}
+                </CardContent>
               </Card>
             </TabsContent>
           )}

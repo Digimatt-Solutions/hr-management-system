@@ -1,5 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
-import { Link, Outlet, useLocation, useParams, useOutletContext } from "react-router-dom";
+import {
+  Link,
+  Outlet,
+  useLocation,
+  useParams,
+  useOutletContext,
+} from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import DashboardLayout from "@/components/DashboardLayout";
 import EmployeeDialog from "@/components/EmployeeDialog";
@@ -9,7 +15,13 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useAuth } from "@/contexts/AuthContext";
-import { formatDate, formatMoney, initials, statusVariant, titleCase } from "@/lib/hr";
+import {
+  formatDate,
+  formatMoney,
+  initials,
+  statusVariant,
+  titleCase,
+} from "@/lib/hr";
 import { ArrowLeft, Mail, Pencil, Phone } from "lucide-react";
 
 export interface EmployeeFull {
@@ -105,9 +117,12 @@ const EmployeeDetail = () => {
     );
   }
 
-  const canManage = isAdmin || (isManager && employee.manager_id === me?.id) || false;
+  const canManage =
+    isAdmin || (isManager && employee.manager_id === me?.id) || false;
   const name = `${employee.first_name} ${employee.last_name}`;
-  const activeTab = tabs.find((tab) => location.pathname.endsWith(`/${tab.path}`))?.path ?? "details";
+  const activeTab =
+    tabs.find((tab) => location.pathname.endsWith(`/${tab.path}`))?.path ??
+    "details";
 
   return (
     <DashboardLayout>
@@ -127,11 +142,14 @@ const EmployeeDetail = () => {
           <div className="min-w-[200px] flex-1">
             <div className="flex flex-wrap items-center gap-2">
               <h2 className="font-heading text-2xl font-semibold">{name}</h2>
-              <Badge variant={statusVariant(employee.status)}>{titleCase(employee.status)}</Badge>
+              <Badge variant={statusVariant(employee.status)}>
+                {titleCase(employee.status)}
+              </Badge>
             </div>
             <p className="text-sm text-muted-foreground">
               {employee.positions?.title ?? "No position"} ·{" "}
-              {employee.departments?.name ?? "Unassigned"} · {employee.employee_code}
+              {employee.departments?.name ?? "Unassigned"} ·{" "}
+              {employee.employee_code}
             </p>
             <div className="mt-2 flex flex-wrap gap-4 text-sm text-muted-foreground">
               {employee.work_email && (
@@ -180,7 +198,11 @@ const EmployeeDetail = () => {
         ))}
       </div>
 
-      <Outlet context={{ employee, canManage, reload: load } satisfies EmployeeContext} />
+      <Outlet
+        context={
+          { employee, canManage, reload: load } satisfies EmployeeContext
+        }
+      />
 
       <EmployeeDialog
         open={editOpen}

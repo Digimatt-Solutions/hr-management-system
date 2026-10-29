@@ -1,7 +1,13 @@
-import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
-import { supabase } from '@/integrations/supabase/client';
-import { useAuth } from './AuthContext';
-import { toast } from 'sonner';
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode,
+} from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "./AuthContext";
+import { toast } from "sonner";
 
 export interface Department {
   id: string;
@@ -17,26 +23,31 @@ interface DepartmentContextType {
   reload: () => Promise<void>;
 }
 
-const DepartmentContext = createContext<DepartmentContextType | undefined>(undefined);
+const DepartmentContext = createContext<DepartmentContextType | undefined>(
+  undefined,
+);
 
 export function DepartmentProvider({ children }: { children: ReactNode }) {
   const { user } = useAuth();
   const [departments, setDepartments] = useState<Department[]>([]);
-  const [selectedDepartment, setSelectedDepartment] = useState<Department | null>(null);
+  const [selectedDepartment, setSelectedDepartment] =
+    useState<Department | null>(null);
   const [loading, setLoading] = useState(true);
 
   const load = async () => {
     try {
       const { data, error } = await supabase
-        .from('departments')
-        .select('id, name, code')
-        .order('name');
+        .from("departments")
+        .select("id, name, code")
+        .order("name");
       if (error) throw error;
       setDepartments(data || []);
-      setSelectedDepartment(current=>current ? data?.find(d=>d.id===current.id)??null : null);
+      setSelectedDepartment((current) =>
+        current ? (data?.find((d) => d.id === current.id) ?? null) : null,
+      );
     } catch (error: any) {
-      console.error('Error loading departments:', error);
-      toast.error('Could not load departments');
+      console.error("Error loading departments:", error);
+      toast.error("Could not load departments");
     } finally {
       setLoading(false);
     }
@@ -55,7 +66,13 @@ export function DepartmentProvider({ children }: { children: ReactNode }) {
 
   return (
     <DepartmentContext.Provider
-      value={{ departments, selectedDepartment, setSelectedDepartment, loading, reload: load }}
+      value={{
+        departments,
+        selectedDepartment,
+        setSelectedDepartment,
+        loading,
+        reload: load,
+      }}
     >
       {children}
     </DepartmentContext.Provider>
@@ -65,7 +82,7 @@ export function DepartmentProvider({ children }: { children: ReactNode }) {
 export function useDepartments() {
   const context = useContext(DepartmentContext);
   if (context === undefined) {
-    throw new Error('useDepartments must be used within a DepartmentProvider');
+    throw new Error("useDepartments must be used within a DepartmentProvider");
   }
   return context;
 }

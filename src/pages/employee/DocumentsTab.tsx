@@ -74,7 +74,8 @@ const DocumentsTab = () => {
     load();
   };
 
-  const isExpired = (value: string | null) => value && new Date(value) < new Date();
+  const isExpired = (value: string | null) =>
+    value && new Date(value) < new Date();
 
   return (
     <Card>
@@ -94,11 +95,19 @@ const DocumentsTab = () => {
               <div className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="doc-name">Name</Label>
-                  <Input id="doc-name" value={name} onChange={(e) => setName(e.target.value)} />
+                  <Input
+                    id="doc-name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="doc-type">Type</Label>
-                  <Input id="doc-type" value={docType} onChange={(e) => setDocType(e.target.value)} />
+                  <Input
+                    id="doc-type"
+                    value={docType}
+                    onChange={(e) => setDocType(e.target.value)}
+                  />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="doc-expiry">Expires</Label>
@@ -137,7 +146,11 @@ const DocumentsTab = () => {
                 <TableCell>{formatDate(doc.created_at)}</TableCell>
                 <TableCell>
                   {doc.expires_at ? (
-                    <Badge variant={isExpired(doc.expires_at) ? "destructive" : "outline"}>
+                    <Badge
+                      variant={
+                        isExpired(doc.expires_at) ? "destructive" : "outline"
+                      }
+                    >
                       {formatDate(doc.expires_at)}
                     </Badge>
                   ) : (
@@ -148,7 +161,10 @@ const DocumentsTab = () => {
             ))}
             {docs.length === 0 && (
               <TableRow>
-                <TableCell colSpan={4} className="py-8 text-center text-muted-foreground">
+                <TableCell
+                  colSpan={4}
+                  className="py-8 text-center text-muted-foreground"
+                >
                   No documents on file.
                 </TableCell>
               </TableRow>

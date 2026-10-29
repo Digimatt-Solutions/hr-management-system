@@ -15,7 +15,13 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useAuth } from "@/contexts/AuthContext";
-import { formatDate, formatTime, fullName, statusVariant, titleCase } from "@/lib/hr";
+import {
+  formatDate,
+  formatTime,
+  fullName,
+  statusVariant,
+  titleCase,
+} from "@/lib/hr";
 import { LogIn, LogOut } from "lucide-react";
 import { toast } from "sonner";
 
@@ -69,7 +75,8 @@ const Attendance = () => {
   const todayRecord = mine.find((r) => r.work_date === today());
 
   const clockIn = async () => {
-    if (!employee) return toast.error("No employee record linked to your account");
+    if (!employee)
+      return toast.error("No employee record linked to your account");
     const { error } = await supabase.from("attendance_records").insert({
       employee_id: employee.id,
       work_date: today(),
@@ -140,13 +147,18 @@ const Attendance = () => {
                       <TableCell>{formatTime(row.clock_out)}</TableCell>
                       <TableCell>{row.hours_worked ?? "—"}</TableCell>
                       <TableCell>
-                        <Badge variant={statusVariant(row.status)}>{titleCase(row.status)}</Badge>
+                        <Badge variant={statusVariant(row.status)}>
+                          {titleCase(row.status)}
+                        </Badge>
                       </TableCell>
                     </TableRow>
                   ))}
                   {mine.length === 0 && (
                     <TableRow>
-                      <TableCell colSpan={5} className="py-8 text-center text-muted-foreground">
+                      <TableCell
+                        colSpan={5}
+                        className="py-8 text-center text-muted-foreground"
+                      >
                         No attendance recorded yet.
                       </TableCell>
                     </TableRow>
@@ -188,13 +200,18 @@ const Attendance = () => {
                         <TableCell>{formatTime(row.clock_out)}</TableCell>
                         <TableCell>{row.hours_worked ?? "—"}</TableCell>
                         <TableCell>
-                          <Badge variant={statusVariant(row.status)}>{titleCase(row.status)}</Badge>
+                          <Badge variant={statusVariant(row.status)}>
+                            {titleCase(row.status)}
+                          </Badge>
                         </TableCell>
                       </TableRow>
                     ))}
                     {dayRows.length === 0 && (
                       <TableRow>
-                        <TableCell colSpan={5} className="py-8 text-center text-muted-foreground">
+                        <TableCell
+                          colSpan={5}
+                          className="py-8 text-center text-muted-foreground"
+                        >
                           Nobody clocked in on this day.
                         </TableCell>
                       </TableRow>

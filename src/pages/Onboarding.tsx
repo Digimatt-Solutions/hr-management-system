@@ -44,10 +44,15 @@ const Onboarding = () => {
     const next = !task.is_completed;
     const { error } = await supabase
       .from("onboarding_tasks")
-      .update({ is_completed: next, completed_at: next ? new Date().toISOString() : null })
+      .update({
+        is_completed: next,
+        completed_at: next ? new Date().toISOString() : null,
+      })
       .eq("id", task.id);
     if (error) return toast.error("Could not update the task");
-    setTasks((prev) => prev.map((t) => (t.id === task.id ? { ...t, is_completed: next } : t)));
+    setTasks((prev) =>
+      prev.map((t) => (t.id === task.id ? { ...t, is_completed: next } : t)),
+    );
   };
 
   const groups = Array.from(new Set(tasks.map((t) => t.employee_id)));
@@ -76,7 +81,10 @@ const Onboarding = () => {
               <Card key={employeeId}>
                 <CardHeader>
                   <CardTitle className="text-base">
-                    <Link to={`/employees/${employeeId}`} className="hover:underline">
+                    <Link
+                      to={`/employees/${employeeId}`}
+                      className="hover:underline"
+                    >
                       {fullName(rows[0]?.employees)}
                     </Link>
                   </CardTitle>

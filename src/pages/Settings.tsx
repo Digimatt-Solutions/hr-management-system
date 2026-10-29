@@ -54,7 +54,10 @@ const Settings = () => {
   const load = useCallback(async () => {
     setLoading(true);
     const [p, r, lt, h] = await Promise.all([
-      supabase.from("profiles").select("id, email, full_name").order("full_name"),
+      supabase
+        .from("profiles")
+        .select("id, email, full_name")
+        .order("full_name"),
       supabase.from("user_roles").select("user_id, role"),
       supabase
         .from("leave_types")
@@ -81,18 +84,25 @@ const Settings = () => {
     load();
   }, [load]);
 
-  const changeRole = async (userId: string, role: "admin" | "manager" | "staff") => {
+  const changeRole = async (
+    userId: string,
+    role: "admin" | "manager" | "staff",
+  ) => {
     const { error } = await supabase
       .from("user_roles")
       .upsert({ user_id: userId, role }, { onConflict: "user_id" });
-    if (error) return toast.error("Could not change this person's access level");
+    if (error)
+      return toast.error("Could not change this person's access level");
     toast.success("Access level updated");
     setUsers((prev) => prev.map((u) => (u.id === userId ? { ...u, role } : u)));
   };
 
   if (loading) {
     return (
-      <DashboardLayout title="Settings" description="People access and HR configuration">
+      <DashboardLayout
+        title="Settings"
+        description="People access and HR configuration"
+      >
         <div className="space-y-4">
           {[...Array(3)].map((_, i) => (
             <Skeleton key={i} className="h-40 w-full" />
@@ -103,7 +113,10 @@ const Settings = () => {
   }
 
   return (
-    <DashboardLayout title="Settings" description="People access and HR configuration">
+    <DashboardLayout
+      title="Settings"
+      description="People access and HR configuration"
+    >
       <Tabs defaultValue="access">
         <TabsList>
           <TabsTrigger value="access">Access</TabsTrigger>
@@ -128,13 +141,18 @@ const Settings = () => {
                 <TableBody>
                   {users.map((row) => (
                     <TableRow key={row.id}>
-                      <TableCell className="font-medium">{row.full_name}</TableCell>
+                      <TableCell className="font-medium">
+                        {row.full_name}
+                      </TableCell>
                       <TableCell>{row.email}</TableCell>
                       <TableCell>
                         <Select
                           value={row.role}
                           onValueChange={(value) =>
-                            changeRole(row.id, value as "admin" | "manager" | "staff")
+                            changeRole(
+                              row.id,
+                              value as "admin" | "manager" | "staff",
+                            )
                           }
                         >
                           <SelectTrigger>
@@ -182,7 +200,9 @@ const Settings = () => {
                           {type.is_paid ? "Paid" : "Unpaid"}
                         </Badge>
                       </TableCell>
-                      <TableCell>{type.requires_approval ? "Yes" : "No"}</TableCell>
+                      <TableCell>
+                        {type.requires_approval ? "Yes" : "No"}
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -208,9 +228,13 @@ const Settings = () => {
                 <TableBody>
                   {holidays.map((holiday) => (
                     <TableRow key={holiday.id}>
-                      <TableCell className="font-medium">{holiday.name}</TableCell>
+                      <TableCell className="font-medium">
+                        {holiday.name}
+                      </TableCell>
                       <TableCell>{formatDate(holiday.holiday_date)}</TableCell>
-                      <TableCell>{holiday.is_recurring ? "Yes" : "No"}</TableCell>
+                      <TableCell>
+                        {holiday.is_recurring ? "Yes" : "No"}
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

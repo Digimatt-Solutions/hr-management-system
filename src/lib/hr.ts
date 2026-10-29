@@ -9,7 +9,9 @@ export function roleLabel(role?: string | null) {
   return ROLE_LABELS[role] ?? role;
 }
 
-export function fullName(p?: { first_name?: string | null; last_name?: string | null } | null) {
+export function fullName(
+  p?: { first_name?: string | null; last_name?: string | null } | null,
+) {
   if (!p) return "—";
   return [p.first_name, p.last_name].filter(Boolean).join(" ") || "—";
 }
@@ -34,7 +36,10 @@ export function formatDate(value?: string | null) {
 
 export function formatTime(value?: string | null) {
   if (!value) return "—";
-  return new Date(value).toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" });
+  return new Date(value).toLocaleTimeString(undefined, {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 }
 
 export function formatMoney(value?: number | null) {

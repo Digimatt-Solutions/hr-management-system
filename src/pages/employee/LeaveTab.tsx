@@ -46,7 +46,9 @@ const LeaveTab = () => {
           .eq("year", currentYear()),
         supabase
           .from("leave_requests")
-          .select("id, start_date, end_date, days, status, reason, leave_types(name)")
+          .select(
+            "id, start_date, end_date, days, status, reason, leave_types(name)",
+          )
           .eq("employee_id", employee.id)
           .order("start_date", { ascending: false }),
       ]);
@@ -60,16 +62,22 @@ const LeaveTab = () => {
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">Leave balances ({currentYear()})</CardTitle>
+          <CardTitle className="text-base">
+            Leave balances ({currentYear()})
+          </CardTitle>
         </CardHeader>
         <CardContent className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {balances.length === 0 && (
-            <p className="text-sm text-muted-foreground">No balances allocated yet.</p>
+            <p className="text-sm text-muted-foreground">
+              No balances allocated yet.
+            </p>
           )}
           {balances.map((balance) => {
-            const remaining = Number(balance.entitled_days) - Number(balance.used_days);
+            const remaining =
+              Number(balance.entitled_days) - Number(balance.used_days);
             const percent = balance.entitled_days
-              ? (Number(balance.used_days) / Number(balance.entitled_days)) * 100
+              ? (Number(balance.used_days) / Number(balance.entitled_days)) *
+                100
               : 0;
             return (
               <div key={balance.id} className="rounded-md border p-4">
@@ -107,15 +115,22 @@ const LeaveTab = () => {
                   <TableCell>{formatDate(request.start_date)}</TableCell>
                   <TableCell>{formatDate(request.end_date)}</TableCell>
                   <TableCell>{request.days}</TableCell>
-                  <TableCell className="max-w-[240px] truncate">{request.reason || "—"}</TableCell>
+                  <TableCell className="max-w-[240px] truncate">
+                    {request.reason || "—"}
+                  </TableCell>
                   <TableCell>
-                    <Badge variant={statusVariant(request.status)}>{titleCase(request.status)}</Badge>
+                    <Badge variant={statusVariant(request.status)}>
+                      {titleCase(request.status)}
+                    </Badge>
                   </TableCell>
                 </TableRow>
               ))}
               {requests.length === 0 && (
                 <TableRow>
-                  <TableCell colSpan={6} className="py-8 text-center text-muted-foreground">
+                  <TableCell
+                    colSpan={6}
+                    className="py-8 text-center text-muted-foreground"
+                  >
                     No leave requests recorded.
                   </TableCell>
                 </TableRow>

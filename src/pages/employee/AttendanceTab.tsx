@@ -37,7 +37,10 @@ const AttendanceTab = () => {
       .then(({ data }) => setRecords((data as Record[]) ?? []));
   }, [employee.id]);
 
-  const totalHours = records.reduce((sum, row) => sum + Number(row.hours_worked ?? 0), 0);
+  const totalHours = records.reduce(
+    (sum, row) => sum + Number(row.hours_worked ?? 0),
+    0,
+  );
   const presentDays = records.filter((row) => row.status === "present").length;
 
   return (
@@ -46,7 +49,9 @@ const AttendanceTab = () => {
         <Card>
           <CardContent className="p-5">
             <p className="text-sm text-muted-foreground">Days recorded</p>
-            <p className="font-heading text-2xl font-semibold">{records.length}</p>
+            <p className="font-heading text-2xl font-semibold">
+              {records.length}
+            </p>
           </CardContent>
         </Card>
         <Card>
@@ -58,7 +63,9 @@ const AttendanceTab = () => {
         <Card>
           <CardContent className="p-5">
             <p className="text-sm text-muted-foreground">Hours logged</p>
-            <p className="font-heading text-2xl font-semibold">{totalHours.toFixed(1)}</p>
+            <p className="font-heading text-2xl font-semibold">
+              {totalHours.toFixed(1)}
+            </p>
           </CardContent>
         </Card>
       </div>
@@ -86,13 +93,18 @@ const AttendanceTab = () => {
                   <TableCell>{formatTime(row.clock_out)}</TableCell>
                   <TableCell>{row.hours_worked ?? "—"}</TableCell>
                   <TableCell>
-                    <Badge variant={statusVariant(row.status)}>{titleCase(row.status)}</Badge>
+                    <Badge variant={statusVariant(row.status)}>
+                      {titleCase(row.status)}
+                    </Badge>
                   </TableCell>
                 </TableRow>
               ))}
               {records.length === 0 && (
                 <TableRow>
-                  <TableCell colSpan={5} className="py-8 text-center text-muted-foreground">
+                  <TableCell
+                    colSpan={5}
+                    className="py-8 text-center text-muted-foreground"
+                  >
                     No attendance recorded.
                   </TableCell>
                 </TableRow>

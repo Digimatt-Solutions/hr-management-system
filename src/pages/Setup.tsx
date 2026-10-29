@@ -4,7 +4,13 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { toast } from "sonner";
 import { Loader2, ShieldCheck } from "lucide-react";
@@ -53,7 +59,9 @@ const Setup = () => {
         setAwaitingConfirmation(true);
       }
     } catch (error: any) {
-      toast.error(error.message || "Could not create the administrator account");
+      toast.error(
+        error.message || "Could not create the administrator account",
+      );
     } finally {
       setSaving(false);
     }
@@ -78,9 +86,12 @@ const Setup = () => {
               <ShieldCheck className="h-8 w-8 text-primary" />
             </div>
           </div>
-          <CardTitle className="font-heading text-2xl">Create Super Admin</CardTitle>
+          <CardTitle className="font-heading text-2xl">
+            Create Super Admin
+          </CardTitle>
           <CardDescription>
-            This secure, one-time step creates the account that manages the entire HR workspace.
+            This secure, one-time step creates the account that manages the
+            entire HR workspace.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -88,8 +99,9 @@ const Setup = () => {
             <div className="space-y-4">
               <Alert>
                 <AlertDescription>
-                  The administrator account for <strong>{email}</strong> has been saved. Confirm the
-                  address using the email we just sent, then sign in.
+                  The administrator account for <strong>{email}</strong> has
+                  been saved. Confirm the address using the email we just sent,
+                  then sign in.
                 </AlertDescription>
               </Alert>
               <Button className="w-full" onClick={() => navigate("/auth")}>
@@ -145,14 +157,16 @@ const Setup = () => {
               <Button type="submit" className="w-full" disabled={saving}>
                 {saving ? (
                   <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Creating account...
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Creating
+                    account...
                   </>
                 ) : (
                   "Create Super Admin"
                 )}
               </Button>
               <p className="text-center text-xs text-muted-foreground">
-                 Setup closes automatically when the Super Admin account is created.
+                Setup closes automatically when the Super Admin account is
+                created.
               </p>
             </form>
           )}

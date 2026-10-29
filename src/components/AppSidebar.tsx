@@ -41,23 +41,68 @@ interface Item {
 }
 
 const workspaceItems: Item[] = [
-  { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard, roles: ["admin", "manager", "staff"] },
+  {
+    title: "Dashboard",
+    url: "/dashboard",
+    icon: LayoutDashboard,
+    roles: ["admin", "manager", "staff"],
+  },
   { title: "Clients", url: "/clients", icon: Users, roles: ["admin"] },
-  { title: "Employees", url: "/employees", icon: Users, roles: ["admin", "manager", "staff"] },
-  { title: "Departments", url: "/departments", icon: Building2, roles: ["admin", "manager", "staff"] },
+  {
+    title: "Employees",
+    url: "/employees",
+    icon: Users,
+    roles: ["admin", "manager", "staff"],
+  },
+  {
+    title: "Departments",
+    url: "/departments",
+    icon: Building2,
+    roles: ["admin", "manager", "staff"],
+  },
 ];
 
 const peopleItems: Item[] = [
-  { title: "Leave", url: "/leave", icon: CalendarDays, roles: ["admin", "manager", "staff"] },
-  { title: "Attendance", url: "/attendance", icon: Clock, roles: ["admin", "manager", "staff"] },
-  { title: "Onboarding", url: "/onboarding", icon: ClipboardCheck, roles: ["admin", "manager"] },
-  { title: "Performance", url: "/performance", icon: Target, roles: ["admin", "manager", "staff"] },
+  {
+    title: "Leave",
+    url: "/leave",
+    icon: CalendarDays,
+    roles: ["admin", "manager", "staff"],
+  },
+  {
+    title: "Attendance",
+    url: "/attendance",
+    icon: Clock,
+    roles: ["admin", "manager", "staff"],
+  },
+  {
+    title: "Onboarding",
+    url: "/onboarding",
+    icon: ClipboardCheck,
+    roles: ["admin", "manager"],
+  },
+  {
+    title: "Performance",
+    url: "/performance",
+    icon: Target,
+    roles: ["admin", "manager", "staff"],
+  },
   { title: "Payroll", url: "/payroll", icon: Wallet, roles: ["admin"] },
 ];
 
 const companyItems: Item[] = [
-  { title: "Announcements", url: "/announcements", icon: Megaphone, roles: ["admin", "manager", "staff"] },
-  { title: "My Profile", url: "/profile", icon: User, roles: ["admin", "manager", "staff"] },
+  {
+    title: "Announcements",
+    url: "/announcements",
+    icon: Megaphone,
+    roles: ["admin", "manager", "staff"],
+  },
+  {
+    title: "My Profile",
+    url: "/profile",
+    icon: User,
+    roles: ["admin", "manager", "staff"],
+  },
   { title: "Settings", url: "/settings", icon: Settings, roles: ["admin"] },
 ];
 
@@ -85,12 +130,15 @@ export function AppSidebar() {
     if (list.length === 0) return null;
     return (
       <SidebarGroup key={label}>
-        <SidebarGroupLabel className={collapsed ? "sr-only" : ""}>{label}</SidebarGroupLabel>
+        <SidebarGroupLabel className={collapsed ? "sr-only" : ""}>
+          {label}
+        </SidebarGroupLabel>
         <SidebarGroupContent>
           <SidebarMenu>
             {list.map((item) => {
               const isActive =
-                currentPath === item.url || currentPath.startsWith(`${item.url}/`);
+                currentPath === item.url ||
+                currentPath.startsWith(`${item.url}/`);
               return (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
@@ -98,7 +146,9 @@ export function AppSidebar() {
                       to={item.url}
                       onClick={() => isMobile && setOpenMobile(false)}
                       className={`flex items-center gap-3 rounded-md px-3 py-2 transition-colors hover:bg-sidebar-accent ${
-                        isActive ? "bg-sidebar-accent text-sidebar-primary font-medium" : ""
+                        isActive
+                          ? "bg-sidebar-accent text-sidebar-primary font-medium"
+                          : ""
                       }`}
                     >
                       <item.icon className="h-5 w-5 shrink-0" />
@@ -117,16 +167,30 @@ export function AppSidebar() {
   return (
     <Sidebar collapsible="icon" className="border-r border-sidebar-border">
       <SidebarContent>
-        <div className={`border-b border-sidebar-border px-4 py-5 ${collapsed ? "px-2" : ""}`}>
-          <div className={collapsed ? "mx-auto h-9 w-9 overflow-hidden rounded-md" : "flex justify-center"}>
+        <div
+          className={`border-b border-sidebar-border px-4 py-5 ${collapsed ? "px-2" : ""}`}
+        >
+          <div
+            className={
+              collapsed
+                ? "mx-auto h-9 w-9 overflow-hidden rounded-md"
+                : "flex justify-center"
+            }
+          >
             <img
               src={logoImage}
               alt="Kazini Shared"
-              className={collapsed ? "h-9 max-w-none object-cover object-left" : "h-auto w-full max-w-[190px] object-contain"}
+              className={
+                collapsed
+                  ? "h-9 max-w-none object-cover object-left"
+                  : "h-auto w-full max-w-[190px] object-contain"
+              }
             />
           </div>
           {!collapsed && (
-            <p className="mt-3 text-center text-xs text-sidebar-foreground/60">{roleLabel(role)}</p>
+            <p className="mt-3 text-center text-xs text-sidebar-foreground/60">
+              {roleLabel(role)}
+            </p>
           )}
         </div>
         {renderGroup("Workspace", workspaceItems)}

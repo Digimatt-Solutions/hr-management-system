@@ -1,4 +1,5 @@
 # Architecture rules
+
 - Retain React/Vite and the existing HR routes; extend existing modules rather than duplicating them so established workflows remain available.
 - Public client submissions go through the validated submit-client function; client records are readable and mutable only by administrators to protect visitor biodata.
 - Keep client validation contracts aligned in src/lib/clients.ts and the edge function shared schema; both runtimes validate the same fields.

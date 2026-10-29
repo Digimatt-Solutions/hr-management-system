@@ -60,7 +60,9 @@ const ReviewsTab = () => {
         <Card key={review.id}>
           <CardHeader className="flex-row items-start justify-between space-y-0">
             <div>
-              <CardTitle className="text-base">{review.review_cycles?.name ?? "Review"}</CardTitle>
+              <CardTitle className="text-base">
+                {review.review_cycles?.name ?? "Review"}
+              </CardTitle>
               <p className="text-sm text-muted-foreground">
                 {review.review_cycles
                   ? `${formatDate(review.review_cycles.start_date)} – ${formatDate(review.review_cycles.end_date)}`
@@ -70,21 +72,28 @@ const ReviewsTab = () => {
             <div className="flex items-center gap-3">
               {review.overall_rating !== null && (
                 <span className="flex items-center gap-1 text-sm font-medium">
-                  <Star className="h-4 w-4 text-primary" /> {review.overall_rating}/5
+                  <Star className="h-4 w-4 text-primary" />{" "}
+                  {review.overall_rating}/5
                 </span>
               )}
-              <Badge variant={statusVariant(review.status)}>{titleCase(review.status)}</Badge>
+              <Badge variant={statusVariant(review.status)}>
+                {titleCase(review.status)}
+              </Badge>
             </div>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
                 <p className="text-sm font-medium">Strengths</p>
-                <p className="text-sm text-muted-foreground">{review.strengths || "—"}</p>
+                <p className="text-sm text-muted-foreground">
+                  {review.strengths || "—"}
+                </p>
               </div>
               <div>
                 <p className="text-sm font-medium">Areas to improve</p>
-                <p className="text-sm text-muted-foreground">{review.improvements || "—"}</p>
+                <p className="text-sm text-muted-foreground">
+                  {review.improvements || "—"}
+                </p>
               </div>
             </div>
             {review.review_goals?.length > 0 && (

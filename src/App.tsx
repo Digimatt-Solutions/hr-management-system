@@ -63,15 +63,52 @@ const App = () => (
           <DepartmentProvider>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/clients" element={<ProtectedRoute><RoleRoute allow={["admin"]}><Clients /></RoleRoute></ProtectedRoute>} />
-              <Route path="/auth" element={<PublicRoute><Auth /></PublicRoute>} />
+              <Route
+                path="/clients"
+                element={
+                  <ProtectedRoute>
+                    <RoleRoute allow={["admin"]}>
+                      <Clients />
+                    </RoleRoute>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/auth"
+                element={
+                  <PublicRoute>
+                    <Auth />
+                  </PublicRoute>
+                }
+              />
               <Route path="/setup" element={<Navigate to="/auth" replace />} />
               <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route path="/terms" element={<Terms />} />
 
-              <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-              <Route path="/employees" element={<ProtectedRoute><Employees /></ProtectedRoute>} />
-              <Route path="/employees/:id" element={<ProtectedRoute><EmployeeDetail /></ProtectedRoute>}>
+              <Route
+                path="/dashboard"
+                element={
+                  <ProtectedRoute>
+                    <Dashboard />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/employees"
+                element={
+                  <ProtectedRoute>
+                    <Employees />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/employees/:id"
+                element={
+                  <ProtectedRoute>
+                    <EmployeeDetail />
+                  </ProtectedRoute>
+                }
+              >
                 <Route index element={<Navigate to="details" replace />} />
                 <Route path="details" element={<EmployeeDetailsTab />} />
                 <Route path="employment" element={<EmployeeEmploymentTab />} />
@@ -80,9 +117,30 @@ const App = () => (
                 <Route path="documents" element={<EmployeeDocumentsTab />} />
                 <Route path="reviews" element={<EmployeeReviewsTab />} />
               </Route>
-              <Route path="/departments" element={<ProtectedRoute><Departments /></ProtectedRoute>} />
-              <Route path="/leave" element={<ProtectedRoute><Leave /></ProtectedRoute>} />
-              <Route path="/attendance" element={<ProtectedRoute><Attendance /></ProtectedRoute>} />
+              <Route
+                path="/departments"
+                element={
+                  <ProtectedRoute>
+                    <Departments />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/leave"
+                element={
+                  <ProtectedRoute>
+                    <Leave />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/attendance"
+                element={
+                  <ProtectedRoute>
+                    <Attendance />
+                  </ProtectedRoute>
+                }
+              />
               <Route
                 path="/onboarding"
                 element={
@@ -93,7 +151,14 @@ const App = () => (
                   </ProtectedRoute>
                 }
               />
-              <Route path="/performance" element={<ProtectedRoute><Performance /></ProtectedRoute>} />
+              <Route
+                path="/performance"
+                element={
+                  <ProtectedRoute>
+                    <Performance />
+                  </ProtectedRoute>
+                }
+              />
               <Route
                 path="/payroll"
                 element={
@@ -104,8 +169,22 @@ const App = () => (
                   </ProtectedRoute>
                 }
               />
-              <Route path="/announcements" element={<ProtectedRoute><Announcements /></ProtectedRoute>} />
-              <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+              <Route
+                path="/announcements"
+                element={
+                  <ProtectedRoute>
+                    <Announcements />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute>
+                    <Profile />
+                  </ProtectedRoute>
+                }
+              />
               <Route
                 path="/settings"
                 element={

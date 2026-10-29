@@ -4,7 +4,9 @@ import { formatDate, titleCase } from "@/lib/hr";
 
 const Field = ({ label, value }: { label: string; value?: string | null }) => (
   <div>
-    <p className="text-xs uppercase tracking-wide text-muted-foreground">{label}</p>
+    <p className="text-xs uppercase tracking-wide text-muted-foreground">
+      {label}
+    </p>
     <p className="mt-0.5 font-medium">{value || "—"}</p>
   </div>
 );
@@ -21,8 +23,16 @@ const DetailsTab = () => {
         <CardContent className="grid gap-4 sm:grid-cols-2">
           <Field label="First name" value={employee.first_name} />
           <Field label="Last name" value={employee.last_name} />
-          <Field label="Date of birth" value={employee.date_of_birth ? formatDate(employee.date_of_birth) : null} />
-          <Field label="Gender" value={employee.gender ? titleCase(employee.gender) : null} />
+          <Field
+            label="Date of birth"
+            value={
+              employee.date_of_birth ? formatDate(employee.date_of_birth) : null
+            }
+          />
+          <Field
+            label="Gender"
+            value={employee.gender ? titleCase(employee.gender) : null}
+          />
           <Field label="Phone" value={employee.phone} />
           <Field label="Work email" value={employee.work_email} />
           <Field label="City" value={employee.city} />

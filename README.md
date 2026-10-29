@@ -10,42 +10,42 @@ The HR Management System is built to simplify day-to-day human resource operatio
 
 It is designed with a focus on:
 
-* Efficient employee management
-* Centralized HR records
-* Role-based access to system functionality
-* Administrative management
-* Secure authentication and account management
-* Responsive and accessible user experience
-* Scalable application architecture
+- Efficient employee management
+- Centralized HR records
+- Role-based access to system functionality
+- Administrative management
+- Secure authentication and account management
+- Responsive and accessible user experience
+- Scalable application architecture
 
 ## Core Features
 
 ### Employee Management
 
-* Employee registration and management
-* Employee profiles
-* Employment information
-* Department and role management
-* Employee status management
-* Centralized employee records
+- Employee registration and management
+- Employee profiles
+- Employment information
+- Department and role management
+- Employee status management
+- Centralized employee records
 
 ### HR Administration
 
-* HR dashboard
-* Organizational management
-* Department management
-* Employee oversight
-* Administrative workflows
-* System configuration
+- HR dashboard
+- Organizational management
+- Department management
+- Employee oversight
+- Administrative workflows
+- System configuration
 
 ### Authentication & Access Control
 
-* Secure user authentication
-* Account registration and login
-* Role-based access control
-* Protected application areas
-* Administrative access management
-* Session and account security controls
+- Secure user authentication
+- Account registration and login
+- Role-based access control
+- Protected application areas
+- Administrative access management
+- Session and account security controls
 
 Access to functionality is determined by the user's assigned role and permissions.
 
@@ -57,10 +57,10 @@ The system provides dashboards tailored to the user's level of access, allowing 
 
 The application is designed to work across:
 
-* Desktop computers
-* Laptops
-* Tablets
-* Mobile devices
+- Desktop computers
+- Laptops
+- Tablets
+- Mobile devices
 
 The interface follows modern UI/UX principles with an emphasis on clarity, consistency, accessibility, and ease of navigation.
 
@@ -70,14 +70,14 @@ Security is treated as a core part of the system architecture.
 
 The application incorporates appropriate measures for:
 
-* Authentication and authorization
-* Role-based access control
-* Protected application routes
-* Secure handling of application data
-* Input validation
-* Database access controls
-* Controlled administrative functionality
-* Protection of sensitive system operations
+- Authentication and authorization
+- Role-based access control
+- Protected application routes
+- Secure handling of application data
+- Input validation
+- Database access controls
+- Controlled administrative functionality
+- Protection of sensitive system operations
 
 Security-sensitive implementation details are intentionally not documented publicly.
 
@@ -85,23 +85,23 @@ Security-sensitive implementation details are intentionally not documented publi
 
 ### Frontend
 
-* React
-* TypeScript
-* Modern CSS and responsive UI components
+- React
+- TypeScript
+- Modern CSS and responsive UI components
 
 ### Backend & Data
 
-* Supabase
-* PostgreSQL
-* Database-level access controls
+- Supabase
+- PostgreSQL
+- Database-level access controls
 
 ### Development & Deployment
 
-* Git
-* GitHub
-* Vite
-* Node.js
-* Netlify / compatible hosting platforms
+- Git
+- GitHub
+- Vite
+- Node.js
+- Netlify / compatible hosting platforms
 
 ## Project Structure
 
@@ -128,9 +128,9 @@ The exact implementation may evolve as the system develops.
 
 Make sure you have the following installed:
 
-* Node.js
-* npm
-* Git
+- Node.js
+- npm
+- Git
 
 ### Installation
 
@@ -197,14 +197,14 @@ Before deploying to production:
 
 The project follows these general principles:
 
-* Maintainable and modular code
-* Clear separation of application responsibilities
-* Responsive design
-* Consistent UI/UX
-* Secure data handling
-* Least-privilege access
-* Validation of user input
-* Production-ready deployment practices
+- Maintainable and modular code
+- Clear separation of application responsibilities
+- Responsive design
+- Consistent UI/UX
+- Secure data handling
+- Least-privilege access
+- Validation of user input
+- Production-ready deployment practices
 
 ## Important Note
 

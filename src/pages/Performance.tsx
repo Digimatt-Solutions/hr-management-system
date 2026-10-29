@@ -64,7 +64,10 @@ const Performance = () => {
   }, [load]);
 
   return (
-    <DashboardLayout title="Performance" description="Review cycles and appraisals">
+    <DashboardLayout
+      title="Performance"
+      description="Review cycles and appraisals"
+    >
       {loading ? (
         <div className="space-y-4">
           {[...Array(3)].map((_, i) => (
@@ -79,10 +82,13 @@ const Performance = () => {
                 <CardHeader className="space-y-1">
                   <div className="flex items-center justify-between">
                     <CardTitle className="text-base">{cycle.name}</CardTitle>
-                    <Badge variant={statusVariant(cycle.status)}>{titleCase(cycle.status)}</Badge>
+                    <Badge variant={statusVariant(cycle.status)}>
+                      {titleCase(cycle.status)}
+                    </Badge>
                   </div>
                   <p className="text-xs text-muted-foreground">
-                    {formatDate(cycle.start_date)} – {formatDate(cycle.end_date)}
+                    {formatDate(cycle.start_date)} –{" "}
+                    {formatDate(cycle.end_date)}
                   </p>
                 </CardHeader>
                 <CardContent>
@@ -90,13 +96,16 @@ const Performance = () => {
                     {cycle.description || "No description"}
                   </p>
                   <p className="mt-2 text-sm">
-                    {reviews.filter((r) => r.cycle_id === cycle.id).length} reviews
+                    {reviews.filter((r) => r.cycle_id === cycle.id).length}{" "}
+                    reviews
                   </p>
                 </CardContent>
               </Card>
             ))}
             {cycles.length === 0 && (
-              <p className="text-sm text-muted-foreground">No review cycles yet.</p>
+              <p className="text-sm text-muted-foreground">
+                No review cycles yet.
+              </p>
             )}
           </div>
 
@@ -127,13 +136,15 @@ const Performance = () => {
                         </Link>
                       </TableCell>
                       <TableCell>
-                        {cycles.find((c) => c.id === review.cycle_id)?.name ?? "—"}
+                        {cycles.find((c) => c.id === review.cycle_id)?.name ??
+                          "—"}
                       </TableCell>
                       <TableCell>{fullName(review.reviewer)}</TableCell>
                       <TableCell>
                         {review.overall_rating !== null ? (
                           <span className="flex items-center gap-1">
-                            <Star className="h-4 w-4 text-primary" /> {review.overall_rating}/5
+                            <Star className="h-4 w-4 text-primary" />{" "}
+                            {review.overall_rating}/5
                           </span>
                         ) : (
                           "—"
@@ -148,7 +159,10 @@ const Performance = () => {
                   ))}
                   {reviews.length === 0 && (
                     <TableRow>
-                      <TableCell colSpan={5} className="py-8 text-center text-muted-foreground">
+                      <TableCell
+                        colSpan={5}
+                        className="py-8 text-center text-muted-foreground"
+                      >
                         No reviews recorded.
                       </TableCell>
                     </TableRow>

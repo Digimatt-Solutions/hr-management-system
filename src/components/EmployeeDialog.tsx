@@ -71,17 +71,29 @@ interface Props {
 const EmployeeDialog = ({ open, onOpenChange, employee, onSaved }: Props) => {
   const [values, setValues] = useState<EmployeeFormValues>(empty);
   const [saving, setSaving] = useState(false);
-  const [departments, setDepartments] = useState<{ id: string; name: string }[]>([]);
-  const [positions, setPositions] = useState<{ id: string; title: string; department_id: string | null }[]>([]);
-  const [managers, setManagers] = useState<{ id: string; first_name: string; last_name: string }[]>([]);
+  const [departments, setDepartments] = useState<
+    { id: string; name: string }[]
+  >([]);
+  const [positions, setPositions] = useState<
+    { id: string; title: string; department_id: string | null }[]
+  >([]);
+  const [managers, setManagers] = useState<
+    { id: string; first_name: string; last_name: string }[]
+  >([]);
 
   useEffect(() => {
     if (!open) return;
     const load = async () => {
       const [d, p, m] = await Promise.all([
         supabase.from("departments").select("id, name").order("name"),
-        supabase.from("positions").select("id, title, department_id").order("title"),
-        supabase.from("employees").select("id, first_name, last_name").order("first_name"),
+        supabase
+          .from("positions")
+          .select("id, title, department_id")
+          .order("title"),
+        supabase
+          .from("employees")
+          .select("id, first_name, last_name")
+          .order("first_name"),
       ]);
       setDepartments(d.data ?? []);
       setPositions(p.data ?? []);
@@ -94,7 +106,7 @@ const EmployeeDialog = ({ open, onOpenChange, employee, onSaved }: Props) => {
     if (open) {
       setValues({
         ...empty,
-        employee_code: `EMP-${crypto.randomUUID().slice(0,8).toUpperCase()}`,
+        employee_code: `EMP-${crypto.randomUUID().slice(0, 8).toUpperCase()}`,
         ...(employee ?? {}),
       } as EmployeeFormValues);
     }
@@ -105,8 +117,20 @@ const EmployeeDialog = ({ open, onOpenChange, employee, onSaved }: Props) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if(!values.first_name.trim()||!values.last_name.trim()||!values.employee_code.trim()||values.first_name.length>150||values.last_name.length>150||values.employee_code.length>40)return toast.error('Enter valid employee names and staff number');
-    if(values.salary&&(!Number.isFinite(Number(values.salary))||Number(values.salary)<0))return toast.error('Salary must be a non-negative number');
+    if (
+      !values.first_name.trim() ||
+      !values.last_name.trim() ||
+      !values.employee_code.trim() ||
+      values.first_name.length > 150 ||
+      values.last_name.length > 150 ||
+      values.employee_code.length > 40
+    )
+      return toast.error("Enter valid employee names and staff number");
+    if (
+      values.salary &&
+      (!Number.isFinite(Number(values.salary)) || Number(values.salary) < 0)
+    )
+      return toast.error("Salary must be a non-negative number");
     setSaving(true);
     try {
       const payload = {
@@ -129,11 +153,18 @@ const EmployeeDialog = ({ open, onOpenChange, employee, onSaved }: Props) => {
       };
 
       if (values.id) {
-        const { error } = await supabase.from("employees").update(payload).eq("id", values.id);
+        const { error } = await supabase
+          .from("employees")
+          .update(payload)
+          .eq("id", values.id);
         if (error) throw error;
         toast.success("Employee updated");
       } else {
-        const { data, error } = await supabase.from("employees").insert(payload).select("id").single();
+        const { data, error } = await supabase
+          .from("employees")
+          .insert(payload)
+          .select("id")
+          .single();
         if (error) throw error;
         const checklist = [
           "Sign employment contract",
@@ -142,14 +173,19 @@ const EmployeeDialog = ({ open, onOpenChange, employee, onSaved }: Props) => {
           "Team introduction and orientation",
           "Complete policy handbook acknowledgement",
         ];
-        const {error: checklistError}=await supabase.from("onboarding_tasks").insert(
-          checklist.map((title, index) => ({
-            employee_id: data.id,
-            title,
-            sort_order: index + 1,
-          })),
-        );
-        if(checklistError)toast.warning('Employee saved, but onboarding checklist could not be created');
+        const { error: checklistError } = await supabase
+          .from("onboarding_tasks")
+          .insert(
+            checklist.map((title, index) => ({
+              employee_id: data.id,
+              title,
+              sort_order: index + 1,
+            })),
+          );
+        if (checklistError)
+          toast.warning(
+            "Employee saved, but onboarding checklist could not be created",
+          );
         else toast.success("Employee added with an onboarding checklist");
       }
       onSaved();
@@ -169,36 +205,67 @@ const EmployeeDialog = ({ open, onOpenChange, employee, onSaved }: Props) => {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>{values.id ? "Edit employee" : "Add employee"}</DialogTitle>
+          <DialogTitle>
+            {values.id ? "Edit employee" : "Add employee"}
+          </DialogTitle>
           <DialogDescription>
-            Employment details are visible to the employee, their manager and HR admins.
+            Employment details are visible to the employee, their manager and HR
+            admins.
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="first_name">First name</Label>
-              <Input id="first_name" value={values.first_name} onChange={(e) => set("first_name", e.target.value)} required />
+              <Input
+                id="first_name"
+                value={values.first_name}
+                onChange={(e) => set("first_name", e.target.value)}
+                required
+              />
             </div>
             <div className="space-y-2">
               <Label htmlFor="last_name">Last name</Label>
-              <Input id="last_name" value={values.last_name} onChange={(e) => set("last_name", e.target.value)} required />
+              <Input
+                id="last_name"
+                value={values.last_name}
+                onChange={(e) => set("last_name", e.target.value)}
+                required
+              />
             </div>
             <div className="space-y-2">
               <Label htmlFor="employee_code">Staff number</Label>
-              <Input id="employee_code" value={values.employee_code} onChange={(e) => set("employee_code", e.target.value)} required />
+              <Input
+                id="employee_code"
+                value={values.employee_code}
+                onChange={(e) => set("employee_code", e.target.value)}
+                required
+              />
             </div>
             <div className="space-y-2">
               <Label htmlFor="work_email">Work email</Label>
-              <Input id="work_email" type="email" value={values.work_email} onChange={(e) => set("work_email", e.target.value)} />
+              <Input
+                id="work_email"
+                type="email"
+                value={values.work_email}
+                onChange={(e) => set("work_email", e.target.value)}
+              />
             </div>
             <div className="space-y-2">
               <Label htmlFor="phone">Phone</Label>
-              <Input id="phone" value={values.phone} onChange={(e) => set("phone", e.target.value)} />
+              <Input
+                id="phone"
+                value={values.phone}
+                onChange={(e) => set("phone", e.target.value)}
+              />
             </div>
             <div className="space-y-2">
               <Label htmlFor="city">City</Label>
-              <Input id="city" value={values.city} onChange={(e) => set("city", e.target.value)} />
+              <Input
+                id="city"
+                value={values.city}
+                onChange={(e) => set("city", e.target.value)}
+              />
             </div>
             <div className="space-y-2">
               <Label>Department</Label>
@@ -209,11 +276,15 @@ const EmployeeDialog = ({ open, onOpenChange, employee, onSaved }: Props) => {
                   set("position_id", null);
                 }}
               >
-                <SelectTrigger><SelectValue placeholder="Select department" /></SelectTrigger>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select department" />
+                </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="none">Unassigned</SelectItem>
                   {departments.map((d) => (
-                    <SelectItem key={d.id} value={d.id}>{d.name}</SelectItem>
+                    <SelectItem key={d.id} value={d.id}>
+                      {d.name}
+                    </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
@@ -222,13 +293,19 @@ const EmployeeDialog = ({ open, onOpenChange, employee, onSaved }: Props) => {
               <Label>Position</Label>
               <Select
                 value={values.position_id ?? "none"}
-                onValueChange={(v) => set("position_id", v === "none" ? null : v)}
+                onValueChange={(v) =>
+                  set("position_id", v === "none" ? null : v)
+                }
               >
-                <SelectTrigger><SelectValue placeholder="Select position" /></SelectTrigger>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select position" />
+                </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="none">Unassigned</SelectItem>
                   {filteredPositions.map((p) => (
-                    <SelectItem key={p.id} value={p.id}>{p.title}</SelectItem>
+                    <SelectItem key={p.id} value={p.id}>
+                      {p.title}
+                    </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
@@ -237,9 +314,13 @@ const EmployeeDialog = ({ open, onOpenChange, employee, onSaved }: Props) => {
               <Label>Reports to</Label>
               <Select
                 value={values.manager_id ?? "none"}
-                onValueChange={(v) => set("manager_id", v === "none" ? null : v)}
+                onValueChange={(v) =>
+                  set("manager_id", v === "none" ? null : v)
+                }
               >
-                <SelectTrigger><SelectValue placeholder="Select manager" /></SelectTrigger>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select manager" />
+                </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="none">No manager</SelectItem>
                   {managers
@@ -254,49 +335,103 @@ const EmployeeDialog = ({ open, onOpenChange, employee, onSaved }: Props) => {
             </div>
             <div className="space-y-2">
               <Label htmlFor="hire_date">Hire date</Label>
-              <Input id="hire_date" type="date" value={values.hire_date} onChange={(e) => set("hire_date", e.target.value)} required />
+              <Input
+                id="hire_date"
+                type="date"
+                value={values.hire_date}
+                onChange={(e) => set("hire_date", e.target.value)}
+                required
+              />
             </div>
             <div className="space-y-2">
               <Label>Employment type</Label>
-              <Select value={values.employment_type} onValueChange={(v) => set("employment_type", v)}>
-                <SelectTrigger><SelectValue /></SelectTrigger>
+              <Select
+                value={values.employment_type}
+                onValueChange={(v) => set("employment_type", v)}
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
                 <SelectContent>
-                  {["full_time", "part_time", "contract", "intern", "temporary"].map((t) => (
-                    <SelectItem key={t} value={t}>{t.replace("_", " ")}</SelectItem>
+                  {[
+                    "full_time",
+                    "part_time",
+                    "contract",
+                    "intern",
+                    "temporary",
+                  ].map((t) => (
+                    <SelectItem key={t} value={t}>
+                      {t.replace("_", " ")}
+                    </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
             </div>
             <div className="space-y-2">
               <Label>Status</Label>
-              <Select value={values.status} onValueChange={(v) => set("status", v)}>
-                <SelectTrigger><SelectValue /></SelectTrigger>
+              <Select
+                value={values.status}
+                onValueChange={(v) => set("status", v)}
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
                 <SelectContent>
-                  {["active", "probation", "on_leave", "suspended", "terminated"].map((s) => (
-                    <SelectItem key={s} value={s}>{s.replace("_", " ")}</SelectItem>
+                  {[
+                    "active",
+                    "probation",
+                    "on_leave",
+                    "suspended",
+                    "terminated",
+                  ].map((s) => (
+                    <SelectItem key={s} value={s}>
+                      {s.replace("_", " ")}
+                    </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
             </div>
             <div className="space-y-2">
               <Label htmlFor="salary">Monthly salary</Label>
-              <Input id="salary" type="number" value={values.salary} onChange={(e) => set("salary", e.target.value)} />
+              <Input
+                id="salary"
+                type="number"
+                value={values.salary}
+                onChange={(e) => set("salary", e.target.value)}
+              />
             </div>
             <div className="space-y-2">
               <Label htmlFor="ec_name">Emergency contact</Label>
-              <Input id="ec_name" value={values.emergency_contact_name} onChange={(e) => set("emergency_contact_name", e.target.value)} />
+              <Input
+                id="ec_name"
+                value={values.emergency_contact_name}
+                onChange={(e) => set("emergency_contact_name", e.target.value)}
+              />
             </div>
             <div className="space-y-2">
               <Label htmlFor="ec_phone">Emergency phone</Label>
-              <Input id="ec_phone" value={values.emergency_contact_phone} onChange={(e) => set("emergency_contact_phone", e.target.value)} />
+              <Input
+                id="ec_phone"
+                value={values.emergency_contact_phone}
+                onChange={(e) => set("emergency_contact_phone", e.target.value)}
+              />
             </div>
           </div>
           <div className="space-y-2">
             <Label htmlFor="notes">Notes</Label>
-            <Textarea id="notes" value={values.notes} onChange={(e) => set("notes", e.target.value)} rows={3} />
+            <Textarea
+              id="notes"
+              value={values.notes}
+              onChange={(e) => set("notes", e.target.value)}
+              rows={3}
+            />
           </div>
           <DialogFooter>
-            <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => onOpenChange(false)}
+            >
               Cancel
             </Button>
             <Button type="submit" disabled={saving}>

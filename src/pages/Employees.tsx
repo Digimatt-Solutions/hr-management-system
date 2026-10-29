@@ -60,7 +60,8 @@ const Employees = () => {
         "id, employee_code, first_name, last_name, work_email, phone, status, employment_type, hire_date, departments(name), positions(title)",
       )
       .order("first_name");
-    if (selectedDepartment) query = query.eq("department_id", selectedDepartment.id);
+    if (selectedDepartment)
+      query = query.eq("department_id", selectedDepartment.id);
     const { data, error } = await query;
     if (error) toast.error("Could not load the staff directory");
     setRows((data as unknown as Row[]) ?? []);
@@ -72,7 +73,8 @@ const Employees = () => {
   }, [load]);
 
   const filtered = rows.filter((row) => {
-    const haystack = `${row.first_name} ${row.last_name} ${row.employee_code} ${row.work_email ?? ""} ${row.positions?.title ?? ""}`.toLowerCase();
+    const haystack =
+      `${row.first_name} ${row.last_name} ${row.employee_code} ${row.work_email ?? ""} ${row.positions?.title ?? ""}`.toLowerCase();
     const matchesSearch = haystack.includes(search.toLowerCase());
     const matchesStatus = status === "all" || row.status === status;
     return matchesSearch && matchesStatus;
@@ -108,7 +110,13 @@ const Employees = () => {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">All statuses</SelectItem>
-                {["active", "probation", "on_leave", "suspended", "terminated"].map((s) => (
+                {[
+                  "active",
+                  "probation",
+                  "on_leave",
+                  "suspended",
+                  "terminated",
+                ].map((s) => (
                   <SelectItem key={s} value={s}>
                     {titleCase(s)}
                   </SelectItem>
@@ -142,10 +150,15 @@ const Employees = () => {
                   {filtered.map((row) => (
                     <TableRow key={row.id}>
                       <TableCell>
-                        <Link to={`/employees/${row.id}`} className="font-medium hover:underline">
+                        <Link
+                          to={`/employees/${row.id}`}
+                          className="font-medium hover:underline"
+                        >
                           {row.first_name} {row.last_name}
                         </Link>
-                        <p className="text-xs text-muted-foreground">{row.work_email}</p>
+                        <p className="text-xs text-muted-foreground">
+                          {row.work_email}
+                        </p>
                       </TableCell>
                       <TableCell>{row.employee_code}</TableCell>
                       <TableCell>{row.departments?.name ?? "—"}</TableCell>
@@ -153,7 +166,9 @@ const Employees = () => {
                       <TableCell>{titleCase(row.employment_type)}</TableCell>
                       <TableCell>{formatDate(row.hire_date)}</TableCell>
                       <TableCell>
-                        <Badge variant={statusVariant(row.status)}>{titleCase(row.status)}</Badge>
+                        <Badge variant={statusVariant(row.status)}>
+                          {titleCase(row.status)}
+                        </Badge>
                       </TableCell>
                       <TableCell className="text-right">
                         <Button asChild variant="ghost" size="sm">
@@ -164,7 +179,10 @@ const Employees = () => {
                   ))}
                   {filtered.length === 0 && (
                     <TableRow>
-                      <TableCell colSpan={8} className="py-10 text-center text-muted-foreground">
+                      <TableCell
+                        colSpan={8}
+                        className="py-10 text-center text-muted-foreground"
+                      >
                         No employees match your filters.
                       </TableCell>
                     </TableRow>
@@ -176,7 +194,11 @@ const Employees = () => {
         </CardContent>
       </Card>
 
-      <EmployeeDialog open={dialogOpen} onOpenChange={setDialogOpen} onSaved={load} />
+      <EmployeeDialog
+        open={dialogOpen}
+        onOpenChange={setDialogOpen}
+        onSaved={load}
+      />
     </DashboardLayout>
   );
 };
