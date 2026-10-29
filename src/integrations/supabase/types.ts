@@ -644,6 +644,24 @@ export type Database = {
         }
         Relationships: []
       }
+      module_visibility: {
+        Row: {
+          enabled: boolean
+          module_key: string
+          updated_at: string
+        }
+        Insert: {
+          enabled?: boolean
+          module_key: string
+          updated_at?: string
+        }
+        Update: {
+          enabled?: boolean
+          module_key?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       onboarding_tasks: {
         Row: {
           completed_at: string | null
