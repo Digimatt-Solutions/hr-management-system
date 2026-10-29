@@ -30,3 +30,11 @@
 - [ ] Verify live Airtouch acceptance and delivery interpretation — blocked: designated test recipient and explicit send approval needed; no SMS sent
 
 Paused at the user's credit check-in request. Existing records remain intact. Seven database-linter warnings concern intentional authenticated access-check helpers; required helper execution remains enabled.
+
+# Platform precision updates
+
+- [ ] Apply Quicksand and subtle glossy styling; compact dashboard cards/charts and popup forms
+- [ ] Reproduce and resolve dashboard fetch failures
+- [ ] Add persisted administrator module visibility controls across navigation and direct pages
+- [ ] Remove identified fabricated placeholder data without deleting real user records
+- [ ] Verify authenticated visibility controls, dashboard loading, and small-screen layout
