@@ -57,7 +57,7 @@ const Employees = () => {
     let query = supabase
       .from("employees")
       .select(
-        "id, employee_code, first_name, last_name, work_email, phone, status, employment_type, hire_date, departments(name), positions(title)",
+        "id, employee_code, first_name, last_name, work_email, phone, status, employment_type, hire_date, departments!employees_department_id_fkey(name), positions(title)",
       )
       .order("first_name");
     if (selectedDepartment)

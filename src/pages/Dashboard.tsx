@@ -58,7 +58,7 @@ export default function Dashboard() {
     try {
     let emp = supabase
       .from("employees")
-      .select("id,department_id,departments(name)")
+      .select("id,department_id,departments!employees_department_id_fkey(name)")
       .neq("status", "terminated");
     if (selectedDepartment)
       emp = emp.eq("department_id", selectedDepartment.id);
