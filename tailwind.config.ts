@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 
+
 export default {
   darkMode: ["class"],
   content: [
@@ -19,9 +20,12 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["Quicksand", "system-ui", "sans-serif"],
-        heading: ["Quicksand", "system-ui", "sans-serif"],
-      },
+  sans: ["Quicksand", "system-ui", "sans-serif"],
+  heading: ["Quicksand", "system-ui", "sans-serif"],
+  homeSans: ["DM Sans", "system-ui", "sans-serif"],
+  homeHeading: ["Outfit", "system-ui", "sans-serif"],
+},
+
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

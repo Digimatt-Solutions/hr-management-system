@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -15,13 +14,11 @@ import {
   Armchair,
   CheckCircle2,
   ChevronDown,
-  Sparkles,
   Building2,
   Clock3,
   MoveRight,
   MessageCircle,
   ShieldCheck,
-  Coffee,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -136,7 +133,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-background text-foreground">
+    <div className="min-h-screen overflow-x-hidden bg-background font-homeSans text-foreground [&_h1]:font-homeHeading [&_h2]:font-homeHeading [&_h3]:font-homeHeading">
       {/* Navigation */}
       <header className="sticky top-0 z-40 border-b border-border/70 bg-background/95 backdrop-blur-xl">
         <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between gap-4 px-5 sm:px-8 lg:h-[84px]">
@@ -145,42 +142,27 @@ export default function Home() {
             aria-label="Kazini Shared home"
             onClick={closeMenu}
             className="shrink-0"
-            >
+          >
             <img
-                src={logo}
-                alt="Kazini Shared"
-                width={160}
-                height={64}
-                className="h-12 w-32 object-contain sm:h-14 sm:w-36"
+              src={logo}
+              alt="Kazini Shared"
+              width={160}
+              height={64}
+              className="h-12 w-32 object-contain sm:h-14 sm:w-36"
             />
-            </Link>
+          </Link>
 
           <nav
             aria-label="Main navigation"
             className="hidden items-center gap-7 text-sm font-medium lg:flex xl:gap-9"
           >
-            <a
-              href="#about"
-              className="transition-colors hover:text-primary"
-            >
+            <a href="#about" className="transition-colors hover:text-primary">
               About Kazini
             </a>
-            <a
-              href="#spaces"
-              className="transition-colors hover:text-primary"
-            >
+            <a href="#spaces" className="transition-colors hover:text-primary">
               Our spaces
             </a>
-            <a
-              href="#how-it-works"
-              className="transition-colors hover:text-primary"
-            >
-              How it works
-            </a>
-            <a
-              href="#contact"
-              className="transition-colors hover:text-primary"
-            >
+            <a href="#contact" className="transition-colors hover:text-primary">
               Contact
             </a>
             <Link
@@ -230,7 +212,6 @@ export default function Home() {
               {[
                 ["About Kazini", "#about"],
                 ["Our spaces", "#spaces"],
-                ["How it works", "#how-it-works"],
                 ["Frequently asked questions", "#faq"],
                 ["Contact", "#contact"],
               ].map(([label, href]) => (
@@ -281,7 +262,7 @@ export default function Home() {
 
           <div className="relative mx-auto flex min-h-[590px] max-w-7xl items-center px-5 py-20 sm:min-h-[660px] sm:px-8 lg:min-h-[700px]">
             <div className="max-w-3xl text-white">
-              <div className="mb-7 inline-flex items-center gap-2 px-1 py-2 text-sm font-semibold uppercase tracking-[0.18em] text-white/90 backdrop-blur-md">
+              <div className="mb-7 inline-flex items-center gap-2 px-1 py-2 text-sm font-semibold uppercase tracking-[0.18em] text-white/90">
                 Work. Connect. Grow.
               </div>
 
@@ -293,28 +274,28 @@ export default function Home() {
               </h1>
 
               <p className="mt-7 max-w-xl text-base leading-7 text-white/80 sm:text-lg sm:leading-8">
-                Welcome to Kazini Shared coworking - a place for independent minds,
-                growing businesses, and meaningful connections.
+                Welcome to Kazini Shared coworking — a place for independent
+                minds, growing businesses, and meaningful connections.
               </p>
 
-             <div className="mt-9 grid grid-cols-2 gap-3 sm:flex sm:items-center">
+              <div className="mt-9 grid grid-cols-2 gap-3 sm:flex sm:items-center">
                 <Button
-                    size="lg"
-                    onClick={openRegistration}
-                    className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl border border-white/35 px-2 text-xs font-medium text-white transition-colors hover:border-white hover:bg-white/10 sm:w-auto sm:px-5 sm:text-sm"
+                  size="lg"
+                  onClick={openRegistration}
+                  className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl border border-white/35 px-2 text-xs font-medium text-white transition-colors hover:border-white hover:bg-white/10 sm:w-auto sm:px-5 sm:text-sm"
                 >
-                    Join Kazini
-                    <ArrowUpRight className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" />
+                  Join Kazini
+                  <ArrowUpRight className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" />
                 </Button>
 
                 <a
-                    href="#spaces"
-                    className="inline-flex bg-black/20 min-h-12 w-full items-center justify-center gap-2 rounded-xl border border-white/20 px-2 text-xs font-medium text-white transition-colors hover:border-white hover:bg-white/10 sm:w-auto sm:px-5 sm:text-sm"
+                  href="#spaces"
+                  className="hidden sm:inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl border border-white/20 bg-black/20 px-2 text-xs font-medium text-white transition-colors hover:border-white hover:bg-white/10 sm:w-auto sm:px-5 sm:text-sm"
                 >
-                    Find your workspace
-                    <ArrowUpRight className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" />
+                  Find your workspace
+                  <ArrowUpRight className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" />
                 </a>
-                </div>
+              </div>
             </div>
           </div>
 
@@ -338,12 +319,12 @@ export default function Home() {
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
                   Find your fit
                 </p>
+
                 <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
                   Space to do your
-                  <span className="block text-foreground">
-                    best work.
-                  </span>
+                  <span className="block text-foreground">best work.</span>
                 </h2>
+
                 <p className="mt-4 max-w-xl text-sm leading-7 text-muted-foreground sm:text-base">
                   Different people work differently. Explore our workspace
                   options and tell us what would make your workday better.
@@ -387,6 +368,7 @@ export default function Home() {
                       <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
                         <item.icon className="h-5 w-5" />
                       </div>
+
                       <span className="text-xs font-medium tracking-wider text-muted-foreground">
                         {item.number}
                       </span>
@@ -418,10 +400,12 @@ export default function Home() {
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-background text-primary shadow-sm">
                   <MessageCircle className="h-5 w-5" />
                 </div>
+
                 <div>
                   <h3 className="font-semibold">
                     Not sure which option suits you?
                   </h3>
+
                   <p className="mt-1 text-sm leading-6 text-muted-foreground">
                     Tell us what you have in mind, and let’s start a
                     conversation.
@@ -432,7 +416,7 @@ export default function Home() {
               <Button
                 onClick={openRegistration}
                 variant="outline"
-                className="shrink-0 rounded-full"
+                className="shrink-0 rounded-xl"
               >
                 Talk to our team
                 <ArrowUpRight className="ml-2 h-4 w-4" />
@@ -485,8 +469,8 @@ export default function Home() {
               </p>
 
               <p className="mt-4 text-base leading-7 text-muted-foreground">
-                Tell us about your work, your business, and the environment
-                you need. We will use your enquiry to better understand your
+                Tell us about your work, your business, and the environment you
+                need. We will use your enquiry to better understand your
                 requirements.
               </p>
 
@@ -500,10 +484,10 @@ export default function Home() {
             </div>
           </div>
         </section>
-
         {/* Conversion banner */}
         <section className="relative isolate overflow-hidden bg-black">
           <div className="absolute -right-20 -top-36 h-96 w-96 rounded-full bg-primary/15 blur-3xl" />
+
           <div className="relative mx-auto flex max-w-7xl flex-col gap-8 px-5 py-16 sm:px-8 sm:py-20 md:flex-row md:items-center md:justify-between lg:py-24">
             <div className="max-w-2xl">
               <div className="inline-flex items-center gap-2 text-sm font-medium text-orange-300">
@@ -518,28 +502,28 @@ export default function Home() {
               </h2>
 
               <p className="mt-5 max-w-xl text-sm leading-7 text-white/70 sm:text-base">
-                Tell us what your ideal workspace looks like and take the
-                first step towards finding your fit at Kazini Shared.
+                Tell us what your ideal workspace looks like and take the first
+                step towards finding your fit at Kazini Shared.
               </p>
             </div>
 
             <div className="grid w-full grid-cols-2 gap-3 sm:flex sm:w-auto sm:shrink-0 sm:flex-row md:flex-col lg:flex-row">
-            <Button
+              <Button
                 size="lg"
                 onClick={openRegistration}
-                className="h-13 min-h-12 w-full rounded-xl bg-primary px-3 font-bold text-white shadow-lg shadow-primary/20 transition-transform hover:-translate-y-0.5 sm:w-auto sm:px-7"
-            >
+                className="min-h-12 h-13 w-full rounded-xl bg-primary px-3 font-bold text-white shadow-lg shadow-primary/20 transition-transform hover:-translate-y-0.5 sm:w-auto sm:px-7"
+              >
                 Join Kazini
                 <ArrowUpRight className="ml-2 h-5 w-5 shrink-0" />
-            </Button>
+              </Button>
 
-            <a
+              <a
                 href="#contact"
                 className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl border border-white/25 px-3 text-sm font-bold text-white transition-colors hover:bg-white/10 sm:w-auto sm:px-6"
-            >
+              >
                 Contact us
                 <ArrowRight className="h-4 w-4 shrink-0" />
-            </a>
+              </a>
             </div>
           </div>
         </section>
@@ -560,8 +544,8 @@ export default function Home() {
               </h2>
 
               <p className="mt-4 max-w-md text-sm leading-7 text-muted-foreground sm:text-base">
-                Have something else in mind? Our team is available through
-                the contact details below.
+                Have something else in mind? Our team is available through the
+                contact details below.
               </p>
 
               <a
@@ -582,9 +566,7 @@ export default function Home() {
                     <button
                       type="button"
                       aria-expanded={isActive}
-                      onClick={() =>
-                        setActiveFaq(isActive ? null : index)
-                      }
+                      onClick={() => setActiveFaq(isActive ? null : index)}
                       className="flex w-full items-center justify-between gap-5 py-5 text-left sm:py-6"
                     >
                       <span className="text-sm font-semibold leading-6 sm:text-base">
@@ -639,8 +621,8 @@ export default function Home() {
             </Link>
 
             <p className="mt-4 max-w-sm text-sm leading-7 text-muted-foreground">
-              A shared workspace for people, ideas, and new possibilities.
-              Find your working rhythm and make room for your next chapter.
+              A shared workspace for people, ideas, and new possibilities. Find
+              your working rhythm and make room for your next chapter.
             </p>
 
             <div className="mt-6 flex items-center gap-3 text-sm text-muted-foreground">
@@ -759,7 +741,7 @@ export default function Home() {
         </div>
       </footer>
 
-      {/* Existing registration form integration */}
+      {/* Existing registration form */}
       <ClientForm open={open} onOpenChange={setOpen} />
     </div>
   );
