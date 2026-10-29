@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import DashboardLayout from "@/components/DashboardLayout";
@@ -27,6 +27,7 @@ import {
 } from "recharts";
 import { formatDate } from "@/lib/hr";
 import { membershipPlans } from "@/lib/clients";
+import { useModules } from "@/contexts/ModuleContext";
 
 type ClientMetric = {
   id: string;
@@ -38,6 +39,7 @@ type ClientMetric = {
 export default function Dashboard() {
   const { profile, employee, isAdmin, profileLoading } = useAuth();
   const { selectedDepartment } = useDepartments();
+  const { enabled } = useModules();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [clients, setClients] = useState<ClientMetric[]>([]);
@@ -50,9 +52,10 @@ export default function Dashboard() {
   >([]);
   const [departments, setDepartments] = useState(0);
   const [leave, setLeave] = useState(0);
-  const load = async () => {
+  const load = useCallback(async () => {
     setLoading(true);
     setError("");
+    try {
     let emp = supabase
       .from("employees")
       .select("id,department_id,departments(name)")
@@ -62,20 +65,22 @@ export default function Dashboard() {
     const today = new Date().toISOString().slice(0, 10);
     const [e, d, l] = await Promise.all([
       emp,
-      supabase.from("departments").select("id", { count: "exact", head: true }),
+      supabase.from("departments").select("id", { count: "exact" }).limit(1),
       supabase
         .from("leave_requests")
-        .select("id", { count: "exact", head: true })
+        .select("id", { count: "exact" }).limit(1)
         .eq("status", "approved")
         .lte("start_date", today)
         .gte("end_date", today),
     ]);
-    if (e.error || d.error || l.error)
-      setError("Could not load dashboard metrics.");
+    if (e.error || d.error || l.error) {
+      console.error("Dashboard metrics", { employees: e.error, departments: d.error, leave: l.error });
+      throw new Error("Could not load dashboard metrics. Please retry.");
+    }
     setStaff(e.data ?? []);
     setDepartments(d.count ?? 0);
     setLeave(l.count ?? 0);
-    if (isAdmin) {
+    if (isAdmin && enabled("clients")) {
       let all: ClientMetric[] = [];
       let offset = 0;
       while (true) {
@@ -85,8 +90,8 @@ export default function Dashboard() {
           .order("created_at", { ascending: false })
           .range(offset, offset + 999);
         if (r.error) {
-          setError("Could not load client metrics.");
-          break;
+          console.error("Dashboard clients", r.error);
+          throw new Error("Could not load client metrics. Please retry.");
         }
         all.push(...(r.data ?? []));
         if ((r.data?.length ?? 0) < 1000) break;
@@ -94,11 +99,13 @@ export default function Dashboard() {
       }
       setClients(all);
     } else setClients([]);
-    setLoading(false);
-  };
+    } catch (failure) {
+      setError(failure instanceof Error ? failure.message : "Could not load dashboard metrics. Please retry.");
+    } finally { setLoading(false); }
+  }, [selectedDepartment?.id, isAdmin, enabled("clients")]);
   useEffect(() => {
-    if (!profileLoading) load();
-  }, [selectedDepartment, isAdmin, profileLoading]);
+    if (!profileLoading) void load();
+  }, [load, profileLoading]);
   const monthStart = new Date();
   monthStart.setDate(1);
   monthStart.setHours(0, 0, 0, 0);
@@ -184,7 +191,7 @@ export default function Dashboard() {
           {kind === "trend" ? (
             <AreaChart
               data={trend}
-              margin={{ top: 10, right: 15, left: 8, bottom: 25 }}
+              margin={{ top: 10, right: 8, left: 0, bottom: 25 }}
             >
               <CartesianGrid stroke="hsl(var(--border))" vertical={false} />
               <XAxis
@@ -198,7 +205,7 @@ export default function Dashboard() {
               />
               <YAxis
                 allowDecimals={false}
-                width={45}
+                width={32}
                 label={{
                   value: "Registrations",
                   angle: -90,
@@ -218,7 +225,7 @@ export default function Dashboard() {
           ) : (
             <BarChart
               data={kind === "members" ? distribution : employeeChart}
-              margin={{ top: 10, right: 15, left: 8, bottom: 40 }}
+              margin={{ top: 10, right: 8, left: 0, bottom: 24 }}
             >
               <CartesianGrid stroke="hsl(var(--border))" vertical={false} />
               <XAxis
@@ -235,7 +242,7 @@ export default function Dashboard() {
               />
               <YAxis
                 allowDecimals={false}
-                width={45}
+                width={32}
                 label={{
                   value: kind === "members" ? "Clients" : "Employees",
                   angle: -90,
@@ -264,7 +271,7 @@ export default function Dashboard() {
           : "Your Kazini community at a glance"
       }
       actions={
-        isAdmin ? (
+        isAdmin && enabled("clients") ? (
           <Button asChild>
             <Link to="/clients">
               Client Management <ArrowUpRight className="h-4 w-4" />
@@ -281,19 +288,19 @@ export default function Dashboard() {
           </Button>
         </div>
       )}
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        {stats.map((s) => (
-          <Link key={s.label} to={s.to}>
-            <Card>
-              <CardContent className="p-5">
-                <div className="flex items-center justify-between">
-                  <p className="text-sm text-muted-foreground">{s.label}</p>
-                  <s.icon className="h-5 w-5 text-primary" />
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4">
+        {stats.filter(s => enabled(s.to.slice(1))).map((s) => (
+          <Link key={s.label} to={s.to} className="min-w-0">
+            <Card className="surface-gloss h-full">
+              <CardContent className="p-3 sm:p-5">
+                <div className="flex min-h-10 items-start justify-between gap-2">
+                  <p className="text-xs leading-5 text-muted-foreground sm:text-sm">{s.label}</p>
+                  <s.icon className="h-4 w-4 shrink-0 text-primary sm:h-5 sm:w-5" />
                 </div>
                 {loading ? (
                   <Skeleton className="mt-5 h-9 w-16" />
                 ) : (
-                  <p className="mt-5 text-3xl font-semibold">{s.value}</p>
+                  <p className="mt-3 text-2xl font-semibold sm:mt-5 sm:text-3xl">{error ? "—" : s.value}</p>
                 )}
               </CardContent>
             </Card>
@@ -301,13 +308,13 @@ export default function Dashboard() {
         ))}
       </div>
       <div className="mt-7 grid gap-6 xl:grid-cols-2">
-        {isAdmin && (
+        {isAdmin && enabled("clients") && (
           <Card>
             <CardHeader>
               <CardTitle className="text-lg">Client registrations</CardTitle>
               <p className="text-sm text-muted-foreground">Last 12 months</p>
             </CardHeader>
-            <CardContent>
+            <CardContent className="px-2 sm:px-4">
               {chart("trend")}
               {!loading && !clients.length && (
                 <p className="mt-3 text-center text-sm text-muted-foreground">
@@ -317,11 +324,11 @@ export default function Dashboard() {
             </CardContent>
           </Card>
         )}
-        <Card>
+        {enabled("employees") && <Card>
           <CardHeader>
             <CardTitle className="text-lg">Employees by department</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="px-2 sm:px-4">
             {staff.length || loading ? (
               chart("employees")
             ) : (
@@ -330,8 +337,8 @@ export default function Dashboard() {
               </p>
             )}
           </CardContent>
-        </Card>
-        {isAdmin && (
+        </Card>}
+        {isAdmin && enabled("clients") && (
           <>
             <Card>
               <CardHeader>
@@ -339,7 +346,7 @@ export default function Dashboard() {
                   Membership preferences
                 </CardTitle>
               </CardHeader>
-              <CardContent>{chart("members")}</CardContent>
+              <CardContent className="px-2 sm:px-4">{chart("members")}</CardContent>
             </Card>
             <Card>
               <CardHeader className="flex-row items-center justify-between">
