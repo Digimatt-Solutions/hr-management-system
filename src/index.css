@@ -92,6 +92,8 @@ All colors MUST be HSL.
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
     --shadow-glow: 0 0 20px hsl(25 95% 53% / 0.3);
+    --surface-gloss: linear-gradient(160deg, hsl(var(--card)) 0%, hsl(var(--secondary) / 0.5) 100%);
+    --gloss-highlight: inset 0 1px 0 hsl(var(--card) / 0.8);
   }
 
   .dark {
@@ -147,7 +149,10 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
+    letter-spacing: 0;
   }
+
+  input, textarea, button, select { font-family: inherit; }
 
   h1,
   h2,
@@ -160,6 +165,10 @@ All colors MUST be HSL.
 }
 
 @layer utilities {
+  .surface-gloss {
+    background: var(--surface-gloss);
+    box-shadow: var(--gloss-highlight), var(--shadow-sm);
+  }
   .hero-shade {
     background: var(--hero-overlay);
   }

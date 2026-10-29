@@ -19,8 +19,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["DM Sans", "system-ui", "sans-serif"],
-        heading: ["Outfit", "system-ui", "sans-serif"],
+        sans: ["Quicksand", "system-ui", "sans-serif"],
+        heading: ["Quicksand", "system-ui", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
