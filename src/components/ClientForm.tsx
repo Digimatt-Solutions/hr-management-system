@@ -204,7 +204,7 @@ export default function ClientForm({
           <img
             src={logo}
             alt="Kazini Shared"
-            className="h-20 w-48 object-contain"
+            className="h-12 w-28 object-contain sm:h-14 sm:w-32"
           />
           <DialogTitle className="text-2xl">
             {success
