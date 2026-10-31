@@ -160,33 +160,33 @@ export type Database = {
         }
         Insert: {
           comments?: string
-          company_name: string
-          coworking_date: string
+          company_name?: string
+          coworking_date?: string
           created_at?: string
           email: string
-          emergency_name: string
-          emergency_phone: string
-          emergency_relationship: string
+          emergency_name?: string
+          emergency_phone?: string
+          emergency_relationship?: string
           facebook?: string
           full_name: string
           id?: string
-          industry: string
+          industry?: string
           job_title?: string
           linkedin?: string
-          membership_plans: string[]
+          membership_plans?: string[]
           owner_id?: string | null
           phone: string
           privacy_agreed: boolean
-          residential_address: string
-          signature: string
+          residential_address?: string
+          signature?: string
           signature_confirmed: boolean
-          signature_date: string
+          signature_date?: string
           social_other?: string
           source?: string
           special_requirements?: string
           updated_at?: string
           website?: string
-          working_hours: string[]
+          working_hours?: string[]
         }
         Update: {
           comments?: string

@@ -29,6 +29,13 @@
       "when": 1793288734253,
       "tag": "0003_module_visibility",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1793442211852,
+      "tag": "0004_kazini_clients_optional_fields",
+      "breakpoints": true
     }
   ]
 }
