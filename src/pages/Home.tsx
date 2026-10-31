@@ -287,7 +287,7 @@ export default function Home() {
                 <Button
                   size="lg"
                   onClick={openRegistration}
-                  className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl border border-white/35 px-2 text-xs font-medium text-white transition-colors hover:border-white hover:bg-white/10 sm:w-auto sm:px-5 sm:text-sm"
+                  className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl border border-transparent bg-primary px-2 text-xs font-medium text-primary-foreground shadow-lg shadow-primary/20 transition-colors hover:bg-primary/90 sm:w-auto sm:px-5 sm:text-sm"
                 >
                   Join Kazini
                   <ArrowUpRight className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" />
