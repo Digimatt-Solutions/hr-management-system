@@ -363,7 +363,7 @@ export default function Home() {
 
                     <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/10" />
 
-                    <span className="absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-white text-neutral-900 shadow-lg transition-all duration-300 group-hover:bg-primary group-hover:text-white">
+                    <span className="absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-white text-neutral-900 shadow-lg transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground">
                       <ArrowUpRight className="h-5 w-5" />
                     </span>
                   </div>
@@ -516,7 +516,7 @@ export default function Home() {
               <Button
                 size="lg"
                 onClick={openRegistration}
-                className="min-h-12 h-13 w-full rounded-xl bg-primary px-3 font-bold text-white shadow-lg shadow-primary/20 transition-transform hover:-translate-y-0.5 sm:w-auto sm:px-7"
+                className="min-h-12 h-13 w-full rounded-xl bg-primary px-3 font-bold text-primary-foreground shadow-lg shadow-primary/20 transition-transform hover:-translate-y-0.5 sm:w-auto sm:px-7"
               >
                 Join Kazini
                 <ArrowUpRight className="ml-2 h-5 w-5 shrink-0" />

@@ -141,12 +141,12 @@ const printDocument = (title: string, body: string) => {
       justify-content: space-between;
       align-items: flex-start;
       gap: 20px;
-      border-bottom: 3px solid #f37021;
+      border-bottom: 3px solid #9ecc04;
       padding-bottom: 16px;
       margin-bottom: 22px;
     }
     .brand {
-      color: #f37021;
+      color: #567307;
       font-size: 11px;
       font-weight: 800;
       letter-spacing: 2px;
@@ -206,10 +206,10 @@ const printDocument = (title: string, body: string) => {
       display: inline-block;
       margin: 1px 3px 2px 0;
       padding: 2px 6px;
-      border: 1px solid #f4c4a8;
+      border: 1px solid #cfe39a;
       border-radius: 4px;
-      background: #fff7f1;
-      color: #9a4315;
+      background: #f7fce8;
+      color: #4a5f07;
       font-size: 9px;
     }
     .profile-grid {
@@ -727,7 +727,7 @@ export default function Clients() {
 
           <Button
             onClick={openNewClient}
-            className="h-10 gap-2 rounded-xl bg-orange-600 px-4 font-semibold text-white shadow-sm transition-colors hover:bg-orange-700"
+            className="h-10 gap-2 rounded-xl bg-primary px-4 font-semibold text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
           >
             <Plus className="h-4 w-4" />
             <span>New client</span>
@@ -1046,7 +1046,7 @@ export default function Clients() {
                 <Button
                   type="button"
                   onClick={openNewClient}
-                  className="mt-5 gap-2 rounded-xl bg-orange-600 text-white hover:bg-orange-700"
+                  className="mt-5 gap-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90"
                 >
                   <Plus className="h-4 w-4" />
                   Add first client
@@ -1347,7 +1347,7 @@ export default function Clients() {
                   setView(null);
                   openEditClient(client);
                 }}
-                className="gap-2 rounded-xl bg-orange-600 text-white hover:bg-orange-700"
+                className="gap-2 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90"
               >
                 <Pencil className="h-4 w-4" />
                 Edit client
