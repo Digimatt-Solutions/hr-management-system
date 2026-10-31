@@ -5,6 +5,7 @@ import {
   membershipPlans,
   workingHours,
   normalizePhone,
+  toClientPayload,
 } from "../src/lib/clients";
 const valid = {
   ...emptyClient(),
@@ -20,6 +21,11 @@ const valid = {
   emergency_relationship: "Colleague",
   emergency_phone: "0700000002",
   signature: "Test Client",
+};
+const minimal = {
+  full_name: "Test Client",
+  phone: "0700000001",
+  email: "test@example.com",
 };
 describe("Kazini biodata rules", () => {
   it("accepts the five document membership options", () => {
@@ -50,13 +56,45 @@ describe("Kazini biodata rules", () => {
       clientSchema.safeParse({ ...valid, working_hours: ["Night"] }).success,
     ).toBe(false);
   });
-  it("requires a membership and working hours selection", () => {
+  it("accepts a record carrying only name, phone and email", () => {
+    const parsed = clientSchema.safeParse(minimal);
+    expect(parsed.success).toBe(true);
+    if (parsed.success) {
+      expect(parsed.data.residential_address).toBe("");
+      expect(parsed.data.company_name).toBe("");
+      expect(parsed.data.membership_plans).toEqual([]);
+      expect(parsed.data.working_hours).toEqual([]);
+      expect(parsed.data.emergency_name).toBe("");
+      expect(parsed.data.emergency_phone).toBe("");
+      expect(parsed.data.signature).toBe("");
+    }
+  });
+  it("rejects a record missing name, phone or email", () => {
+    expect(clientSchema.safeParse({ ...minimal, full_name: "" }).success).toBe(
+      false,
+    );
+    expect(clientSchema.safeParse({ ...minimal, phone: "" }).success).toBe(
+      false,
+    );
+    expect(clientSchema.safeParse({ ...minimal, email: "" }).success).toBe(
+      false,
+    );
     expect(
-      clientSchema.safeParse({ ...valid, membership_plans: [] }).success,
-    ).toBe(false);
+      clientSchema.safeParse({
+        ...minimal,
+        phone: "0700000001",
+        email: "test@example.com",
+      }).success,
+    ).toBe(true);
+  });
+  it("accepts blank membership plans and working hours", () => {
     expect(
-      clientSchema.safeParse({ ...valid, working_hours: [] }).success,
-    ).toBe(false);
+      clientSchema.safeParse({
+        ...valid,
+        membership_plans: [],
+        working_hours: [],
+      }).success,
+    ).toBe(true);
   });
   it("normalizes Kenyan contact numbers", () => {
     expect(normalizePhone("0700 000 001")).toBe("+254700000001");
@@ -67,20 +105,44 @@ describe("Kazini biodata rules", () => {
   });
   it("requires privacy and signature acknowledgements", () => {
     expect(
-      clientSchema.safeParse({ ...valid, privacy_agreed: false }).success,
+      clientSchema.safeParse({ ...minimal, privacy_agreed: false }).success,
     ).toBe(false);
     expect(
-      clientSchema.safeParse({ ...valid, signature_confirmed: false }).success,
+      clientSchema.safeParse({ ...minimal, signature_confirmed: false }).success,
     ).toBe(false);
   });
-  it("rejects missing emergency details and invalid dates", () => {
+  it("accepts a blank emergency contact but rejects an invalid emergency phone", () => {
     expect(
-      clientSchema.safeParse({ ...valid, emergency_name: "" }).success,
+      clientSchema.safeParse({
+        ...valid,
+        emergency_name: "",
+        emergency_relationship: "",
+        emergency_phone: "",
+      }).success,
+    ).toBe(true);
+    expect(
+      clientSchema.safeParse({ ...valid, emergency_phone: "abc" }).success,
     ).toBe(false);
+  });
+  it("rejects invalid dates but accepts a cleared date", () => {
     expect(
       clientSchema.safeParse({ ...valid, coworking_date: "2026-02-30" })
         .success,
     ).toBe(false);
+    expect(
+      clientSchema.safeParse({ ...valid, coworking_date: "" }).success,
+    ).toBe(true);
+  });
+  it("drops cleared dates from the stored payload", () => {
+    const parsed = clientSchema.parse({
+      ...valid,
+      coworking_date: "",
+      signature_date: "",
+    });
+    const payload = toClientPayload(parsed);
+    expect("coworking_date" in payload).toBe(false);
+    expect("signature_date" in payload).toBe(false);
+    expect(payload.full_name).toBe("Test Client");
   });
   it("accepts a complete record while rejecting invalid email and unsafe website schemes", () => {
     expect(clientSchema.safeParse(valid).success).toBe(true);
