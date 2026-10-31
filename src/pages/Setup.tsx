@@ -70,7 +70,7 @@ const Setup = () => {
   if (checking) {
     return (
       <div className="flex h-screen items-center justify-center">
-        <Loader2 className="h-6 w-6 animate-spin text-primary" />
+        <Loader2 className="h-6 w-6 animate-spin text-primary-ink" />
       </div>
     );
   }
@@ -83,7 +83,7 @@ const Setup = () => {
         <CardHeader className="space-y-1 text-center">
           <div className="mb-3 flex justify-center">
             <div className="rounded-md bg-primary/10 p-3">
-              <ShieldCheck className="h-8 w-8 text-primary" />
+              <ShieldCheck className="h-8 w-8 text-primary-ink" />
             </div>
           </div>
           <CardTitle className="font-heading text-2xl">

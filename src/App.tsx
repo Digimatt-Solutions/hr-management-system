@@ -42,7 +42,7 @@ const queryClient = new QueryClient();
 function FullScreenLoader() {
   return (
     <div className="flex h-screen items-center justify-center">
-      <div className="h-8 w-8 animate-spin rounded-full border-b-2 border-primary" />
+      <div className="h-8 w-8 animate-spin rounded-full border-b-2 border-primary-ink" />
     </div>
   );
 }

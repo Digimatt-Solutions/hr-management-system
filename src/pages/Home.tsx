@@ -161,18 +161,18 @@ export default function Home() {
             aria-label="Main navigation"
             className="hidden items-center gap-7 text-sm font-medium lg:flex xl:gap-9"
           >
-            <a href="#about" className="transition-colors hover:text-primary">
+            <a href="#about" className="transition-colors hover:text-primary-ink">
               About Kazini
             </a>
-            <a href="#spaces" className="transition-colors hover:text-primary">
+            <a href="#spaces" className="transition-colors hover:text-primary-ink">
               Our spaces
             </a>
-            <a href="#contact" className="transition-colors hover:text-primary">
+            <a href="#contact" className="transition-colors hover:text-primary-ink">
               Contact
             </a>
             <Link
               to={user ? "/dashboard" : "/auth"}
-              className="transition-colors hover:text-primary"
+              className="transition-colors hover:text-primary-ink"
             >
               {user ? "Admin dashboard" : "Admin login"}
             </Link>
@@ -224,7 +224,7 @@ export default function Home() {
                   key={href}
                   href={href}
                   onClick={closeMenu}
-                  className="rounded-xl px-4 py-3 text-sm font-medium transition-colors hover:bg-muted hover:text-primary"
+                  className="rounded-xl px-4 py-3 text-sm font-medium transition-colors hover:bg-muted hover:text-primary-ink"
                 >
                   {label}
                 </a>
@@ -233,7 +233,7 @@ export default function Home() {
               <Link
                 to={user ? "/dashboard" : "/auth"}
                 onClick={closeMenu}
-                className="rounded-xl px-4 py-3 text-sm font-medium transition-colors hover:bg-muted hover:text-primary"
+                className="rounded-xl px-4 py-3 text-sm font-medium transition-colors hover:bg-muted hover:text-primary-ink"
               >
                 {user ? "Admin dashboard" : "Admin login"}
               </Link>
@@ -273,7 +273,7 @@ export default function Home() {
 
               <h1 className="max-w-3xl text-5xl font-semibold leading-[1.08] tracking-tight sm:text-6xl lg:text-6xl xl:text-[72px]">
                 Make space for
-                <span className="mt-2 block text-orange-400">
+                <span className="mt-2 block text-primary">
                   your next big thing.
                 </span>
               </h1>
@@ -321,7 +321,7 @@ export default function Home() {
           <div className="mx-auto max-w-7xl">
             <div className="mb-10 flex flex-col gap-5 sm:mb-12 sm:flex-row sm:items-end sm:justify-between">
               <div className="max-w-2xl">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary-ink">
                   Find your fit
                 </p>
 
@@ -338,7 +338,7 @@ export default function Home() {
 
               <a
                 href="#contact"
-                className="inline-flex w-fit items-center gap-2 text-sm font-semibold text-primary transition-colors hover:text-primary/75"
+                className="inline-flex w-fit items-center gap-2 text-sm font-semibold text-primary-ink transition-colors hover:text-primary-ink/75"
               >
                 Have a question?
                 <ArrowUpRight className="h-4 w-4" />
@@ -349,7 +349,7 @@ export default function Home() {
               {workspaceOptions.map((item) => (
                 <article
                   key={item.number}
-                  className="group overflow-hidden rounded-2xl border border-border/80 bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-xl hover:shadow-black/[0.04]"
+                  className="group overflow-hidden rounded-2xl border border-border/80 bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary-ink/30 hover:shadow-xl hover:shadow-black/[0.04]"
                 >
                   <div className="relative aspect-[5/4] overflow-hidden bg-muted">
                     <img
@@ -363,14 +363,14 @@ export default function Home() {
 
                     <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/10" />
 
-                    <span className="absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-white text-neutral-900 shadow-lg transition-all duration-300 group-hover:bg-primary group-hover:text-white">
+                    <span className="absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-white text-neutral-900 shadow-lg transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground">
                       <ArrowUpRight className="h-5 w-5" />
                     </span>
                   </div>
 
                   <div className="p-5 sm:p-6">
                     <div className="mb-4 flex items-center justify-between">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary-ink">
                         <item.icon className="h-5 w-5" />
                       </div>
 
@@ -390,7 +390,7 @@ export default function Home() {
                     <button
                       type="button"
                       onClick={openRegistration}
-                      className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary transition-all hover:gap-3"
+                      className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary-ink transition-all hover:gap-3"
                     >
                       Enquire now
                       <ArrowRight className="h-4 w-4" />
@@ -402,7 +402,7 @@ export default function Home() {
 
             <div className="mt-10 flex flex-col items-start justify-between gap-4 rounded-2xl bg-muted/60 p-6 sm:flex-row sm:items-center sm:p-8">
               <div className="flex items-start gap-4">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-background text-primary shadow-sm">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-background text-primary-ink shadow-sm">
                   <MessageCircle className="h-5 w-5" />
                 </div>
 
@@ -437,7 +437,7 @@ export default function Home() {
         >
           <div className="mx-auto grid max-w-7xl gap-12 px-5 py-20 sm:px-8 sm:py-24 md:grid-cols-2 md:items-center lg:gap-20 lg:py-28">
             <div className="relative">
-              <div className="absolute -left-4 -top-4 h-28 w-28 rounded-tl-[2rem] border-l-2 border-t-2 border-primary/50 sm:-left-6 sm:-top-6" />
+              <div className="absolute -left-4 -top-4 h-28 w-28 rounded-tl-[2rem] border-l-2 border-t-2 border-primary-ink/50 sm:-left-6 sm:-top-6" />
 
               <div className="relative overflow-hidden rounded-2xl">
                 <img
@@ -451,11 +451,11 @@ export default function Home() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/35 to-transparent" />
               </div>
 
-              <div className="absolute -bottom-4 -right-4 hidden h-24 w-24 rounded-br-[2rem] border-b-2 border-r-2 border-primary/50 sm:block" />
+              <div className="absolute -bottom-4 -right-4 hidden h-24 w-24 rounded-br-[2rem] border-b-2 border-r-2 border-primary-ink/50 sm:block" />
             </div>
 
             <div className="py-2">
-              <div className="inline-flex items-center gap-2 px-1 py-1 text-sm font-semibold uppercase tracking-[0.15em] text-primary">
+              <div className="inline-flex items-center gap-2 px-1 py-1 text-sm font-semibold uppercase tracking-[0.15em] text-primary-ink">
                 Welcome to Kazini
               </div>
 
@@ -495,13 +495,13 @@ export default function Home() {
 
           <div className="relative mx-auto flex max-w-7xl flex-col gap-8 px-5 py-16 sm:px-8 sm:py-20 md:flex-row md:items-center md:justify-between lg:py-24">
             <div className="max-w-2xl">
-              <div className="inline-flex items-center gap-2 text-sm font-medium text-orange-300">
+              <div className="inline-flex items-center gap-2 text-sm font-medium text-primary">
                 Your space. Your community.
               </div>
 
               <h2 className="mt-4 text-3xl font-semibold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">
                 Make room for
-                <span className="block text-orange-400">
+                <span className="block text-primary">
                   what comes next.
                 </span>
               </h2>
@@ -516,7 +516,7 @@ export default function Home() {
               <Button
                 size="lg"
                 onClick={openRegistration}
-                className="min-h-12 h-13 w-full rounded-xl bg-primary px-3 font-bold text-white shadow-lg shadow-primary/20 transition-transform hover:-translate-y-0.5 sm:w-auto sm:px-7"
+                className="min-h-12 h-13 w-full rounded-xl bg-primary px-3 font-bold text-primary-foreground shadow-lg shadow-primary/20 transition-transform hover:-translate-y-0.5 sm:w-auto sm:px-7"
               >
                 Join Kazini
                 <ArrowUpRight className="ml-2 h-5 w-5 shrink-0" />
@@ -540,7 +540,7 @@ export default function Home() {
         >
           <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary-ink">
                 Good to know
               </p>
 
@@ -555,7 +555,7 @@ export default function Home() {
 
               <a
                 href="mailto:info@kazini.co.ke"
-                className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
+                className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary-ink hover:underline"
               >
                 Ask us a question
                 <ArrowUpRight className="h-4 w-4" />
@@ -581,7 +581,7 @@ export default function Home() {
                       <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-border transition-colors">
                         <ChevronDown
                           className={`h-4 w-4 transition-transform duration-300 ${
-                            isActive ? "rotate-180 text-primary" : ""
+                            isActive ? "rotate-180 text-primary-ink" : ""
                           }`}
                         />
                       </span>
@@ -631,7 +631,7 @@ export default function Home() {
             </p>
 
             <div className="mt-6 flex items-center gap-3 text-sm text-muted-foreground">
-              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-primary">
+              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-primary-ink">
                 <ShieldCheck className="h-4 w-4" />
               </span>
               A community built around work and connection.
@@ -645,30 +645,30 @@ export default function Home() {
 
             <div className="space-y-4">
               <a
-                className="group flex items-start gap-3 text-sm text-muted-foreground transition-colors hover:text-primary"
+                className="group flex items-start gap-3 text-sm text-muted-foreground transition-colors hover:text-primary-ink"
                 href="mailto:info@kazini.co.ke"
               >
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-muted text-primary transition-colors group-hover:bg-primary/10">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-muted text-primary-ink transition-colors group-hover:bg-primary/10">
                   <Mail className="h-4 w-4" />
                 </span>
                 <span className="pt-2">info@kazini.co.ke</span>
               </a>
 
               <a
-                className="group flex items-start gap-3 text-sm text-muted-foreground transition-colors hover:text-primary"
+                className="group flex items-start gap-3 text-sm text-muted-foreground transition-colors hover:text-primary-ink"
                 href="tel:+254700113300"
               >
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-muted text-primary transition-colors group-hover:bg-primary/10">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-muted text-primary-ink transition-colors group-hover:bg-primary/10">
                   <Phone className="h-4 w-4" />
                 </span>
                 <span className="pt-2">+254 700 113 300</span>
               </a>
 
               <a
-                className="group flex items-start gap-3 text-sm text-muted-foreground transition-colors hover:text-primary"
+                className="group flex items-start gap-3 text-sm text-muted-foreground transition-colors hover:text-primary-ink"
                 href="tel:+254705414414"
               >
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-muted text-primary transition-colors group-hover:bg-primary/10">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-muted text-primary-ink transition-colors group-hover:bg-primary/10">
                   <Phone className="h-4 w-4" />
                 </span>
                 <span className="pt-2">+254 705 414 414</span>
@@ -682,7 +682,7 @@ export default function Home() {
             </h3>
 
             <div className="flex items-start gap-3">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary-ink">
                 <MapPin className="h-5 w-5" />
               </span>
 
@@ -701,7 +701,7 @@ export default function Home() {
               href="https://www.google.com/maps/search/?api=1&query=Shompole+Business+Park+Kiserian"
               target="_blank"
               rel="noreferrer"
-              className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
+              className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary-ink hover:underline"
             >
               Get directions
               <ArrowUpRight className="h-4 w-4" />
@@ -723,21 +723,21 @@ export default function Home() {
             <div className="flex flex-wrap gap-x-5 gap-y-3">
               <Link
                 to="/privacy"
-                className="transition-colors hover:text-primary"
+                className="transition-colors hover:text-primary-ink"
               >
                 Privacy Policy
               </Link>
 
               <Link
                 to="/terms"
-                className="transition-colors hover:text-primary"
+                className="transition-colors hover:text-primary-ink"
               >
                 Terms &amp; Conditions
               </Link>
 
               <Link
                 to="/auth"
-                className="transition-colors hover:text-primary"
+                className="transition-colors hover:text-primary-ink"
               >
                 Access
               </Link>

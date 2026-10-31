@@ -322,7 +322,7 @@ export default function ClientForm({
                     href="/privacy"
                     target="_blank"
                     rel="noreferrer"
-                    className="text-primary underline"
+                    className="text-primary-ink underline"
                   >
                     privacy notice
                   </a>

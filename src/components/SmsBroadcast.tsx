@@ -133,7 +133,7 @@ export default function SmsBroadcast() {
   return (
     <section className="mb-8 border-b pb-8">
       <div className="mb-5 flex items-center gap-3">
-        <MessageSquare className="h-5 w-5 text-primary" />
+        <MessageSquare className="h-5 w-5 text-primary-ink" />
         <div>
           <h2 className="text-xl font-semibold">Client SMS</h2>
           <p className="text-sm text-muted-foreground">

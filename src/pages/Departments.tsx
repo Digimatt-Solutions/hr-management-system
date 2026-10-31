@@ -140,7 +140,7 @@ const Departments = () => {
             <Card key={row.id}>
               <CardHeader className="flex-row items-center gap-3 space-y-0">
                 <div className="rounded-md bg-primary/10 p-2">
-                  <Building2 className="h-5 w-5 text-primary" />
+                  <Building2 className="h-5 w-5 text-primary-ink" />
                 </div>
                 <div>
                   <CardTitle className="text-base">{row.name}</CardTitle>

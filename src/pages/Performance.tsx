@@ -143,7 +143,7 @@ const Performance = () => {
                       <TableCell>
                         {review.overall_rating !== null ? (
                           <span className="flex items-center gap-1">
-                            <Star className="h-4 w-4 text-primary" />{" "}
+                            <Star className="h-4 w-4 text-primary-ink" />{" "}
                             {review.overall_rating}/5
                           </span>
                         ) : (
