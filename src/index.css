@@ -9,8 +9,25 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Kazini: crisp white, charcoal and brand orange */
-    --chart-community: 168 52% 34%;
+    /* ─── BRAND COLOR ROLLBACK ──────────────────────────────────────────
+       Current brand color: lime green #9ecc04 = hsl(74 96% 41%).
+       Previous brand color was Kazini orange. To roll back, restore the
+       values below (full instructions in .lovable/brand-color-rollback.md,
+       and the change is also recoverable from git history):
+         --primary: 24 90% 54%;          --primary-foreground: 0 0% 100%;
+         --accent: 24 90% 54%;           --accent-foreground: 0 0% 100%;
+         --ring: 24 90% 54%;             --chart-community: 168 52% 34%;
+         --sidebar-primary: 24 90% 54%;  --sidebar-primary-foreground: 0 0% 100%;
+         --gradient-primary: hsl(24 90% 54%) 0% -> hsl(18 91% 48%) 100%;
+         --shadow-glow: 0 0 20px hsl(25 95% 53% / 0.3);
+         .dark --primary / --accent / --ring / --sidebar-primary: 25 95% 53%
+                 with foregrounds 0 0% 100%;
+         --primary-ink did not exist: text-primary / border-primary used
+                 --primary directly (revert the *.tsx class swaps too).
+       ─────────────────────────────────────────────────────────────────── */
+
+    /* Kazini: crisp white, charcoal and brand lime */
+    --chart-community: 78 80% 30%;
     --hero-overlay: linear-gradient(
       90deg,
       hsl(0 0% 5% / 0.78),
@@ -26,8 +43,10 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 5%;
 
-    --primary: 24 90% 54%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 74 96% 41%;
+    --primary-foreground: 0 0% 7%;
+    /* Deep lime used wherever brand color is text or a thin outline */
+    --primary-ink: 76 88% 24%;
 
     --secondary: 0 0% 94%;
     --secondary-foreground: 0 0% 8%;
@@ -35,8 +54,8 @@ All colors MUST be HSL.
     --muted: 0 0% 94%;
     --muted-foreground: 0 0% 40%;
 
-    --accent: 24 90% 54%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 74 96% 41%;
+    --accent-foreground: 0 0% 7%;
 
     /* Success - Green for good stock */
     --success: 142 76% 36%;
@@ -52,25 +71,25 @@ All colors MUST be HSL.
 
     --border: 0 0% 88%;
     --input: 0 0% 84%;
-    --ring: 24 90% 54%;
+    --ring: 74 96% 41%;
 
     --radius: 0.5rem;
 
     /* Sidebar - Light neutral gray */
     --sidebar-background: 0 0% 96%;
     --sidebar-foreground: 0 0% 16%;
-    --sidebar-primary: 24 90% 54%;
-    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-primary: 74 96% 41%;
+    --sidebar-primary-foreground: 0 0% 7%;
     --sidebar-accent: 0 0% 90%;
     --sidebar-accent-foreground: 0 0% 8%;
     --sidebar-border: 0 0% 84%;
-    --sidebar-ring: 24 90% 54%;
+    --sidebar-ring: 74 96% 41%;
 
     /* Custom gradients */
     --gradient-primary: linear-gradient(
       135deg,
-      hsl(24 90% 54%) 0%,
-      hsl(18 91% 48%) 100%
+      hsl(74 96% 41%) 0%,
+      hsl(80 90% 27%) 100%
     );
     --gradient-success: linear-gradient(
       135deg,
@@ -92,7 +111,7 @@ All colors MUST be HSL.
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
-    --shadow-glow: 0 0 20px hsl(25 95% 53% / 0.3);
+    --shadow-glow: 0 0 20px hsl(74 96% 41% / 0.32);
     --surface-gloss: linear-gradient(160deg, hsl(var(--card)) 0%, hsl(var(--secondary) / 0.5) 100%);
     --gloss-highlight: inset 0 1px 0 hsl(var(--card) / 0.8);
   }
@@ -107,8 +126,9 @@ All colors MUST be HSL.
     --popover: 220 16% 15%;
     --popover-foreground: 220 10% 92%;
 
-    --primary: 25 95% 53%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 76 92% 52%;
+    --primary-foreground: 0 0% 7%;
+    --primary-ink: 76 92% 55%;
 
     --secondary: 220 15% 20%;
     --secondary-foreground: 220 10% 85%;
@@ -116,8 +136,8 @@ All colors MUST be HSL.
     --muted: 220 15% 20%;
     --muted-foreground: 220 10% 60%;
 
-    --accent: 25 95% 53%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 76 92% 52%;
+    --accent-foreground: 0 0% 7%;
 
     --success: 142 76% 36%;
     --success-foreground: 0 0% 100%;
@@ -130,16 +150,16 @@ All colors MUST be HSL.
 
     --border: 220 15% 25%;
     --input: 220 15% 25%;
-    --ring: 25 95% 53%;
+    --ring: 76 92% 52%;
 
     --sidebar-background: 220 10% 18%;
     --sidebar-foreground: 220 10% 90%;
-    --sidebar-primary: 25 95% 53%;
-    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-primary: 76 92% 52%;
+    --sidebar-primary-foreground: 0 0% 7%;
     --sidebar-accent: 220 15% 15%;
     --sidebar-accent-foreground: 220 10% 85%;
     --sidebar-border: 220 15% 18%;
-    --sidebar-ring: 25 95% 53%;
+    --sidebar-ring: 76 92% 52%;
   }
 }
 
