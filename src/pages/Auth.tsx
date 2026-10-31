@@ -97,11 +97,11 @@ export default function Auth() {
           className="absolute inset-0 h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-foreground/55" />
-        <div className="relative z-10 max-w-xl space-y-4 p-10 text-primary-foreground">
+        <div className="relative z-10 max-w-xl space-y-4 p-10 text-white">
           <h1 className="text-4xl font-semibold leading-tight">
             Your community, connected.
           </h1>
-          <p className="max-w-lg text-base leading-7 text-primary-foreground/85">
+          <p className="max-w-lg text-base leading-7 text-white/80">
             A secure workspace for employee records, leave, attendance, payroll,
             and performance.
           </p>

@@ -267,19 +267,19 @@ export default function Home() {
 
           <div className="relative mx-auto flex min-h-[590px] max-w-7xl items-center px-5 py-20 sm:min-h-[660px] sm:px-8 lg:min-h-[700px]">
             <div className="max-w-3xl text-white">
-              <div className="mb-7 inline-flex items-center gap-2 px-1 py-2 text-sm font-semibold uppercase tracking-[0.18em] text-white/90">
+              <div className="mb-7 inline-flex items-center gap-2 px-1 py-2 text-sm font-semibold uppercase tracking-[0.18em] text-primary">
                 Work. Connect. Grow.
               </div>
 
               <h1 className="max-w-3xl text-5xl font-semibold leading-[1.08] tracking-tight sm:text-6xl lg:text-6xl xl:text-[72px]">
                 Make space for
                 <span className="mt-2 block text-primary">
-                  your next big thing.
+                your next big thing.
                 </span>
               </h1>
 
               <p className="mt-7 max-w-xl text-base leading-7 text-white/80 sm:text-lg sm:leading-8">
-                Welcome to Kazini Shared coworking — a place for independent
+                Welcome to Kazini Shared coworking space, a place for independent
                 minds, growing businesses, and meaningful connections.
               </p>
 
@@ -287,7 +287,7 @@ export default function Home() {
                 <Button
                   size="lg"
                   onClick={openRegistration}
-                  className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl border border-transparent bg-primary px-2 text-xs font-medium text-primary-foreground shadow-lg shadow-primary/20 transition-colors hover:bg-primary/90 sm:w-auto sm:px-5 sm:text-sm"
+                  className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl border border-transparent bg-primary px-2 text-sm font-medium text-primary-foreground shadow-lg shadow-primary/20 transition-colors hover:bg-primary/90 sm:w-auto sm:px-5 sm:text-sm"
                 >
                   Join Kazini
                   <ArrowUpRight className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" />
@@ -392,7 +392,7 @@ export default function Home() {
                       onClick={openRegistration}
                       className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary-ink transition-all hover:gap-3"
                     >
-                      Enquire now
+                      Explore now
                       <ArrowRight className="h-4 w-4" />
                     </button>
                   </div>
