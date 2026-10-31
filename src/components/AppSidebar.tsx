@@ -150,7 +150,7 @@ export function AppSidebar() {
                       onClick={() => isMobile && setOpenMobile(false)}
                       className={`flex items-center gap-3 rounded-md px-3 py-2 transition-colors hover:bg-sidebar-accent ${
                         isActive
-                          ? "bg-sidebar-accent text-sidebar-primary font-medium"
+                          ? "bg-sidebar-accent text-primary-ink font-medium"
                           : ""
                       }`}
                     >
