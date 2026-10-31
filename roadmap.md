@@ -38,3 +38,4 @@ Paused at the user's credit check-in request. Existing records remain intact. Se
 - [x] Add persisted administrator module visibility controls across navigation and direct pages
 - [x] Remove original demonstration employees and unused seeded HR settings; preserve real employee/client records
 - [x] Verify authenticated visibility controls after reload and direct page access, dashboard loading, two-card rows and 8px popup clearance; 15 tests pass
+- [x] Make only name, phone and email mandatory in the client biodata form (no asterisks); relaxed table checks, aligned edge-function validation, 19 tests pass and a minimal submission stored end to end
