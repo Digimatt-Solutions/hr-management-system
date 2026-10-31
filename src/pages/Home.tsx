@@ -273,7 +273,7 @@ export default function Home() {
 
               <h1 className="max-w-3xl text-5xl font-semibold leading-[1.08] tracking-tight sm:text-6xl lg:text-6xl xl:text-[72px]">
                 Make space for
-                <span className="mt-2 block text-orange-400">
+                <span className="mt-2 block text-primary">
                   your next big thing.
                 </span>
               </h1>
@@ -495,13 +495,13 @@ export default function Home() {
 
           <div className="relative mx-auto flex max-w-7xl flex-col gap-8 px-5 py-16 sm:px-8 sm:py-20 md:flex-row md:items-center md:justify-between lg:py-24">
             <div className="max-w-2xl">
-              <div className="inline-flex items-center gap-2 text-sm font-medium text-orange-300">
+              <div className="inline-flex items-center gap-2 text-sm font-medium text-primary">
                 Your space. Your community.
               </div>
 
               <h2 className="mt-4 text-3xl font-semibold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">
                 Make room for
-                <span className="block text-orange-400">
+                <span className="block text-primary">
                   what comes next.
                 </span>
               </h2>

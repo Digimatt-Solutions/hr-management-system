@@ -85,7 +85,7 @@ const initials = (name?: string | null) => {
 };
 
 const avatarColors = [
-  "bg-orange-100 text-orange-700",
+  "bg-primary/15 text-primary-ink",
   "bg-sky-100 text-sky-700",
   "bg-violet-100 text-violet-700",
   "bg-emerald-100 text-emerald-700",
@@ -639,7 +639,7 @@ export default function Clients() {
           <Badge
             key={membership}
             variant="secondary"
-            className="rounded-md border border-orange-100 bg-orange-50 px-2 py-0.5 font-medium text-orange-800 hover:bg-orange-50"
+            className="rounded-md border border-primary-ink/20 bg-primary/10 px-2 py-0.5 font-medium text-primary-ink hover:bg-primary/15"
           >
             {membership}
           </Badge>
@@ -674,7 +674,7 @@ export default function Clients() {
         size="icon"
         title="View client profile"
         aria-label={`View ${client.full_name}`}
-        className="h-9 w-9 rounded-lg text-muted-foreground hover:bg-orange-50 hover:text-orange-700"
+        className="h-9 w-9 rounded-lg text-muted-foreground hover:bg-primary/10 hover:text-primary-ink"
         onClick={() => setView(client)}
       >
         <Eye className="h-4 w-4" />
@@ -739,7 +739,7 @@ export default function Clients() {
         <div className="mb-6 overflow-hidden rounded-2xl border bg-card">
           <div className="relative flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
             <div className="flex items-start gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-orange-50 text-orange-700 ring-1 ring-orange-100">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary-ink ring-1 ring-primary-ink/15">
                 <Users className="h-6 w-6" />
               </div>
               <div>
@@ -781,7 +781,7 @@ export default function Clients() {
               <span className="text-xs font-medium text-muted-foreground sm:text-sm">
                 Matching clients
               </span>
-              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-orange-50 text-orange-700">
+              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-primary-ink">
                 <Users className="h-4 w-4" />
               </span>
             </div>
@@ -883,7 +883,7 @@ export default function Clients() {
               <Input
                 aria-label="Search clients"
                 placeholder="Search name, company, email or phone..."
-                className="h-11 rounded-xl border-muted-foreground/20 bg-background pl-10 pr-10 focus-visible:ring-orange-500"
+                className="h-11 rounded-xl border-muted-foreground/20 bg-background pl-10 pr-10 focus-visible:ring-primary"
                 value={search}
                 onChange={(event) => {
                   setSearch(event.target.value);
