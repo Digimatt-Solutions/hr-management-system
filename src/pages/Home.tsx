@@ -25,12 +25,12 @@ import { Button } from "@/components/ui/button";
 import ClientForm from "@/components/ClientForm";
 import { useAuth } from "@/contexts/AuthContext";
 import logo from "@/assets/kazini-logo.png";
-import workspace from "@/assets/kazini/kazini23.jpeg";
-import work from "@/assets/kazini/kazini23.jpeg";
-import space from "@/assets/kazini/kazini28.jpeg";
-import share from "@/assets/kazini/kazini12.jpeg";
-import thrive from "@/assets/kazini/kazini6.jpeg";
-import peace from "@/assets/kazini/kazini21.jpeg";
+import workspace from "@/assets/Kazini/kazini23.jpeg";
+import work from "@/assets/Kazini/kazini23.jpeg";
+import space from "@/assets/Kazini/kazini28.jpeg";
+import share from "@/assets/Kazini/kazini12.jpeg";
+import thrive from "@/assets/Kazini/kazini6.jpeg";
+import peace from "@/assets/Kazini/kazini21.jpeg";
 
 const workspaceOptions = [
   {
