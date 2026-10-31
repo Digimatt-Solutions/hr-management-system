@@ -25,16 +25,21 @@ import { Button } from "@/components/ui/button";
 import ClientForm from "@/components/ClientForm";
 import { useAuth } from "@/contexts/AuthContext";
 import logo from "@/assets/kazini-logo.png";
-import workspace from "@/assets/kazini-workspace.jpg";
+import workspace from "@/assets/kazini/kazini (23).jpeg";
+import work from "@/assets/kazini/kazini (23).jpeg";
+import space from "@/assets/kazini/kazini (28).jpeg";
+import share from "@/assets/kazini/kazini (12).jpeg";
+import thrive from "@/assets/kazini/kazini (6).jpeg";
+import peace from "@/assets/kazini/kazini (21).jpeg";
 
 const workspaceOptions = [
   {
     number: "01",
     title: "Flexible Coworking",
     description:
-      "A welcoming place to focus, get things done, and connect with other professionals.",
+      "Cowork in a shared space with like-minded people & an environment that supports your work.",
     image:
-      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=85",
+      work,
     icon: Laptop,
   },
   {
@@ -43,7 +48,7 @@ const workspaceOptions = [
     description:
       "Create a consistent working routine with a space to concentrate on what matters.",
     image:
-      "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1000&q=85",
+      space,
     icon: Armchair,
   },
   {
@@ -52,16 +57,16 @@ const workspaceOptions = [
     description:
       "Bring people together for conversations, collaboration, and productive meetings.",
     image:
-      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1000&q=85",
+      share,
     icon: Users,
   },
   {
     number: "04",
-    title: "Flexible Workdays",
+    title: "Cyber Services",
     description:
-      "Tell us about your preferred working times and the environment you need.",
+      "Access a range of cyber services to support your business and working needs.",
     image:
-      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=85",
+      thrive,
     icon: CalendarDays,
   },
 ];
@@ -436,7 +441,7 @@ export default function Home() {
 
               <div className="relative overflow-hidden rounded-2xl">
                 <img
-                  src={workspace}
+                  src={peace}
                   alt="An inviting shared workspace with room to focus and collaborate"
                   width={1600}
                   height={1008}
