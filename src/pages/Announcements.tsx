@@ -266,14 +266,14 @@ const Announcements = () => {
 
           <div className="relative flex flex-col gap-6 p-5 sm:p-7 lg:flex-row lg:items-center lg:justify-between lg:p-8">
             <div className="max-w-2xl">
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/[0.07] px-3 py-1.5 text-xs font-semibold text-primary">
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary-ink/20 bg-primary/[0.07] px-3 py-1.5 text-xs font-semibold text-primary-ink">
                 <Radio className="h-3.5 w-3.5" />
                 COMMUNICATION CENTRE
               </div>
 
               <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
                 Every message,{" "}
-                <span className="text-primary">one place.</span>
+                <span className="text-primary-ink">one place.</span>
               </h2>
 
               <p className="mt-3 max-w-xl text-sm leading-6 text-muted-foreground sm:text-base sm:leading-7">
@@ -313,7 +313,7 @@ const Announcements = () => {
         <section className="grid grid-cols-2 gap-3 lg:grid-cols-3 lg:gap-5">
           <Card className="rounded-2xl border-border/80 shadow-sm">
             <CardContent className="flex items-start gap-3 p-4 sm:p-5">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary sm:h-11 sm:w-11">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary-ink sm:h-11 sm:w-11">
                 <Newspaper className="h-5 w-5" />
               </div>
               <div className="min-w-0">
@@ -376,7 +376,7 @@ const Announcements = () => {
           <section id="sms-broadcast" className="scroll-mt-24 space-y-4">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
               <div>
-                <div className="flex items-center gap-2 text-sm font-semibold text-primary">
+                <div className="flex items-center gap-2 text-sm font-semibold text-primary-ink">
                   <MessageSquareText className="h-4 w-4" />
                   CLIENT COMMUNICATION
                 </div>
@@ -423,7 +423,7 @@ const Announcements = () => {
         <section className="space-y-5">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <div className="flex items-center gap-2 text-sm font-semibold text-primary">
+              <div className="flex items-center gap-2 text-sm font-semibold text-primary-ink">
                 <Clock3 className="h-4 w-4" />
                 COMMUNICATION ARCHIVE
               </div>
@@ -575,7 +575,7 @@ const Announcements = () => {
               {filteredRows.map((row) => (
                 <Card
                   key={row.id}
-                  className="group overflow-hidden rounded-2xl border-border/80 shadow-sm transition-all duration-200 hover:border-primary/25 hover:shadow-md"
+                  className="group overflow-hidden rounded-2xl border-border/80 shadow-sm transition-all duration-200 hover:border-primary-ink/25 hover:shadow-md"
                 >
                   <CardContent className="p-0">
                     <div className="flex">
@@ -583,7 +583,7 @@ const Announcements = () => {
 
                       <div className="min-w-0 flex-1 p-4 sm:p-5">
                         <div className="flex items-start gap-3 sm:gap-4">
-                          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary sm:h-12 sm:w-12">
+                          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary-ink sm:h-12 sm:w-12">
                             <Megaphone className="h-5 w-5" />
                           </div>
 
@@ -683,7 +683,7 @@ const Announcements = () => {
       >
         <DialogContent className="max-h-[90vh] overflow-y-auto rounded-2xl sm:max-w-xl">
           <DialogHeader>
-            <div className="mb-2 flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
+            <div className="mb-2 flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary-ink">
               <Megaphone className="h-5 w-5" />
             </div>
 

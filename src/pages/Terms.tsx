@@ -13,7 +13,7 @@ export default function Terms() {
           </Link>
         </Button>
         <header className="space-y-3 border-b pb-6">
-          <p className="text-sm font-semibold text-primary">Kazini Shared</p>
+          <p className="text-sm font-semibold text-primary-ink">Kazini Shared</p>
           <h1 className="text-3xl font-semibold">Terms &amp; Conditions</h1>
           <p className="text-muted-foreground">
             Responsible use of Kazini registration and administration services.

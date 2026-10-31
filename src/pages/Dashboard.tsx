@@ -295,7 +295,7 @@ export default function Dashboard() {
               <CardContent className="p-3 sm:p-5">
                 <div className="flex min-h-10 items-start justify-between gap-2">
                   <p className="text-xs leading-5 text-muted-foreground sm:text-sm">{s.label}</p>
-                  <s.icon className="h-4 w-4 shrink-0 text-primary sm:h-5 sm:w-5" />
+                  <s.icon className="h-4 w-4 shrink-0 text-primary-ink sm:h-5 sm:w-5" />
                 </div>
                 {loading ? (
                   <Skeleton className="mt-5 h-9 w-16" />

@@ -135,7 +135,7 @@ const EmployeeDetail = () => {
       <Card className="mb-6">
         <CardContent className="flex flex-wrap items-center gap-4 p-6">
           <Avatar className="h-16 w-16">
-            <AvatarFallback className="bg-primary/10 text-lg text-primary">
+            <AvatarFallback className="bg-primary/10 text-lg text-primary-ink">
               {initials(name)}
             </AvatarFallback>
           </Avatar>
@@ -189,7 +189,7 @@ const EmployeeDetail = () => {
             to={`/employees/${employee.id}/${tab.path}`}
             className={`-mb-px border-b-2 px-3 py-2 text-sm transition-colors ${
               activeTab === tab.path
-                ? "border-primary font-medium text-primary"
+                ? "border-primary-ink font-medium text-primary-ink"
                 : "border-transparent text-muted-foreground hover:text-foreground"
             }`}
           >

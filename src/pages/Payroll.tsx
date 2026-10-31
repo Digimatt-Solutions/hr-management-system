@@ -104,7 +104,7 @@ const Payroll = () => {
             {periods.map((period) => (
               <Card
                 key={period.id}
-                className={`cursor-pointer transition-colors ${period.id === selected ? "border-primary" : ""}`}
+                className={`cursor-pointer transition-colors ${period.id === selected ? "border-primary-ink" : ""}`}
                 onClick={() => setSelected(period.id)}
               >
                 <CardHeader className="space-y-1">

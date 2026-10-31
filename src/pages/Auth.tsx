@@ -118,7 +118,7 @@ export default function Auth() {
             />
           </div>
           <div className="mb-7 space-y-2 text-center">
-            <p className="text-sm font-semibold text-primary">Kazini Admin</p>
+            <p className="text-sm font-semibold text-primary-ink">Kazini Admin</p>
             <h1 className="text-3xl font-semibold">
               {mode === "signin" ? "Welcome back" : "Create your account"}
             </h1>
@@ -259,14 +259,14 @@ export default function Auth() {
                   >
                     I agree to the{" "}
                     <Link
-                      className="font-medium text-primary hover:underline"
+                      className="font-medium text-primary-ink hover:underline"
                       to="/privacy"
                     >
                       Privacy Policy
                     </Link>{" "}
                     and{" "}
                     <Link
-                      className="font-medium text-primary hover:underline"
+                      className="font-medium text-primary-ink hover:underline"
                       to="/terms"
                     >
                       Terms &amp; Conditions
@@ -288,7 +288,7 @@ export default function Auth() {
           )}
           <Link
             to="/"
-            className="mt-6 block text-center text-sm text-muted-foreground hover:text-primary"
+            className="mt-6 block text-center text-sm text-muted-foreground hover:text-primary-ink"
           >
             Back to Kazini Home
           </Link>

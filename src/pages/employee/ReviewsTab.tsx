@@ -72,7 +72,7 @@ const ReviewsTab = () => {
             <div className="flex items-center gap-3">
               {review.overall_rating !== null && (
                 <span className="flex items-center gap-1 text-sm font-medium">
-                  <Star className="h-4 w-4 text-primary" />{" "}
+                  <Star className="h-4 w-4 text-primary-ink" />{" "}
                   {review.overall_rating}/5
                 </span>
               )}
