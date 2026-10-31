@@ -26,6 +26,8 @@ const minimal = {
   full_name: "Test Client",
   phone: "0700000001",
   email: "test@example.com",
+  privacy_agreed: true,
+  signature_confirmed: true,
 };
 describe("Kazini biodata rules", () => {
   it("accepts the five document membership options", () => {
