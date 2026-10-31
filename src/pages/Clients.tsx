@@ -90,7 +90,7 @@ const avatarColors = [
   "bg-violet-100 text-violet-700",
   "bg-emerald-100 text-emerald-700",
   "bg-rose-100 text-rose-700",
-  "bg-amber-100 text-amber-800",
+  "bg-lime-100 text-lime-800",
 ];
 
 const getAvatarColor = (name?: string | null) => {
