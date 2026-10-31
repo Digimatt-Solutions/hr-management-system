@@ -1,6 +1,6 @@
 import { createClient } from "npm:@supabase/supabase-js@2";
 import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
-import { clientSchema } from "../_shared/client-schema.ts";
+import { clientSchema, toClientPayload } from "../_shared/client-schema.ts";
 
 Deno.serve(async (req) => {
   const respond = (body: unknown, status = 200) =>
@@ -42,7 +42,11 @@ Deno.serve(async (req) => {
       );
     const { data, error } = await db
       .from("clients")
-      .insert({ ...parsed.data, owner_id: ownerId, source: "website" })
+      .insert({
+        ...toClientPayload(parsed.data),
+        owner_id: ownerId,
+        source: "website",
+      })
       .select("id")
       .single();
     if (error)

@@ -6,6 +6,7 @@ import {
   emptyClient,
   membershipPlans,
   workingHours,
+  toClientPayload,
   type ClientValues,
   type ClientRecord,
 } from "@/lib/clients";
@@ -144,7 +145,7 @@ export default function ClientForm({
     setErrors({});
     try {
       if (admin) {
-        const payload = parsed.data as ClientValues;
+        const payload = toClientPayload(parsed.data as ClientValues);
         const result = record
           ? await supabase
               .from("clients")
@@ -218,6 +219,12 @@ export default function ClientForm({
               ? "Thank you for joining Kazini Shared."
               : "Tell us about yourself and your workspace needs."}
           </DialogDescription>
+          {!success && (
+            <p className="text-xs text-muted-foreground">
+              Only your name, phone number and email address are needed.
+              Everything else can be left blank.
+            </p>
+          )}
         </DialogHeader>
         {success ? (
           <div className="space-y-5 py-8 text-center">
