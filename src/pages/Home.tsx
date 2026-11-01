@@ -238,7 +238,7 @@ export default function Home() {
                 onClick={closeMenu}
                 className="rounded-xl px-4 py-3 text-sm font-medium transition-colors hover:bg-muted hover:text-primary-ink"
               >
-                {user ? "Admin dashboard" : "Admin login"}
+                {user ? "Admin dashboard" : "User login"}
               </Link>
 
               <Button
@@ -291,11 +291,11 @@ export default function Home() {
   <Button
     size="lg"
     onClick={openRegistration}
-    className="h-10 rounded-lg px-4 text-xs shadow-[var(--shadow-glow)] transition-transform hover:-translate-y-0.5 sm:h-12 sm:rounded-xl sm:px-7 sm:text-sm"
+    className="h-10 rounded-lg px-4 text-xs font-semibold text-black/80 shadow-[var(--shadow-glow)] transition-transform hover:-translate-y-0.5 sm:h-12 sm:rounded-xl sm:px-7 sm:text-sm"
   >
     <span className="sm:hidden">Become part of Kazini</span>
     <span className="hidden sm:inline">Join Kazini</span>
-    <ArrowUpRight className="ml-1.5 h-4 w-4 sm:ml-2 sm:h-5 sm:w-5" />
+    <ArrowUpRight className="h-4 w-4 sm:ml-1 sm:h-5 sm:w-5" />
   </Button>
 
   <a
