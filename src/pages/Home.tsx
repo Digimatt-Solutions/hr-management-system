@@ -602,7 +602,7 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer id="contact" className="scroll-mt-24 bg-background">
+      <footer className="border-t border-border bg-background">
         <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 sm:px-8 sm:py-16 md:grid-cols-2 lg:grid-cols-[1.15fr_1fr_1fr] lg:gap-14 lg:py-20">
           <div>
             <Link to="/" aria-label="Kazini Shared home">
