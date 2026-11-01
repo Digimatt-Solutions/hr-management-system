@@ -255,83 +255,93 @@ export default function Home() {
 
       <main>
         {/* Hero */}
-        <section className="relative isolate overflow-hidden bg-foreground">
-          <img
-            src={workspace}
-            alt="A shared workspace designed for focused work and collaboration"
-            width={1600}
-            height={1008}
-            fetchPriority="high"
-            className="absolute inset-0 h-full w-full object-cover animate-[heroZoom_18s_ease-out_forwards]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/15" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+        
+<section className="relative isolate overflow-hidden bg-foreground">
+  <img
+    src={workspace}
+    alt="A shared workspace designed for focused work and collaboration"
+    width={1600}
+    height={1008}
+    fetchPriority="high"
+    className="absolute inset-0 h-full w-full object-cover animate-[heroZoom_18s_ease-out_forwards]"
+  />
 
-          <div className="relative mx-auto flex min-h-[560px] max-w-7xl items-center px-5 pb-36 pt-16 sm:min-h-[640px] sm:px-8 lg:min-h-[680px]">
-            <div className="max-w-3xl animate-enter text-background">
-              <p className="mb-6 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-primary sm:text-sm">
-                Work. Connect. Grow.
-                <span className="h-px w-10 bg-primary" />
-              </p>
-              <h1 className="text-[2.6rem] font-semibold leading-[1.05] tracking-tight sm:text-6xl xl:text-[76px]">
-                Make space for
-                <span className="mt-1 block text-primary">your next big thing.</span>
-              </h1>
-              <p className="mt-6 max-w-xl text-base leading-7 text-background/80 sm:text-lg sm:leading-8">
-                Welcome to Kazini Shared coworking space, a place for independent
-                minds, growing businesses, and meaningful connections.
-              </p>
-              <div className="mt-9 flex flex-wrap items-center gap-3">
-                <Button
-                  size="lg"
-                  onClick={openRegistration}
-                  className="h-12 rounded-full px-7 shadow-[var(--shadow-glow)] transition-transform hover:-translate-y-0.5"
-                >
-                  Join Kazini
-                  <ArrowUpRight className="ml-2 h-5 w-5" />
-                </Button>
-                <a
-                  href="#spaces"
-                  className="inline-flex h-12 items-center gap-2 rounded-full border border-background/40 px-6 text-sm font-semibold text-background transition-colors hover:bg-background/10"
-                >
-                  Find your workspace
-                  <ArrowRight className="h-4 w-4" />
-                </a>
-              </div>
-            </div>
-          </div>
+  <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/15" />
+  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
 
-          {/* Feature strip */}
-          <div className="absolute inset-x-0 bottom-0 border-t border-background/15 bg-black/45 backdrop-blur-md">
-            <div className="mx-auto grid max-w-7xl grid-cols-2 gap-y-4 px-5 py-5 sm:px-8 md:grid-cols-5 md:divide-x md:divide-background/15">
-              {[
-                [Laptop, "Flexible", "coworking"],
-                [Armchair, "Dedicated", "desks"],
-                [Users, "Meeting", "rooms"],
-                [Printer, "Cyber", "services"],
-                [MapPin, "Kiserian,", "Shompole Business Park"],
-              ].map(([Icon, a, b], i) => {
-                const I = Icon as typeof Laptop;
-                return (
-                  <div key={i} className={`flex items-center gap-3 md:justify-center md:px-4 ${i === 4 ? "col-span-2 md:col-span-1" : ""}`}>
-                    <I className="h-6 w-6 shrink-0 text-primary" />
-                    <span className="text-xs font-medium leading-tight text-background sm:text-sm">
-                      {a as string}<br />{b as string}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
+  <div className="relative mx-auto flex min-h-[560px] max-w-7xl items-center px-5 pb-24 pt-28 sm:min-h-[640px] sm:px-8 sm:pb-36 sm:pt-16 lg:min-h-[700px]">
+    <div className="w-full max-w-3xl animate-enter text-background">
+      <p className="mb-5 flex items-center gap-3 text-[12px] font-semibold uppercase tracking-[0.2em] text-primary sm:mb-6 sm:text-sm sm:tracking-[0.22em]">
+        Work. Connect. Grow.
+      </p>
+
+      <h1 className="max-w-2xl text-[2.60rem] font-semibold leading-[1.08] tracking-tight sm:text-6xl xl:text-[76px]">
+        Make space for
+        <span className="mt-1 block text-primary">
+          your next big thing.
+        </span>
+      </h1>
+
+      <p className="mt-5 max-w-xl text-sm leading-6 text-background/85 sm:mt-6 sm:text-lg sm:leading-8">
+        Welcome to Kazini Shared coworking space, a place for independent
+        minds, growing businesses, and meaningful connections.
+      </p>
+
+      <div className="mt-7 flex flex-row flex-wrap items-center justify-start gap-2.5 sm:mt-9 sm:gap-3">
+        <Button
+          size="lg"
+          onClick={openRegistration}
+          className="h-10 rounded-lg px-4 text-xs shadow-[var(--shadow-glow)] transition-transform hover:-translate-y-0.5 sm:h-12 sm:rounded-xl sm:px-7 sm:text-sm"
+        >
+          Join Kazini
+          <ArrowUpRight className="ml-1.5 h-4 w-4 sm:ml-2 sm:h-5 sm:w-5" />
+        </Button>
+
+        <a
+          href="#spaces"
+          className="inline-flex h-10 items-center justify-center gap-1.5 rounded-lg border border-background/30 px-4 text-xs font-semibold text-background transition-colors hover:bg-background/10 sm:h-12 sm:gap-2 sm:rounded-xl sm:px-6 sm:text-sm"
+        >
+          Find your workspace
+          <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+        </a>
+      </div>
+    </div>
+  </div>
+
+  {/* Feature strip - hidden on mobile */}
+  <div className="absolute inset-x-0 bottom-0 hidden border-t border-background/15 bg-black/45 backdrop-blur-md sm:block">
+    <div className="mx-auto grid max-w-7xl grid-cols-2 gap-y-4 px-5 py-5 sm:px-8 md:grid-cols-5 md:divide-x md:divide-background/15">
+      {[
+        [Laptop, "Flexible", "coworking"],
+        [Armchair, "Dedicated", "desks"],
+        [Users, "Meeting", "rooms"],
+        [Printer, "Cyber", "services"],
+        [MapPin, "Kiserian,", "Shompole Business Park"],
+      ].map(([Icon, a, b], i) => {
+        const I = Icon as typeof Laptop;
+        return (
+          <div
+            key={i}
+            className="flex items-center gap-3 md:justify-center md:px-4"
+          >
+            <I className="h-6 w-6 shrink-0 text-primary" />
+            <span className="text-xs font-medium leading-tight text-background sm:text-sm">
+              {a as string}<br />{b as string}
+            </span>
           </div>
-        </section>
+        );
+      })}
+    </div>
+  </div>
+</section>
 
         {/* Workspace cards */}
-        <section id="spaces" className="scroll-mt-24 px-5 py-20 sm:px-8 sm:py-24">
+        <section id="spaces" className="scroll-mt-24 px-5 py-16 sm:px-8 sm:py-24">
           <div className="mx-auto max-w-7xl">
             <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
               <div className="max-w-2xl">
                 <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary-ink">
-                  <span className="h-px w-8 bg-primary-ink" /> Our workspaces
+                   Our workspaces
                 </p>
                 <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
                   Space to do your best work.
@@ -342,7 +352,7 @@ export default function Home() {
                 </p>
               </div>
               <a href="#join" className="inline-flex w-fit items-center gap-2 text-sm font-semibold text-primary-ink hover:gap-3 transition-all">
-                Enquire about a space <ArrowRight className="h-4 w-4" />
+                Enquire about a space <ArrowUpRight className="h-4 w-4" />
               </a>
             </div>
 
@@ -377,7 +387,7 @@ export default function Home() {
                       </p>
                     </div>
                     <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-foreground text-background transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-                      <ArrowRight className="h-4 w-4" />
+                      <ArrowUpRight className="h-4 w-4" />
                     </span>
                   </div>
                 </button>
@@ -387,83 +397,61 @@ export default function Home() {
         </section>
 
         {/* About */}
-        <section id="about" className="scroll-mt-24 border-y border-border bg-card">
-          <div className="grid md:grid-cols-2">
-            <div className="relative min-h-[320px] overflow-hidden">
-              <img
-                src={peace}
-                alt="An inviting shared workspace with room to focus and collaborate"
-                loading="lazy"
-                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 hover:scale-105"
-              />
-            </div>
-            <div className="grid gap-10 px-5 py-16 sm:px-10 lg:grid-cols-[1.2fr_1fr] lg:px-14 lg:py-20">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary-ink">
-                  About Kazini
-                </p>
-                <h2 className="mt-4 text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
-                  More than a desk.
-                  <span className="block text-primary-ink">A place to belong.</span>
-                </h2>
-                <p className="mt-5 text-sm leading-7 text-muted-foreground sm:text-base">
-                  Kazini Shared brings people and businesses into a shared working
-                  community. Whether you are looking for a flexible workday, a
-                  dedicated desk, or a place to meet, we want to understand what
-                  works for you.
-                </p>
-                <Button onClick={openRegistration} className="mt-8 h-11 rounded-full px-6">
-                  Become part of Kazini <ArrowUpRight className="ml-2 h-4 w-4" />
-                </Button>
-              </div>
-              <ul className="space-y-6 border-border lg:border-l lg:pl-8">
-                {workspaceOptions.map((w) => (
-                  <li key={w.title} className="flex gap-3">
-                    <w.icon className="mt-0.5 h-5 w-5 shrink-0 text-primary-ink" />
-                    <div>
-                      <p className="text-sm font-semibold">{w.title}</p>
-                      <p className="mt-1 text-xs leading-5 text-muted-foreground">{w.description}</p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </section>
+        <section
+          id="about"
+          className="scroll-mt-24 overflow-hidden  border-border bg-card"
+        >
+          <div className="mx-auto grid max-w-7xl gap-12 px-5 py-20 sm:px-8 sm:py-24 md:grid-cols-2 md:items-center lg:gap-20 lg:py-28">
+            <div className="relative">
+              <div className="absolute -left-4 -top-4 h-28 w-28 rounded-tl-[2rem] border-l-2 border-t-2 border-primary-ink/50 sm:-left-6 sm:-top-6" />
 
-        {/* Community */}
-        <section id="community" className="relative isolate scroll-mt-24 overflow-hidden">
-          <img src={share} alt="" aria-hidden className="absolute inset-0 -z-10 h-full w-full object-cover" />
-          <div className="absolute inset-0 -z-10 bg-black/80" />
-          <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-24">
-            <div className="max-w-2xl">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
-                Community & collaboration
-              </p>
-              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-background sm:text-4xl lg:text-5xl">
-                A community that works together.
-              </h2>
-              <p className="mt-4 text-sm leading-7 text-background/70 sm:text-base">
-                Kazini Shared is a welcoming coworking community for focused work,
-                collaboration, and business growth.
-              </p>
+              <div className="relative overflow-hidden rounded-2xl">
+                <img
+                  src={peace}
+                  alt="An inviting shared workspace with room to focus and collaborate"
+                  width={1600}
+                  height={1008}
+                  loading="lazy"
+                  className="aspect-[4/3] w-full object-cover transition-transform duration-700 hover:scale-[1.02]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/35 to-transparent" />
+              </div>
+
+              <div className="absolute -bottom-4 -right-4 hidden h-24 w-24 rounded-br-[2rem] border-b-2 border-r-2 border-primary-ink/50 sm:block" />
             </div>
-            <div className="mt-10 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-              {[
-                [Lightbulb, "Focused work", "A space to concentrate on what matters."],
-                [Handshake, "Collaboration", "Bring people together for productive conversations."],
-                [Users, "Meaningful connections", "Work alongside independent minds and growing businesses."],
-                [Building2, "Business growth", "Make room for your next chapter."],
-              ].map(([Icon, t, d]) => {
-                const I = Icon as typeof Laptop;
-                return (
-                  <div key={t as string} className="rounded-2xl border border-background/15 bg-background/5 p-5 text-center backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/60">
-                    <I className="mx-auto h-8 w-8 text-primary" />
-                    <h3 className="mt-4 text-sm font-semibold text-background sm:text-base">{t as string}</h3>
-                    <p className="mt-2 text-xs leading-5 text-background/65">{d as string}</p>
-                  </div>
-                );
-              })}
+
+            <div className="py-2">
+              <div className="inline-flex items-center gap-2 px-1 py-1 text-sm font-semibold uppercase tracking-[0.15em] text-primary-ink">
+                Welcome to Kazini
+              </div>
+
+              <h2 className="mt-6 text-3xl font-semibold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
+                More than a desk.
+                <span className="block text-foreground">
+                  A place to belong.
+                </span>
+              </h2>
+
+              <p className="mt-6 text-base leading-7 text-muted-foreground">
+                Kazini Shared brings people and businesses into a shared
+                working community. Whether you are looking for a flexible
+                workday, a dedicated desk, or a place to meet, we want to
+                understand what works for you.
+              </p>
+
+              <p className="mt-4 text-base leading-7 text-muted-foreground">
+                Tell us about your work, your business, and the environment you
+                need. We will use your enquiry to better understand your
+                requirements.
+              </p>
+
+              <Button
+                onClick={openRegistration}
+                className="mt-8 h-12 rounded-xl px-6"
+              >
+                Become part of Kazini
+                <ArrowUpRight className="ml-2 h-4 w-4" />
+              </Button>
             </div>
           </div>
         </section>
@@ -501,8 +489,8 @@ export default function Home() {
                     Make room for what comes next.
                   </h3>
                   <p className="mt-3 text-sm leading-7 text-background/70">
-                    Tell us what your ideal workspace looks like. Only your name,
-                    phone number and email are needed to get started.
+                    Tell us what your ideal workspace looks like and 
+                    we will follow up with the options that suit your needs.
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-3">
@@ -558,38 +546,8 @@ export default function Home() {
         </section>
 
         {/* Contact */}
-        <section id="contact" className="scroll-mt-24 px-5 py-20 sm:px-8 sm:py-24">
+        <section id="contact" className="scroll-mt-14 px-5 py-14 sm:px-8 sm:py-14">
           <div className="mx-auto max-w-7xl">
-            <div className="mb-10 text-center">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary-ink">Get in touch</p>
-              <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">Visit or talk to us.</h2>
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {[
-                [Mail, "Email", "info@kazini.co.ke", "mailto:info@kazini.co.ke"],
-                [Phone, "Call", "+254 700 113 300", "tel:+254700113300"],
-                [Phone, "Call", "+254 705 414 414", "tel:+254705414414"],
-                [MapPin, "Shompole Business Park", "Kiserian-Isinya-Magadi Junction, near Galana Station", "https://www.google.com/maps/search/?api=1&query=Shompole+Business+Park+Kiserian"],
-              ].map(([Icon, label, value, href]) => {
-                const I = Icon as typeof Mail;
-                const ext = (href as string).startsWith("http");
-                return (
-                  <a
-                    key={value as string}
-                    href={href as string}
-                    target={ext ? "_blank" : undefined}
-                    rel={ext ? "noreferrer" : undefined}
-                    className="group surface-gloss flex flex-col items-center rounded-2xl border border-border p-6 text-center transition-all hover:-translate-y-1 hover:border-primary-ink/40"
-                  >
-                    <span className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/15 text-primary-ink transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-                      <I className="h-5 w-5" />
-                    </span>
-                    <p className="mt-4 text-sm font-semibold">{label as string}</p>
-                    <p className="mt-1 text-sm text-muted-foreground">{value as string}</p>
-                  </a>
-                );
-              })}
-            </div>
             <div className="mt-10 grid grid-cols-3 gap-2 sm:grid-cols-6">
               {[work, space, share, thrive, peace, workspace].map((src, i) => (
                 <div key={i} className="aspect-square overflow-hidden rounded-xl">
