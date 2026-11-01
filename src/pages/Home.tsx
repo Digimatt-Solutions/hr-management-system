@@ -198,7 +198,7 @@ export default function Home() {
             aria-label={menu ? "Close navigation" : "Open navigation"}
             aria-expanded={menu}
             aria-controls="mobile-navigation"
-            className="h-10 w-10 shrink-0 rounded-full lg:hidden"
+            className="h-10 w-10 shrink-0 rounded-xl lg:hidden"
             onClick={() => setMenu((value) => !value)}
           >
             {menu ? (
@@ -288,23 +288,24 @@ export default function Home() {
       </p>
 
       <div className="mt-7 flex flex-row flex-wrap items-center justify-start gap-2.5 sm:mt-9 sm:gap-3">
-        <Button
-          size="lg"
-          onClick={openRegistration}
-          className="h-10 rounded-lg px-4 text-xs shadow-[var(--shadow-glow)] transition-transform hover:-translate-y-0.5 sm:h-12 sm:rounded-xl sm:px-7 sm:text-sm"
-        >
-          Join Kazini
-          <ArrowUpRight className="ml-1.5 h-4 w-4 sm:ml-2 sm:h-5 sm:w-5" />
-        </Button>
+  <Button
+    size="lg"
+    onClick={openRegistration}
+    className="h-10 rounded-lg px-4 text-xs shadow-[var(--shadow-glow)] transition-transform hover:-translate-y-0.5 sm:h-12 sm:rounded-xl sm:px-7 sm:text-sm"
+  >
+    <span className="sm:hidden">Become part of Kazini</span>
+    <span className="hidden sm:inline">Join Kazini</span>
+    <ArrowUpRight className="ml-1.5 h-4 w-4 sm:ml-2 sm:h-5 sm:w-5" />
+  </Button>
 
-        <a
-          href="#spaces"
-          className="inline-flex h-10 items-center justify-center gap-1.5 rounded-lg border border-background/30 px-4 text-xs font-semibold text-background transition-colors hover:bg-background/10 sm:h-12 sm:gap-2 sm:rounded-xl sm:px-6 sm:text-sm"
-        >
-          Find your workspace
-          <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-        </a>
-      </div>
+  <a
+    href="#spaces"
+    className="hidden h-12 items-center justify-center gap-2 rounded-xl border border-background/30 px-6 text-sm font-semibold text-background transition-colors hover:bg-background/10 sm:inline-flex"
+  >
+    Find your workspace
+    <ArrowRight className="h-4 w-4" />
+  </a>
+</div>
     </div>
   </div>
 
@@ -341,7 +342,7 @@ export default function Home() {
             <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
               <div className="max-w-2xl">
                 <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary-ink">
-                   Our workspaces
+                   Our co-working spaces
                 </p>
                 <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
                   Space to do your best work.
