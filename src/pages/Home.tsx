@@ -19,6 +19,9 @@ import {
   MoveRight,
   MessageCircle,
   ShieldCheck,
+  Printer,
+  Lightbulb,
+  Handshake,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -252,359 +255,347 @@ export default function Home() {
 
       <main>
         {/* Hero */}
-        <section className="relative isolate min-h-[590px] overflow-hidden bg-neutral-950 sm:min-h-[660px] lg:min-h-[700px]">
+        <section className="relative isolate overflow-hidden bg-foreground">
           <img
             src={workspace}
             alt="A shared workspace designed for focused work and collaboration"
             width={1600}
             height={1008}
             fetchPriority="high"
-            className="absolute inset-0 h-full w-full object-cover"
+            className="absolute inset-0 h-full w-full object-cover animate-[heroZoom_18s_ease-out_forwards]"
           />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/15" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
 
-          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/65 to-black/20" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/10" />
-
-          <div className="relative mx-auto flex min-h-[590px] max-w-7xl items-center px-5 py-20 sm:min-h-[660px] sm:px-8 lg:min-h-[700px]">
-            <div className="max-w-3xl text-white">
-              <div className="mb-7 inline-flex items-center gap-2 px-1 py-2 text-sm font-semibold uppercase tracking-[0.18em] text-primary">
+          <div className="relative mx-auto flex min-h-[560px] max-w-7xl items-center px-5 pb-36 pt-16 sm:min-h-[640px] sm:px-8 lg:min-h-[680px]">
+            <div className="max-w-3xl animate-enter text-background">
+              <p className="mb-6 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-primary sm:text-sm">
                 Work. Connect. Grow.
-              </div>
-
-              <h1 className="max-w-3xl text-5xl font-semibold leading-[1.08] tracking-tight sm:text-6xl lg:text-6xl xl:text-[72px]">
+                <span className="h-px w-10 bg-primary" />
+              </p>
+              <h1 className="text-[2.6rem] font-semibold leading-[1.05] tracking-tight sm:text-6xl xl:text-[76px]">
                 Make space for
-                <span className="mt-2 block text-primary">
-                your next big thing.
-                </span>
+                <span className="mt-1 block text-primary">your next big thing.</span>
               </h1>
-
-              <p className="mt-7 max-w-xl text-base leading-7 text-white/80 sm:text-lg sm:leading-8">
+              <p className="mt-6 max-w-xl text-base leading-7 text-background/80 sm:text-lg sm:leading-8">
                 Welcome to Kazini Shared coworking space, a place for independent
                 minds, growing businesses, and meaningful connections.
               </p>
-
-              <div className="mt-9 grid grid-cols-2 gap-3 sm:flex sm:items-center">
+              <div className="mt-9 flex flex-wrap items-center gap-3">
                 <Button
                   size="lg"
                   onClick={openRegistration}
-                  className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl border border-transparent bg-primary px-2 text-sm font-medium text-primary-foreground shadow-lg shadow-primary/20 transition-colors hover:bg-primary/90 sm:w-auto sm:px-5 sm:text-sm"
+                  className="h-12 rounded-full px-7 shadow-[var(--shadow-glow)] transition-transform hover:-translate-y-0.5"
                 >
                   Join Kazini
-                  <ArrowUpRight className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" />
+                  <ArrowUpRight className="ml-2 h-5 w-5" />
                 </Button>
-
                 <a
                   href="#spaces"
-                  className="hidden sm:inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl border border-white/20 bg-black/20 px-2 text-xs font-medium text-white transition-colors hover:border-white hover:bg-white/10 sm:w-auto sm:px-5 sm:text-sm"
+                  className="inline-flex h-12 items-center gap-2 rounded-full border border-background/40 px-6 text-sm font-semibold text-background transition-colors hover:bg-background/10"
                 >
                   Find your workspace
-                  <ArrowUpRight className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" />
+                  <ArrowRight className="h-4 w-4" />
                 </a>
               </div>
             </div>
           </div>
 
-          <a
-            href="#spaces"
-            aria-label="Scroll to workspace options"
-            className="absolute bottom-7 right-6 hidden h-12 w-12 items-center justify-center rounded-full border border-white/30 text-white transition-all hover:bg-white/10 sm:flex lg:right-12"
-          >
-            <ArrowRight className="h-5 w-5 rotate-90" />
-          </a>
+          {/* Feature strip */}
+          <div className="absolute inset-x-0 bottom-0 border-t border-background/15 bg-black/45 backdrop-blur-md">
+            <div className="mx-auto grid max-w-7xl grid-cols-2 gap-y-4 px-5 py-5 sm:px-8 md:grid-cols-5 md:divide-x md:divide-background/15">
+              {[
+                [Laptop, "Flexible", "coworking"],
+                [Armchair, "Dedicated", "desks"],
+                [Users, "Meeting", "rooms"],
+                [Printer, "Cyber", "services"],
+                [MapPin, "Kiserian,", "Shompole Business Park"],
+              ].map(([Icon, a, b], i) => {
+                const I = Icon as typeof Laptop;
+                return (
+                  <div key={i} className={`flex items-center gap-3 md:justify-center md:px-4 ${i === 4 ? "col-span-2 md:col-span-1" : ""}`}>
+                    <I className="h-6 w-6 shrink-0 text-primary" />
+                    <span className="text-xs font-medium leading-tight text-background sm:text-sm">
+                      {a as string}<br />{b as string}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </section>
 
         {/* Workspace cards */}
-        <section
-          id="spaces"
-          className="scroll-mt-24 bg-background px-5 py-20 sm:px-8 sm:py-24 lg:py-28"
-        >
+        <section id="spaces" className="scroll-mt-24 px-5 py-20 sm:px-8 sm:py-24">
           <div className="mx-auto max-w-7xl">
-            <div className="mb-10 flex flex-col gap-5 sm:mb-12 sm:flex-row sm:items-end sm:justify-between">
+            <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
               <div className="max-w-2xl">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary-ink">
-                  Find your fit
+                <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary-ink">
+                  <span className="h-px w-8 bg-primary-ink" /> Our workspaces
                 </p>
-
                 <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
-                  Space to do your
-                  <span className="block text-foreground">best work.</span>
+                  Space to do your best work.
                 </h2>
-
-                <p className="mt-4 max-w-xl text-sm leading-7 text-muted-foreground sm:text-base">
-                  Different people work differently. Explore our workspace
-                  options and tell us what would make your workday better.
+                <p className="mt-3 text-sm leading-7 text-muted-foreground sm:text-base">
+                  Different people work differently. Explore our workspace options
+                  and tell us what would make your workday better.
                 </p>
               </div>
-
-              <a
-                href="#contact"
-                className="inline-flex w-fit items-center gap-2 text-sm font-semibold text-primary-ink transition-colors hover:text-primary-ink/75"
-              >
-                Have a question?
-                <ArrowUpRight className="h-4 w-4" />
+              <a href="#join" className="inline-flex w-fit items-center gap-2 text-sm font-semibold text-primary-ink hover:gap-3 transition-all">
+                Enquire about a space <ArrowRight className="h-4 w-4" />
               </a>
             </div>
 
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {workspaceOptions.map((item) => (
-                <article
+                <button
+                  type="button"
                   key={item.number}
-                  className="group overflow-hidden rounded-2xl border border-border/80 bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary-ink/30 hover:shadow-xl hover:shadow-black/[0.04]"
+                  onClick={openRegistration}
+                  aria-label={`Enquire about ${item.title}`}
+                  className="group overflow-hidden rounded-2xl border border-border bg-card text-left shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
-                  <div className="relative aspect-[5/4] overflow-hidden bg-muted">
+                  <div className="relative aspect-[4/3] overflow-hidden bg-muted">
                     <img
                       src={item.image}
                       alt={item.title}
-                      width={1000}
-                      height={800}
                       loading="lazy"
-                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
-
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/10" />
-
-                    <span className="absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-white text-neutral-900 shadow-lg transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground">
-                      <ArrowUpRight className="h-5 w-5" />
+                    <span className="absolute left-4 top-4 rounded-full bg-background/90 px-3 py-1 text-xs font-semibold text-foreground">
+                      {item.number}
                     </span>
                   </div>
-
-                  <div className="p-5 sm:p-6">
-                    <div className="mb-4 flex items-center justify-between">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary-ink">
-                        <item.icon className="h-5 w-5" />
-                      </div>
-
-                      <span className="text-xs font-medium tracking-wider text-muted-foreground">
-                        {item.number}
-                      </span>
+                  <div className="flex items-end justify-between gap-3 p-5">
+                    <div>
+                      <h3 className="flex items-center gap-2 text-lg font-semibold">
+                        <item.icon className="h-5 w-5 text-primary-ink" />
+                        {item.title}
+                      </h3>
+                      <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                        {item.description}
+                      </p>
                     </div>
-
-                    <h3 className="text-lg font-semibold tracking-tight">
-                      {item.title}
-                    </h3>
-
-                    <p className="mt-2 min-h-[72px] text-sm leading-6 text-muted-foreground">
-                      {item.description}
-                    </p>
-
-                    <button
-                      type="button"
-                      onClick={openRegistration}
-                      className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary-ink transition-all hover:gap-3"
-                    >
-                      Explore now
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-foreground text-background transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                       <ArrowRight className="h-4 w-4" />
-                    </button>
+                    </span>
                   </div>
-                </article>
+                </button>
               ))}
-            </div>
-
-            <div className="mt-10 flex flex-col items-start justify-between gap-4 rounded-2xl bg-muted/60 p-6 sm:flex-row sm:items-center sm:p-8">
-              <div className="flex items-start gap-4">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-background text-primary-ink shadow-sm">
-                  <MessageCircle className="h-5 w-5" />
-                </div>
-
-                <div>
-                  <h3 className="font-semibold">
-                    Not sure which option suits you?
-                  </h3>
-
-                  <p className="mt-1 text-sm leading-6 text-muted-foreground">
-                    Tell us what you have in mind, and let’s start a
-                    conversation.
-                  </p>
-                </div>
-              </div>
-
-              <Button
-                onClick={openRegistration}
-                variant="outline"
-                className="shrink-0 rounded-xl"
-              >
-                Talk to our team
-                <ArrowUpRight className="ml-2 h-4 w-4" />
-              </Button>
             </div>
           </div>
         </section>
 
         {/* About */}
-        <section
-          id="about"
-          className="scroll-mt-24 overflow-hidden border-y border-border bg-card"
-        >
-          <div className="mx-auto grid max-w-7xl gap-12 px-5 py-20 sm:px-8 sm:py-24 md:grid-cols-2 md:items-center lg:gap-20 lg:py-28">
-            <div className="relative">
-              <div className="absolute -left-4 -top-4 h-28 w-28 rounded-tl-[2rem] border-l-2 border-t-2 border-primary-ink/50 sm:-left-6 sm:-top-6" />
-
-              <div className="relative overflow-hidden rounded-2xl">
-                <img
-                  src={peace}
-                  alt="An inviting shared workspace with room to focus and collaborate"
-                  width={1600}
-                  height={1008}
-                  loading="lazy"
-                  className="aspect-[4/3] w-full object-cover transition-transform duration-700 hover:scale-[1.02]"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/35 to-transparent" />
-              </div>
-
-              <div className="absolute -bottom-4 -right-4 hidden h-24 w-24 rounded-br-[2rem] border-b-2 border-r-2 border-primary-ink/50 sm:block" />
+        <section id="about" className="scroll-mt-24 border-y border-border bg-card">
+          <div className="grid md:grid-cols-2">
+            <div className="relative min-h-[320px] overflow-hidden">
+              <img
+                src={peace}
+                alt="An inviting shared workspace with room to focus and collaborate"
+                loading="lazy"
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+              />
             </div>
-
-            <div className="py-2">
-              <div className="inline-flex items-center gap-2 px-1 py-1 text-sm font-semibold uppercase tracking-[0.15em] text-primary-ink">
-                Welcome to Kazini
+            <div className="grid gap-10 px-5 py-16 sm:px-10 lg:grid-cols-[1.2fr_1fr] lg:px-14 lg:py-20">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary-ink">
+                  About Kazini
+                </p>
+                <h2 className="mt-4 text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
+                  More than a desk.
+                  <span className="block text-primary-ink">A place to belong.</span>
+                </h2>
+                <p className="mt-5 text-sm leading-7 text-muted-foreground sm:text-base">
+                  Kazini Shared brings people and businesses into a shared working
+                  community. Whether you are looking for a flexible workday, a
+                  dedicated desk, or a place to meet, we want to understand what
+                  works for you.
+                </p>
+                <Button onClick={openRegistration} className="mt-8 h-11 rounded-full px-6">
+                  Become part of Kazini <ArrowUpRight className="ml-2 h-4 w-4" />
+                </Button>
               </div>
-
-              <h2 className="mt-6 text-3xl font-semibold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
-                More than a desk.
-                <span className="block text-foreground">
-                  A place to belong.
-                </span>
-              </h2>
-
-              <p className="mt-6 text-base leading-7 text-muted-foreground">
-                Kazini Shared brings people and businesses into a shared
-                working community. Whether you are looking for a flexible
-                workday, a dedicated desk, or a place to meet, we want to
-                understand what works for you.
-              </p>
-
-              <p className="mt-4 text-base leading-7 text-muted-foreground">
-                Tell us about your work, your business, and the environment you
-                need. We will use your enquiry to better understand your
-                requirements.
-              </p>
-
-              <Button
-                onClick={openRegistration}
-                className="mt-8 h-12 rounded-xl px-6"
-              >
-                Become part of Kazini
-                <ArrowUpRight className="ml-2 h-4 w-4" />
-              </Button>
+              <ul className="space-y-6 border-border lg:border-l lg:pl-8">
+                {workspaceOptions.map((w) => (
+                  <li key={w.title} className="flex gap-3">
+                    <w.icon className="mt-0.5 h-5 w-5 shrink-0 text-primary-ink" />
+                    <div>
+                      <p className="text-sm font-semibold">{w.title}</p>
+                      <p className="mt-1 text-xs leading-5 text-muted-foreground">{w.description}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </section>
-        {/* Conversion banner */}
-        <section className="relative isolate overflow-hidden bg-black">
-          <div className="absolute -right-20 -top-36 h-96 w-96 rounded-full bg-primary/15 blur-3xl" />
 
-          <div className="relative mx-auto flex max-w-7xl flex-col gap-8 px-5 py-16 sm:px-8 sm:py-20 md:flex-row md:items-center md:justify-between lg:py-24">
+        {/* Community */}
+        <section id="community" className="relative isolate scroll-mt-24 overflow-hidden">
+          <img src={share} alt="" aria-hidden className="absolute inset-0 -z-10 h-full w-full object-cover" />
+          <div className="absolute inset-0 -z-10 bg-black/80" />
+          <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-24">
             <div className="max-w-2xl">
-              <div className="inline-flex items-center gap-2 text-sm font-medium text-primary">
-                Your space. Your community.
-              </div>
-
-              <h2 className="mt-4 text-3xl font-semibold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">
-                Make room for
-                <span className="block text-primary">
-                  what comes next.
-                </span>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+                Community & collaboration
+              </p>
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-background sm:text-4xl lg:text-5xl">
+                A community that works together.
               </h2>
-
-              <p className="mt-5 max-w-xl text-sm leading-7 text-white/70 sm:text-base">
-                Tell us what your ideal workspace looks like and take the first
-                step towards finding your fit at Kazini Shared.
+              <p className="mt-4 text-sm leading-7 text-background/70 sm:text-base">
+                Kazini Shared is a welcoming coworking community for focused work,
+                collaboration, and business growth.
               </p>
             </div>
+            <div className="mt-10 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+              {[
+                [Lightbulb, "Focused work", "A space to concentrate on what matters."],
+                [Handshake, "Collaboration", "Bring people together for productive conversations."],
+                [Users, "Meaningful connections", "Work alongside independent minds and growing businesses."],
+                [Building2, "Business growth", "Make room for your next chapter."],
+              ].map(([Icon, t, d]) => {
+                const I = Icon as typeof Laptop;
+                return (
+                  <div key={t as string} className="rounded-2xl border border-background/15 bg-background/5 p-5 text-center backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/60">
+                    <I className="mx-auto h-8 w-8 text-primary" />
+                    <h3 className="mt-4 text-sm font-semibold text-background sm:text-base">{t as string}</h3>
+                    <p className="mt-2 text-xs leading-5 text-background/65">{d as string}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
 
-            <div className="grid w-full grid-cols-2 gap-3 sm:flex sm:w-auto sm:shrink-0 sm:flex-row md:flex-col lg:flex-row">
-              <Button
-                size="lg"
-                onClick={openRegistration}
-                className="min-h-12 h-13 w-full rounded-xl bg-primary px-3 font-bold text-primary-foreground shadow-lg shadow-primary/20 transition-transform hover:-translate-y-0.5 sm:w-auto sm:px-7"
-              >
-                Join Kazini
-                <ArrowUpRight className="ml-2 h-5 w-5 shrink-0" />
-              </Button>
+        {/* Join / enquiry */}
+        <section id="join" className="scroll-mt-24 px-5 py-20 sm:px-8 sm:py-24">
+          <div className="mx-auto max-w-7xl">
+            <div className="mb-10 max-w-2xl">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary-ink">How to join</p>
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+                Find your fit in three steps.
+              </h2>
+            </div>
+            <div className="grid gap-5 md:grid-cols-3">
+              {journeySteps.map((s) => (
+                <div key={s.number} className="surface-gloss rounded-2xl border border-border p-6">
+                  <div className="flex items-center justify-between">
+                    <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/15 text-primary-ink">
+                      <s.icon className="h-5 w-5" />
+                    </span>
+                    <span className="text-3xl font-semibold text-muted-foreground/40">{s.number}</span>
+                  </div>
+                  <h3 className="mt-5 font-semibold">{s.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-muted-foreground">{s.description}</p>
+                </div>
+              ))}
+            </div>
 
-              <a
-                href="#contact"
-                className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl border border-white/25 px-3 text-sm font-bold text-white transition-colors hover:bg-white/10 sm:w-auto sm:px-6"
-              >
-                Contact us
-                <ArrowRight className="h-4 w-4 shrink-0" />
-              </a>
+            <div className="relative mt-10 overflow-hidden rounded-3xl bg-foreground">
+              <img src={thrive} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-30" />
+              <div className="relative flex flex-col gap-6 p-8 sm:p-12 md:flex-row md:items-center md:justify-between">
+                <div className="max-w-xl">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">Ready when you are</p>
+                  <h3 className="mt-3 text-2xl font-semibold text-background sm:text-3xl">
+                    Make room for what comes next.
+                  </h3>
+                  <p className="mt-3 text-sm leading-7 text-background/70">
+                    Tell us what your ideal workspace looks like. Only your name,
+                    phone number and email are needed to get started.
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-3">
+                  <Button size="lg" onClick={openRegistration} className="h-12 rounded-full px-7">
+                    Open enquiry form <ArrowUpRight className="ml-2 h-5 w-5" />
+                  </Button>
+                  <a href="#contact" className="inline-flex h-12 items-center gap-2 rounded-full border border-background/40 px-6 text-sm font-semibold text-background hover:bg-background/10">
+                    Contact us
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
         {/* FAQ */}
-        <section
-          id="faq"
-          className="scroll-mt-24 border-b border-border bg-card px-5 py-20 sm:px-8 sm:py-24"
-        >
+        <section id="faq" className="scroll-mt-24 border-y border-border bg-card px-5 py-20 sm:px-8 sm:py-24">
           <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary-ink">
-                Good to know
-              </p>
-
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary-ink">Good to know</p>
               <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
                 Frequently asked questions.
               </h2>
-
               <p className="mt-4 max-w-md text-sm leading-7 text-muted-foreground sm:text-base">
                 Have something else in mind? Our team is available through the
                 contact details below.
               </p>
-
-              <a
-                href="mailto:info@kazini.co.ke"
-                className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary-ink hover:underline"
-              >
-                Ask us a question
-                <ArrowUpRight className="h-4 w-4" />
-              </a>
             </div>
-
-            <div className="divide-y divide-border border-y border-border">
+            <div className="space-y-3">
               {faqs.map((faq, index) => {
                 const isActive = activeFaq === index;
-
                 return (
-                  <div key={faq.question}>
+                  <div key={faq.question} className={`rounded-2xl border px-5 transition-colors ${isActive ? "border-primary-ink/40 bg-background" : "border-border"}`}>
                     <button
                       type="button"
                       aria-expanded={isActive}
                       onClick={() => setActiveFaq(isActive ? null : index)}
-                      className="flex w-full items-center justify-between gap-5 py-5 text-left sm:py-6"
+                      className="flex w-full items-center justify-between gap-5 py-5 text-left"
                     >
-                      <span className="text-sm font-semibold leading-6 sm:text-base">
-                        {faq.question}
-                      </span>
-
-                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-border transition-colors">
-                        <ChevronDown
-                          className={`h-4 w-4 transition-transform duration-300 ${
-                            isActive ? "rotate-180 text-primary-ink" : ""
-                          }`}
-                        />
-                      </span>
+                      <span className="text-sm font-semibold sm:text-base">{faq.question}</span>
+                      <ChevronDown className={`h-4 w-4 shrink-0 transition-transform duration-300 ${isActive ? "rotate-180 text-primary-ink" : ""}`} />
                     </button>
-
-                    <div
-                      className={`grid transition-[grid-template-rows] duration-300 ${
-                        isActive ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-                      }`}
-                    >
+                    <div className={`grid transition-[grid-template-rows] duration-300 ${isActive ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
                       <div className="overflow-hidden">
-                        <p
-                          className={`max-w-2xl text-sm leading-7 text-muted-foreground ${
-                            isActive ? "pb-6" : "pb-0"
-                          }`}
-                        >
-                          {faq.answer}
-                        </p>
+                        <p className="pb-5 text-sm leading-7 text-muted-foreground">{faq.answer}</p>
                       </div>
                     </div>
                   </div>
                 );
               })}
+            </div>
+          </div>
+        </section>
+
+        {/* Contact */}
+        <section id="contact" className="scroll-mt-24 px-5 py-20 sm:px-8 sm:py-24">
+          <div className="mx-auto max-w-7xl">
+            <div className="mb-10 text-center">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary-ink">Get in touch</p>
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">Visit or talk to us.</h2>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                [Mail, "Email", "info@kazini.co.ke", "mailto:info@kazini.co.ke"],
+                [Phone, "Call", "+254 700 113 300", "tel:+254700113300"],
+                [Phone, "Call", "+254 705 414 414", "tel:+254705414414"],
+                [MapPin, "Shompole Business Park", "Kiserian-Isinya-Magadi Junction, near Galana Station", "https://www.google.com/maps/search/?api=1&query=Shompole+Business+Park+Kiserian"],
+              ].map(([Icon, label, value, href]) => {
+                const I = Icon as typeof Mail;
+                const ext = (href as string).startsWith("http");
+                return (
+                  <a
+                    key={value as string}
+                    href={href as string}
+                    target={ext ? "_blank" : undefined}
+                    rel={ext ? "noreferrer" : undefined}
+                    className="group surface-gloss flex flex-col items-center rounded-2xl border border-border p-6 text-center transition-all hover:-translate-y-1 hover:border-primary-ink/40"
+                  >
+                    <span className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/15 text-primary-ink transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                      <I className="h-5 w-5" />
+                    </span>
+                    <p className="mt-4 text-sm font-semibold">{label as string}</p>
+                    <p className="mt-1 text-sm text-muted-foreground">{value as string}</p>
+                  </a>
+                );
+              })}
+            </div>
+            <div className="mt-10 grid grid-cols-3 gap-2 sm:grid-cols-6">
+              {[work, space, share, thrive, peace, workspace].map((src, i) => (
+                <div key={i} className="aspect-square overflow-hidden rounded-xl">
+                  <img src={src} alt="" aria-hidden loading="lazy" className="h-full w-full object-cover transition-transform duration-500 hover:scale-110" />
+                </div>
+              ))}
             </div>
           </div>
         </section>
