@@ -282,7 +282,7 @@ export default function Home() {
         </span>
       </h1>
 
-      <p className="mt-5 max-w-xl text-sm leading-6 text-background/85 sm:mt-6 sm:text-lg sm:leading-8">
+      <p className="mt-5 max-w-xl text-sm leading-7 text-background/75 sm:mt-6 sm:text-lg sm:leading-8">
         Welcome to Kazini Shared coworking space, a place for independent
         minds, growing businesses, and meaningful connections.
       </p>
